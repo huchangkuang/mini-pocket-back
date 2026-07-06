@@ -1,0 +1,21 @@
+{
+  "name": "mini-pocket-back",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Mini Pocket 小程序后端 Monorepo",
+  "scripts": {
+    "dev": "pnpm --filter @mini-pocket/api dev",
+    "build": "pnpm --filter @mini-pocket/api build",
+    "start": "pnpm --filter @mini-pocket/api start:prod",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "db:generate": "pnpm --filter @mini-pocket/api db:generate",
+    "db:migrate": "pnpm --filter @mini-pocket/api db:migrate",
+    "db:push": "pnpm --filter @mini-pocket/api db:push",
+    "db:seed": "pnpm --filter @mini-pocket/api db:seed"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.6.5"
+}

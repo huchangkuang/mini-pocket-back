@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Accent {
+  primary
+  secondary
+  tertiary
+}
+
+model Category {
+  id        Int    @id @default(autoincrement())
+  code      String @unique
+  label     String
+  sortOrder Int    @default(0) @map("sort_order")
+  tools     Tool[]
+
+  @@map("categories")
+}
+
+model Tool {
+  id          Int            @id @default(autoincrement())
+  routePath   String         @unique @map("route_path")
+  name        String
+  description String
+  iconKey     String         @map("icon_key")
+  accent      Accent
+  categoryId  Int            @map("category_id")
+  category    Category       @relation(fields: [categoryId], references: [id])
+  heatScore   Int            @default(0) @map("heat_score")
+  enabled     Boolean        @default(true)
+  sortOrder   Int            @default(0) @map("sort_order")
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+  favorites   UserFavorite[]
+
+  @@index([categoryId, enabled, heatScore])
+  @@map("tools")
+}
+
+model User {
+  id        Int            @id @default(autoincrement())
+  openid    String         @unique
+  unionid   String?        @unique
+  nickname  String?
+  avatarUrl String?        @map("avatar_url")
+  createdAt DateTime       @default(now()) @map("created_at")
+  updatedAt DateTime       @updatedAt @map("updated_at")
+  favorites UserFavorite[]
+
+  @@map("users")
+}
+
+model UserFavorite {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  toolId    Int      @map("tool_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tool      Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([userId, toolId])
+  @@map("user_favorites")
+}
