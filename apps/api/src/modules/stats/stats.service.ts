@@ -6,24 +6,50 @@ import {
 import { Prisma } from '@prisma/client';
 import { getShanghaiTodayDate } from '../../common/utils/date.util';
 import { PrismaService } from '../../prisma/prisma.service';
+import { LevelService } from '../level/level.service';
+import {
+  XP_DAILY_LIMIT_PER_TOOL,
+  XP_FIRST_USE,
+  XP_REPEAT_USE,
+} from '../level/xp.constants';
 import { RecordToolUseDto } from './dto/record-tool-use.dto';
+
+function isSameDate(a: Date | null | undefined, b: Date): boolean {
+  if (!a) return false;
+  return a.toISOString().slice(0, 10) === b.toISOString().slice(0, 10);
+}
 
 @Injectable()
 export class StatsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly levelService: LevelService,
+  ) {}
 
   async getUserStats(userId: number) {
-    const [activeDaysCount, usedToolsCount, favoriteCount] = await Promise.all([
-      this.prisma.userActiveDay.count({ where: { userId } }),
-      this.prisma.userToolUsage.count({ where: { userId } }),
-      this.prisma.userFavorite.count({ where: { userId } }),
-    ]);
+    const [user, activeDaysCount, usedToolsCount, favoriteCount] =
+      await Promise.all([
+        this.prisma.user.findUnique({
+          where: { id: userId },
+          select: { totalXp: true },
+        }),
+        this.prisma.userActiveDay.count({ where: { userId } }),
+        this.prisma.userToolUsage.count({ where: { userId } }),
+        this.prisma.userFavorite.count({ where: { userId } }),
+      ]);
 
     return {
       activeDaysCount,
       usedToolsCount,
       favoriteCount,
+      totalXp: user?.totalXp ?? 0,
     };
+  }
+
+  async getUserStatsWithLevel(userId: number) {
+    const stats = await this.getUserStats(userId);
+    const level = await this.levelService.resolveLevel(stats.totalXp);
+    return { stats, level };
   }
 
   async recordActiveDay(userId: number) {
@@ -47,47 +73,106 @@ export class StatsService {
       });
     }
 
-    const stats = await this.getUserStats(userId);
+    const { stats, level } = await this.getUserStatsWithLevel(userId);
 
     return {
       recorded: !existing,
       stats,
+      level,
     };
   }
 
   async recordToolUse(userId: number, dto: RecordToolUseDto) {
     const tool = await this.resolveTool(dto);
+    const today = getShanghaiTodayDate();
 
-    const existing = await this.prisma.userToolUsage.findUnique({
-      where: {
-        userId_toolId: {
-          userId,
-          toolId: tool.id,
+    const result = await this.prisma.$transaction(async (tx) => {
+      const user = await tx.user.findUnique({ where: { id: userId } });
+      if (!user) {
+        throw new NotFoundException('用户不存在');
+      }
+
+      const existing = await tx.userToolUsage.findUnique({
+        where: {
+          userId_toolId: {
+            userId,
+            toolId: tool.id,
+          },
         },
-      },
+      });
+
+      const isFirstEver = !existing;
+      const dailyCountBefore =
+        existing && isSameDate(existing.dailyUseDate, today)
+          ? existing.dailyUseCount
+          : 0;
+
+      let xpGained = 0;
+      if (dailyCountBefore < XP_DAILY_LIMIT_PER_TOOL) {
+        xpGained = isFirstEver ? XP_FIRST_USE : XP_REPEAT_USE;
+      }
+
+      const previousTotalXp = user.totalXp;
+      const newTotalXp = previousTotalXp + xpGained;
+
+      if (isFirstEver) {
+        await tx.userToolUsage.create({
+          data: {
+            userId,
+            toolId: tool.id,
+            dailyUseCount: xpGained > 0 ? 1 : 0,
+            dailyUseDate: today,
+          },
+        });
+      } else if (existing) {
+        const nextDailyCount =
+          xpGained > 0 ? dailyCountBefore + 1 : dailyCountBefore;
+
+        await tx.userToolUsage.update({
+          where: { id: existing.id },
+          data: {
+            dailyUseCount: nextDailyCount,
+            dailyUseDate: today,
+            lastUsedAt: new Date(),
+          },
+        });
+      }
+
+      if (xpGained > 0) {
+        await tx.user.update({
+          where: { id: userId },
+          data: { totalXp: newTotalXp },
+        });
+      }
+
+      const previousLevel = await this.levelService.resolveLevel(previousTotalXp);
+      const currentLevel = await this.levelService.resolveLevel(newTotalXp);
+      const leveledUp =
+        xpGained > 0 && currentLevel.current > previousLevel.current;
+
+      const [activeDaysCount, usedToolsCount, favoriteCount] = await Promise.all([
+        tx.userActiveDay.count({ where: { userId } }),
+        tx.userToolUsage.count({ where: { userId } }),
+        tx.userFavorite.count({ where: { userId } }),
+      ]);
+
+      return {
+        isNew: isFirstEver,
+        toolId: tool.id,
+        xpGained,
+        leveledUp,
+        newTitle: leveledUp ? currentLevel.title : null,
+        stats: {
+          activeDaysCount,
+          usedToolsCount,
+          favoriteCount,
+          totalXp: newTotalXp,
+        },
+        level: currentLevel,
+      };
     });
 
-    if (existing) {
-      await this.prisma.userToolUsage.update({
-        where: { id: existing.id },
-        data: { lastUsedAt: new Date() },
-      });
-    } else {
-      await this.prisma.userToolUsage.create({
-        data: {
-          userId,
-          toolId: tool.id,
-        },
-      });
-    }
-
-    const stats = await this.getUserStats(userId);
-
-    return {
-      isNew: !existing,
-      toolId: tool.id,
-      stats,
-    };
+    return result;
   }
 
   private async resolveTool(dto: RecordToolUseDto) {

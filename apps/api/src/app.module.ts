@@ -3,9 +3,11 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AuthModule } from './modules/auth/auth.module';
 import { CategoriesModule } from './modules/categories/categories.module';
+import { DecisionsModule } from './modules/decisions/decisions.module';
 import { FavoritesModule } from './modules/favorites/favorites.module';
 import { HealthModule } from './modules/health/health.module';
 import { StorageModule } from './modules/storage/storage.module';
+import { LevelModule } from './modules/level/level.module';
 import { StatsModule } from './modules/stats/stats.module';
 import { ToolsModule } from './modules/tools/tools.module';
 import { PrismaModule } from './prisma/prisma.module';
@@ -22,8 +24,10 @@ import { PrismaModule } from './prisma/prisma.module';
     CategoriesModule,
     ToolsModule,
     FavoritesModule,
+    DecisionsModule,
     StorageModule,
     StatsModule,
+    LevelModule,
   ],
   controllers: [AppController],
 })

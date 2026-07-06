@@ -29,7 +29,10 @@ export class ToolsService {
 
     const orderBy: Prisma.ToolOrderByWithRelationInput[] =
       query.sort === 'heat'
-        ? [{ heatScore: 'desc' }, { sortOrder: 'asc' }]
+        ? [
+            { heatScore: query.order === 'asc' ? 'asc' : 'desc' },
+            { sortOrder: 'asc' },
+          ]
         : [{ sortOrder: 'asc' }];
 
     const [total, tools] = await Promise.all([

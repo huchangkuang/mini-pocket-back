@@ -67,11 +67,12 @@ export class AuthService {
       throw new NotFoundException('用户不存在');
     }
 
-    const stats = await this.statsService.getUserStats(userId);
+    const { stats, level } = await this.statsService.getUserStatsWithLevel(userId);
 
     return {
       ...this.toUserProfile(user),
       stats,
+      level,
     };
   }
 

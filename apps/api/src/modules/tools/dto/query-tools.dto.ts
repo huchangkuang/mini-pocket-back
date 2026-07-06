@@ -11,8 +11,12 @@ export class QueryToolsDto {
   keyword?: string;
 
   @IsOptional()
-  @IsIn(['heat'])
-  sort?: 'heat';
+  @IsIn(['heat', 'default'])
+  sort?: 'heat' | 'default';
+
+  @IsOptional()
+  @IsIn(['asc', 'desc'])
+  order?: 'asc' | 'desc';
 
   @IsOptional()
   @Type(() => Number)

@@ -110,7 +110,29 @@ const tools: {
   },
 ];
 
+const levels = [
+  { level: 1, minXp: 0, title: '工坊学徒', sortOrder: 1 },
+  { level: 2, minXp: 100, title: '见习工匠', sortOrder: 2 },
+  { level: 3, minXp: 300, title: '初级工匠', sortOrder: 3 },
+  { level: 4, minXp: 600, title: '高级工匠', sortOrder: 4 },
+  { level: 5, minXp: 1000, title: '工坊大师', sortOrder: 5 },
+  { level: 6, minXp: 1500, title: '百宝达人', sortOrder: 6 },
+  { level: 7, minXp: 2500, title: '传奇工匠', sortOrder: 7 },
+];
+
 async function main() {
+  for (const level of levels) {
+    await prisma.levelConfig.upsert({
+      where: { level: level.level },
+      update: {
+        minXp: level.minXp,
+        title: level.title,
+        sortOrder: level.sortOrder,
+      },
+      create: level,
+    });
+  }
+
   for (const category of categories) {
     await prisma.category.upsert({
       where: { code: category.code },

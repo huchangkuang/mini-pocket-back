@@ -50,11 +50,13 @@ model User {
   unionid    String?         @unique
   nickname   String?
   avatarUrl  String?         @db.Text @map("avatar_url")
+  totalXp    Int             @default(0) @map("total_xp")
   createdAt  DateTime        @default(now()) @map("created_at")
   updatedAt  DateTime        @updatedAt @map("updated_at")
   favorites  UserFavorite[]
   activeDays UserActiveDay[]
   toolUsages UserToolUsage[]
+  decisions  UserDecision[]
 
   @@map("users")
 }
@@ -83,14 +85,41 @@ model UserActiveDay {
 }
 
 model UserToolUsage {
-  id          Int      @id @default(autoincrement())
-  userId      Int      @map("user_id")
-  toolId      Int      @map("tool_id")
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  tool        Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
-  firstUsedAt DateTime @default(now()) @map("first_used_at")
-  lastUsedAt  DateTime @updatedAt @map("last_used_at")
+  id            Int       @id @default(autoincrement())
+  userId        Int       @map("user_id")
+  toolId        Int       @map("tool_id")
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tool          Tool      @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  firstUsedAt   DateTime  @default(now()) @map("first_used_at")
+  lastUsedAt    DateTime  @updatedAt @map("last_used_at")
+  dailyUseCount Int       @default(0) @map("daily_use_count")
+  dailyUseDate  DateTime? @db.Date @map("daily_use_date")
 
   @@unique([userId, toolId])
   @@map("user_tool_usages")
+}
+
+model LevelConfig {
+  level     Int    @id
+  minXp     Int    @map("min_xp")
+  title     String
+  sortOrder Int    @default(0) @map("sort_order")
+
+  @@map("level_configs")
+}
+
+model UserDecision {
+  id         Int       @id @default(autoincrement())
+  userId     Int       @map("user_id")
+  title      String
+  options    Json
+  isActive   Boolean   @default(false) @map("is_active")
+  lastUsedAt DateTime? @map("last_used_at")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isActive])
+  @@index([userId, lastUsedAt])
+  @@map("user_decisions")
 }
