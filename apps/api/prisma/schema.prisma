@@ -38,20 +38,23 @@ model Tool {
   createdAt   DateTime       @default(now()) @map("created_at")
   updatedAt   DateTime       @updatedAt @map("updated_at")
   favorites   UserFavorite[]
+  usages      UserToolUsage[]
 
   @@index([categoryId, enabled, heatScore])
   @@map("tools")
 }
 
 model User {
-  id        Int            @id @default(autoincrement())
-  openid    String         @unique
-  unionid   String?        @unique
-  nickname  String?
-  avatarUrl String? @db.Text @map("avatar_url")
-  createdAt DateTime       @default(now()) @map("created_at")
-  updatedAt DateTime       @updatedAt @map("updated_at")
-  favorites UserFavorite[]
+  id         Int             @id @default(autoincrement())
+  openid     String          @unique
+  unionid    String?         @unique
+  nickname   String?
+  avatarUrl  String?         @db.Text @map("avatar_url")
+  createdAt  DateTime        @default(now()) @map("created_at")
+  updatedAt  DateTime        @updatedAt @map("updated_at")
+  favorites  UserFavorite[]
+  activeDays UserActiveDay[]
+  toolUsages UserToolUsage[]
 
   @@map("users")
 }
@@ -66,4 +69,28 @@ model UserFavorite {
 
   @@unique([userId, toolId])
   @@map("user_favorites")
+}
+
+model UserActiveDay {
+  id         Int      @id @default(autoincrement())
+  userId     Int      @map("user_id")
+  activeDate DateTime @db.Date @map("active_date")
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@unique([userId, activeDate])
+  @@map("user_active_days")
+}
+
+model UserToolUsage {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @map("user_id")
+  toolId      Int      @map("tool_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tool        Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  firstUsedAt DateTime @default(now()) @map("first_used_at")
+  lastUsedAt  DateTime @updatedAt @map("last_used_at")
+
+  @@unique([userId, toolId])
+  @@map("user_tool_usages")
 }

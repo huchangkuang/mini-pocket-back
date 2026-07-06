@@ -6,6 +6,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { FavoritesModule } from './modules/favorites/favorites.module';
 import { HealthModule } from './modules/health/health.module';
 import { StorageModule } from './modules/storage/storage.module';
+import { StatsModule } from './modules/stats/stats.module';
 import { ToolsModule } from './modules/tools/tools.module';
 import { PrismaModule } from './prisma/prisma.module';
 
@@ -22,6 +23,7 @@ import { PrismaModule } from './prisma/prisma.module';
     ToolsModule,
     FavoritesModule,
     StorageModule,
+    StatsModule,
   ],
   controllers: [AppController],
 })

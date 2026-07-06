@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service';
 import { JwtPayload } from '../../common/types/auth-user';
+import { StatsService } from '../stats/stats.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { WechatLoginDto } from './dto/wechat-login.dto';
 import { WechatService } from './wechat.service';
@@ -13,6 +14,7 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly wechatService: WechatService,
     private readonly jwtService: JwtService,
+    private readonly statsService: StatsService,
   ) {}
 
   findUserById(id: number) {
@@ -65,15 +67,11 @@ export class AuthService {
       throw new NotFoundException('用户不存在');
     }
 
-    const favoriteCount = await this.prisma.userFavorite.count({
-      where: { userId },
-    });
+    const stats = await this.statsService.getUserStats(userId);
 
     return {
       ...this.toUserProfile(user),
-      stats: {
-        favoriteCount,
-      },
+      stats,
     };
   }
 
