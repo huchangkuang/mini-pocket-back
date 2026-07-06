@@ -11,6 +11,7 @@
     "typecheck": "pnpm -r typecheck",
     "db:generate": "pnpm --filter @mini-pocket/api db:generate",
     "db:migrate": "pnpm --filter @mini-pocket/api db:migrate",
+    "db:migrate:deploy": "pnpm --filter @mini-pocket/api db:migrate:deploy",
     "db:push": "pnpm --filter @mini-pocket/api db:push",
     "db:seed": "pnpm --filter @mini-pocket/api db:seed"
   },

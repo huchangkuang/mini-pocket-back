@@ -1,0 +1,11 @@
+.dockerignore
+node_modules
+**/node_modules
+**/dist
+.git
+.pnpm-store
+**/.env
+**/.env.local
+**/*.tsbuildinfo
+coverage
+.DS_Store
