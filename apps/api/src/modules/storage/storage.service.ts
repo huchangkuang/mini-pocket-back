@@ -1,15 +1,24 @@
 import {
+  ForbiddenException,
   Injectable,
   Logger,
+  NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import OSS from 'ali-oss';
 import { randomUUID } from 'crypto';
+import type { PersistScope } from './dto/persist-storage.dto';
 
 export type PersistedObject = {
   ossKey: string;
   mimeType: string;
+};
+
+export type PersistedFileResult = {
+  ossKey: string;
+  url: string;
+  sourceOssKey: string;
 };
 
 @Injectable()
@@ -63,15 +72,56 @@ export class StorageService {
     return { ossKey: key, mimeType };
   }
 
+  /** 临时上传（7 天生命周期目录），供反馈等场景选图预览 */
   async uploadTemp(userId: number, buffer: Buffer, mimeType: string) {
-    const ext =
-      mimeType === 'image/png'
-        ? 'png'
-        : mimeType === 'image/webp'
-          ? 'webp'
-          : 'jpg';
+    const ext = this.resolveExtension(mimeType);
     const key = `temp/${userId}/${randomUUID()}.${ext}`;
     return this.uploadBuffer(key, buffer, mimeType);
+  }
+
+  /** 头像直传永久目录 avatars/{userId}/ */
+  async uploadAvatar(userId: number, buffer: Buffer, mimeType: string) {
+    const ext = this.resolveExtension(mimeType);
+    const key = `avatars/${userId}/${randomUUID()}.${ext}`;
+    return this.uploadBuffer(key, buffer, mimeType);
+  }
+
+  /** 将 temp 文件复制到永久目录，保存业务数据时调用 */
+  async persistFromTemp(
+    userId: number,
+    ossKeys: string[],
+    scope: PersistScope,
+  ): Promise<PersistedFileResult[]> {
+    const uniqueKeys = [...new Set(ossKeys)];
+    const results: PersistedFileResult[] = [];
+
+    for (const sourceKey of uniqueKeys) {
+      this.assertTempKeyOwnedByUser(sourceKey, userId);
+      const ext = this.extractExtension(sourceKey);
+      const destKey = `${scope}/${userId}/${randomUUID()}.${ext}`;
+
+      if (this.mockMode) {
+        results.push({
+          ossKey: destKey,
+          url: await this.getAccessUrl(destKey),
+          sourceOssKey: sourceKey,
+        });
+        continue;
+      }
+
+      if (!this.client) {
+        throw new ServiceUnavailableException('对象存储未配置');
+      }
+
+      await this.client.copy(destKey, sourceKey);
+      results.push({
+        ossKey: destKey,
+        url: await this.getAccessUrl(destKey),
+        sourceOssKey: sourceKey,
+      });
+    }
+
+    return results;
   }
 
   async getAccessUrl(ossKey: string, expiresSeconds = 3600 * 24 * 7) {
@@ -86,5 +136,31 @@ export class StorageService {
       throw new ServiceUnavailableException('对象存储未配置');
     }
     return this.client.signatureUrl(ossKey, { expires: expiresSeconds });
+  }
+
+  /** 临时预览 URL，有效期较短 */
+  async getTempPreviewUrl(ossKey: string) {
+    return this.getAccessUrl(ossKey, 3600);
+  }
+
+  private assertTempKeyOwnedByUser(ossKey: string, userId: number) {
+    const expectedPrefix = `temp/${userId}/`;
+    if (!ossKey.startsWith(expectedPrefix)) {
+      throw new ForbiddenException('无权操作该文件');
+    }
+  }
+
+  private resolveExtension(mimeType: string) {
+    if (mimeType === 'image/png') return 'png';
+    if (mimeType === 'image/webp') return 'webp';
+    return 'jpg';
+  }
+
+  private extractExtension(key: string) {
+    const ext = key.split('.').pop()?.toLowerCase();
+    if (ext === 'png' || ext === 'webp' || ext === 'jpg' || ext === 'jpeg') {
+      return ext === 'jpeg' ? 'jpg' : ext;
+    }
+    throw new NotFoundException(`无法识别文件类型: ${key}`);
   }
 }

@@ -7,6 +7,11 @@ declare module 'ali-oss' {
       options?: Record<string, unknown>,
     ): Promise<unknown>;
     delete(name: string, options?: Record<string, unknown>): Promise<unknown>;
+    copy(
+      name: string,
+      sourceName: string,
+      options?: Record<string, unknown>,
+    ): Promise<unknown>;
     signatureUrl(name: string, options?: { expires?: number }): string;
   }
 }

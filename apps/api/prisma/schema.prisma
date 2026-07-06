@@ -57,6 +57,7 @@ model User {
   activeDays UserActiveDay[]
   toolUsages UserToolUsage[]
   decisions  UserDecision[]
+  feedbacks  Feedback[]
 
   @@map("users")
 }
@@ -122,4 +123,33 @@ model UserDecision {
   @@index([userId, isActive])
   @@index([userId, lastUsedAt])
   @@map("user_decisions")
+}
+
+enum FeedbackType {
+  feature
+  performance
+  style
+  other
+}
+
+enum FeedbackStatus {
+  pending
+  processing
+  resolved
+  closed
+}
+
+model Feedback {
+  id        Int            @id @default(autoincrement())
+  userId    Int            @map("user_id")
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      FeedbackType
+  content   String         @db.VarChar(200)
+  contact   String?        @db.VarChar(100)
+  imageUrls Json           @default("[]") @map("image_urls")
+  status    FeedbackStatus @default(pending)
+  createdAt DateTime       @default(now()) @map("created_at")
+
+  @@index([userId, createdAt])
+  @@map("feedbacks")
 }
