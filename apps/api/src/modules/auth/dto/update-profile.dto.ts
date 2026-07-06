@@ -1,4 +1,4 @@
-import { IsOptional, IsString, IsUrl, MaxLength } from 'class-validator';
+import { IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class UpdateProfileDto {
   @IsOptional()
@@ -8,6 +8,6 @@ export class UpdateProfileDto {
 
   @IsOptional()
   @IsString()
-  @IsUrl({}, { message: 'avatarUrl 必须是有效 URL' })
+  @MaxLength(2048)
   avatarUrl?: string;
 }

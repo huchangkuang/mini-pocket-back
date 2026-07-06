@@ -79,6 +79,7 @@ curl https://api.mini-pocket.qiexuxing.top/api/health
 | `pnpm dev` | 开发模式（热重载） |
 | `pnpm build` | 构建 API |
 | `pnpm start` | 生产模式启动（本地） |
+| `pnpm db:generate` | 生成 Prisma Client（`install` 后也会自动执行） |
 | `pnpm db:migrate` | 开发环境数据库迁移 |
 | `pnpm db:migrate:deploy` | 生产环境应用迁移 |
 | `pnpm db:seed` | 导入工具种子数据 |

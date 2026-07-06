@@ -40,6 +40,9 @@ fi
 log "安装依赖..."
 pnpm install --frozen-lockfile
 
+log "生成 Prisma Client..."
+pnpm db:generate
+
 log "应用数据库迁移..."
 pnpm db:migrate:deploy
 
