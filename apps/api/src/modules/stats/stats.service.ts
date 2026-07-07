@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { formatHeatScore } from '../../common/utils/heat.util';
 import { getShanghaiTodayDate } from '../../common/utils/date.util';
 import { PrismaService } from '../../prisma/prisma.service';
 import { LevelService } from '../level/level.service';
@@ -12,7 +13,7 @@ import {
   XP_FIRST_USE,
   XP_REPEAT_USE,
 } from '../level/xp.constants';
-import { RecordToolUseDto } from './dto/record-tool-use.dto';
+import type { RecordToolUseInput } from './dto/record-tool-use.dto';
 
 function isSameDate(a: Date | null | undefined, b: Date): boolean {
   if (!a) return false;
@@ -82,11 +83,31 @@ export class StatsService {
     };
   }
 
-  async recordToolUse(userId: number, dto: RecordToolUseDto) {
+  /** 打开工具：始终加热度；已登录时额外记录个人使用与 XP */
+  async recordOpen(dto: RecordToolUseInput, userId?: number) {
     const tool = await this.resolveTool(dto);
+
+    if (!userId) {
+      const updatedTool = await this.prisma.tool.update({
+        where: { id: tool.id },
+        data: { heatScore: { increment: 1 } },
+      });
+
+      return {
+        toolId: updatedTool.id,
+        heatScore: updatedTool.heatScore,
+        heat: formatHeatScore(updatedTool.heatScore),
+      };
+    }
+
     const today = getShanghaiTodayDate();
 
-    const result = await this.prisma.$transaction(async (tx) => {
+    return this.prisma.$transaction(async (tx) => {
+      const updatedTool = await tx.tool.update({
+        where: { id: tool.id },
+        data: { heatScore: { increment: 1 } },
+      });
+
       const user = await tx.user.findUnique({ where: { id: userId } });
       if (!user) {
         throw new NotFoundException('用户不存在');
@@ -145,20 +166,24 @@ export class StatsService {
         });
       }
 
-      const previousLevel = await this.levelService.resolveLevel(previousTotalXp);
+      const previousLevel =
+        await this.levelService.resolveLevel(previousTotalXp);
       const currentLevel = await this.levelService.resolveLevel(newTotalXp);
       const leveledUp =
         xpGained > 0 && currentLevel.current > previousLevel.current;
 
-      const [activeDaysCount, usedToolsCount, favoriteCount] = await Promise.all([
-        tx.userActiveDay.count({ where: { userId } }),
-        tx.userToolUsage.count({ where: { userId } }),
-        tx.userFavorite.count({ where: { userId } }),
-      ]);
+      const [activeDaysCount, usedToolsCount, favoriteCount] =
+        await Promise.all([
+          tx.userActiveDay.count({ where: { userId } }),
+          tx.userToolUsage.count({ where: { userId } }),
+          tx.userFavorite.count({ where: { userId } }),
+        ]);
 
       return {
+        toolId: updatedTool.id,
+        heatScore: updatedTool.heatScore,
+        heat: formatHeatScore(updatedTool.heatScore),
         isNew: isFirstEver,
-        toolId: tool.id,
         xpGained,
         leveledUp,
         newTitle: leveledUp ? currentLevel.title : null,
@@ -171,11 +196,9 @@ export class StatsService {
         level: currentLevel,
       };
     });
-
-    return result;
   }
 
-  private async resolveTool(dto: RecordToolUseDto) {
+  private async resolveTool(dto: RecordToolUseInput) {
     if (!dto.toolId && !dto.routePath) {
       throw new BadRequestException('toolId 或 routePath 必须提供一个');
     }

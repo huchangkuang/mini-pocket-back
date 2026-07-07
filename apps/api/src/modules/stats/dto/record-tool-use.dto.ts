@@ -12,3 +12,8 @@ export class RecordToolUseDto {
   @MinLength(1)
   routePath?: string;
 }
+
+export type RecordToolUseInput = Pick<
+  RecordToolUseDto,
+  'toolId' | 'routePath'
+>;
