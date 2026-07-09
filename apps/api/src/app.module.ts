@@ -11,6 +11,7 @@ import { StorageModule } from './modules/storage/storage.module';
 import { LevelModule } from './modules/level/level.module';
 import { StatsModule } from './modules/stats/stats.module';
 import { ToolsModule } from './modules/tools/tools.module';
+import { GamesModule } from './modules/games/games.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
@@ -30,6 +31,7 @@ import { PrismaModule } from './prisma/prisma.module';
     StorageModule,
     StatsModule,
     LevelModule,
+    GamesModule,
   ],
   controllers: [AppController],
 })

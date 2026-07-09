@@ -58,6 +58,8 @@ model User {
   toolUsages UserToolUsage[]
   decisions  UserDecision[]
   feedbacks  Feedback[]
+  games      Game[]
+  guesses    GameGuess[]
 
   @@map("users")
 }
@@ -152,4 +154,36 @@ model Feedback {
 
   @@index([userId, createdAt])
   @@map("feedbacks")
+}
+
+enum GameStatus {
+  waiting
+  won
+}
+
+model Game {
+  id         String      @id @default(cuid())
+  creatorId  Int         @map("creator_id")
+  creator    User        @relation(fields: [creatorId], references: [id])
+  targetHash String      @map("target_hash")
+  status     GameStatus  @default(waiting)
+  createdAt  DateTime    @default(now()) @map("created_at")
+  guesses    GameGuess[]
+
+  @@map("games")
+}
+
+model GameGuess {
+  id            Int      @id @default(autoincrement())
+  gameId        String   @map("game_id")
+  game          Game     @relation(fields: [gameId], references: [id])
+  userId        Int      @map("user_id")
+  user          User     @relation(fields: [userId], references: [id])
+  guess         String   @db.VarChar(4)
+  result        String   @db.VarChar(4)
+  attemptNumber Int      @map("attempt_number")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@unique([gameId, userId, attemptNumber])
+  @@map("game_guesses")
 }
