@@ -108,6 +108,39 @@ const tools: {
     enabled: true,
     sortOrder: 8,
   },
+  {
+    routePath: '/pages/timeTravel/index',
+    name: '时间穿越',
+    description: '一键快进未来',
+    iconKey: 'timeTravel',
+    accent: 'primary',
+    categoryCode: 'fun',
+    heatScore: 400,
+    enabled: true,
+    sortOrder: 9,
+  },
+  {
+    routePath: '/pages/xiahouDun/index',
+    name: '夏侯惇模拟器',
+    description: '左眼视觉体验',
+    iconKey: 'xiahouDun',
+    accent: 'secondary',
+    categoryCode: 'fun',
+    heatScore: 380,
+    enabled: true,
+    sortOrder: 10,
+  },
+  {
+    routePath: '/pages/hawking/index',
+    name: '霍金模拟器',
+    description: '屏幕倾斜体验',
+    iconKey: 'hawking',
+    accent: 'tertiary',
+    categoryCode: 'fun',
+    heatScore: 360,
+    enabled: true,
+    sortOrder: 11,
+  },
 ];
 
 const levels = [
@@ -151,19 +184,13 @@ async function main() {
       throw new Error(`Missing category: ${tool.categoryCode}`);
     }
 
-    await prisma.tool.upsert({
+    const existing = await prisma.tool.findUnique({
       where: { routePath: tool.routePath },
-      update: {
-        name: tool.name,
-        description: tool.description,
-        iconKey: tool.iconKey,
-        accent: tool.accent,
-        categoryId,
-        heatScore: tool.heatScore,
-        enabled: tool.enabled,
-        sortOrder: tool.sortOrder,
-      },
-      create: {
+    });
+    if (existing) continue;
+
+    await prisma.tool.create({
+      data: {
         routePath: tool.routePath,
         name: tool.name,
         description: tool.description,
