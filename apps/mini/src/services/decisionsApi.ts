@@ -5,16 +5,13 @@ export function listDecisions(): Promise<ApiDecisionsList> {
   return get<ApiDecisionsList>("/decisions");
 }
 
-export function createDecision(data: {
-  title: string;
-  options: string[];
-}): Promise<ApiDecision> {
+export function createDecision(data: { title: string; options: string[] }): Promise<ApiDecision> {
   return post<ApiDecision>("/decisions", data);
 }
 
 export function updateDecision(
   id: number,
-  data: { title?: string; options?: string[] }
+  data: { title?: string; options?: string[] },
 ): Promise<ApiDecision> {
   return patch<ApiDecision>(`/decisions/${id}`, data);
 }

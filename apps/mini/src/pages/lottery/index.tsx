@@ -22,11 +22,7 @@ const initialNum: {
   red: ["", "", "", "", "", ""],
   blue: "",
 };
-const NumWrapper: FC<NumWrapperProps> = ({
-  redBall = [],
-  blueBall = "",
-  onSubtract,
-}) => {
+const NumWrapper: FC<NumWrapperProps> = ({ redBall = [], blueBall = "", onSubtract }) => {
   const copy = () => {
     if (!blueBall || redBall.some((i) => !i)) {
       errorToast("请先选数");

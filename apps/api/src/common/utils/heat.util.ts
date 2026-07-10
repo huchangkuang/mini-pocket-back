@@ -4,7 +4,7 @@ export function formatHeatScore(score: number): string {
     return Number.isInteger(value) ? `${value}k` : `${value.toFixed(1)}k`;
   }
   if (score >= 999) {
-    return '999+';
+    return "999+";
   }
   return String(score);
 }

@@ -1,9 +1,6 @@
-import type { ApiFavorite } from '@mini-pocket/shared';
-import { ToolWithCategory } from '../tools/tool.mapper';
-import {
-  toFavoriteCategory,
-  toFavoriteTag,
-} from '../../common/utils/category.util';
+import type { ApiFavorite } from "@mini-pocket/shared";
+import { ToolWithCategory } from "../tools/tool.mapper";
+import { toFavoriteCategory, toFavoriteTag } from "../../common/utils/category.util";
 
 export function mapFavorite(tool: ToolWithCategory): ApiFavorite {
   const favoriteCategory = toFavoriteCategory(tool.category.code);

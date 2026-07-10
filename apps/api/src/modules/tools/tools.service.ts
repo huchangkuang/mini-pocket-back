@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { PrismaService } from '../../prisma/prisma.service';
-import { QueryToolsDto } from './dto/query-tools.dto';
-import { mapTool } from './tool.mapper';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { Prisma } from "@prisma/client";
+import { PrismaService } from "../../prisma/prisma.service";
+import { QueryToolsDto } from "./dto/query-tools.dto";
+import { mapTool } from "./tool.mapper";
 
 @Injectable()
 export class ToolsService {
@@ -15,25 +15,19 @@ export class ToolsService {
       enabled: true,
     };
 
-    if (query.category && query.category !== 'all') {
+    if (query.category && query.category !== "all") {
       where.category = { code: query.category };
     }
 
     const keyword = query.keyword?.trim();
     if (keyword) {
-      where.OR = [
-        { name: { contains: keyword } },
-        { description: { contains: keyword } },
-      ];
+      where.OR = [{ name: { contains: keyword } }, { description: { contains: keyword } }];
     }
 
     const orderBy: Prisma.ToolOrderByWithRelationInput[] =
-      query.sort === 'heat'
-        ? [
-            { heatScore: query.order === 'asc' ? 'asc' : 'desc' },
-            { sortOrder: 'asc' },
-          ]
-        : [{ sortOrder: 'asc' }];
+      query.sort === "heat"
+        ? [{ heatScore: query.order === "asc" ? "asc" : "desc" }, { sortOrder: "asc" }]
+        : [{ sortOrder: "asc" }];
 
     const [total, tools] = await Promise.all([
       this.prisma.tool.count({ where }),
@@ -47,13 +41,14 @@ export class ToolsService {
     ]);
 
     const favoriteToolIds = userId
-      ? await this.getFavoriteToolIdSet(userId, tools.map((tool) => tool.id))
+      ? await this.getFavoriteToolIdSet(
+          userId,
+          tools.map((tool) => tool.id),
+        )
       : new Set<number>();
 
     return {
-      list: tools.map((tool) =>
-        mapTool(tool, { isFavorite: favoriteToolIds.has(tool.id) }),
-      ),
+      list: tools.map((tool) => mapTool(tool, { isFavorite: favoriteToolIds.has(tool.id) })),
       total,
       page,
       pageSize,
@@ -67,7 +62,7 @@ export class ToolsService {
     });
 
     if (!tool) {
-      throw new NotFoundException('工具不存在');
+      throw new NotFoundException("工具不存在");
     }
 
     let isFavorite = false;

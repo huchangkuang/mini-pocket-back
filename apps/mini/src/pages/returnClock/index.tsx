@@ -11,9 +11,7 @@ type ActiveButton = "reverse" | "normal" | null;
 const ACCELERATE_MULTIPLIER = 10;
 
 const CLOCK_NUMBERS = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-const NUMBER_ANGLES = [
-  0, -30, -60, -90, -120, -150, -180, -210, -240, -270, -300, -330,
-];
+const NUMBER_ANGLES = [0, -30, -60, -90, -120, -150, -180, -210, -240, -270, -300, -330];
 
 const FLOW_STATUS: Record<
   FlowMode,
@@ -206,7 +204,7 @@ const ReturnClock: React.FC = () => {
           className={cs(
             "returnClock__status",
             status.breathe && "returnClock__status--breathe",
-            `returnClock__status--${status.dotVariant}`
+            `returnClock__status--${status.dotVariant}`,
           )}
         >
           <View className="returnClock__statusDot" />
@@ -215,35 +213,21 @@ const ReturnClock: React.FC = () => {
 
         <View className="returnClock__controls">
           <View
-            className={cs(
-              "returnClock__btn",
-              isReverseActive && "returnClock__btn--active"
-            )}
+            className={cs("returnClock__btn", isReverseActive && "returnClock__btn--active")}
             onClick={handleReverseClick}
           >
-            {!isReverseActive && (
-              <AtIcon value="reload" size="32" color="#005ea4" />
-            )}
+            {!isReverseActive && <AtIcon value="reload" size="32" color="#005ea4" />}
             <Text className="returnClock__btnLabel">加速逆流</Text>
           </View>
           <View className="returnClock__btn" onClick={handlePauseToggle}>
-            <AtIcon
-              value={isPaused ? "play" : "pause"}
-              size="32"
-              color="#005ea4"
-            />
+            <AtIcon value={isPaused ? "play" : "pause"} size="32" color="#005ea4" />
             <Text className="returnClock__btnLabel">时空暂停</Text>
           </View>
           <View
-            className={cs(
-              "returnClock__btn",
-              isNormalActive && "returnClock__btn--active"
-            )}
+            className={cs("returnClock__btn", isNormalActive && "returnClock__btn--active")}
             onClick={handleNormalClick}
           >
-            {!isNormalActive && (
-              <AtIcon value="play" size="32" color="#005ea4" />
-            )}
+            {!isNormalActive && <AtIcon value="play" size="32" color="#005ea4" />}
             <Text className="returnClock__btnLabel">正常流动</Text>
           </View>
         </View>

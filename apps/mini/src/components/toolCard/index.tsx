@@ -51,12 +51,7 @@ const ToolCard: FC<ToolCardProps> = memo(
     if (layout === "list") {
       return (
         <View className="toolCard toolCard--list" onClick={onClick}>
-          <View
-            className={cs(
-              "toolCard__iconWrap",
-              `toolCard__iconWrap--${accent}`
-            )}
-          >
+          <View className={cs("toolCard__iconWrap", `toolCard__iconWrap--${accent}`)}>
             <Image className="toolCard__icon" src={icon} mode="aspectFit" />
           </View>
           <View className="toolCard__content">
@@ -68,11 +63,7 @@ const ToolCard: FC<ToolCardProps> = memo(
             {(tag || heat) && (
               <View className="toolCard__tags">
                 {tag && <Text className="toolCard__tag">{tag}</Text>}
-                {heat && (
-                  <Text className="toolCard__tag toolCard__tag--heat">
-                    热度 {heat}
-                  </Text>
-                )}
+                {heat && <Text className="toolCard__tag toolCard__tag--heat">热度 {heat}</Text>}
               </View>
             )}
           </View>
@@ -83,12 +74,7 @@ const ToolCard: FC<ToolCardProps> = memo(
     return (
       <View className="toolCard" onClick={onClick}>
         <View className="toolCard__header">
-          <View
-            className={cs(
-              "toolCard__iconWrap",
-              `toolCard__iconWrap--${accent}`
-            )}
-          >
+          <View className={cs("toolCard__iconWrap", `toolCard__iconWrap--${accent}`)}>
             <Image className="toolCard__icon" src={icon} mode="aspectFit" />
           </View>
           {favoriteBtn}
@@ -102,7 +88,7 @@ const ToolCard: FC<ToolCardProps> = memo(
         </View>
       </View>
     );
-  }
+  },
 );
 
 export default ToolCard;

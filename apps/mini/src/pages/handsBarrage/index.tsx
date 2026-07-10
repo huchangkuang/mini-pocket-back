@@ -51,10 +51,7 @@ const HandsBarrage: React.FC = () => {
       style={{
         background: bgColor,
       }}
-      className={classNames(
-        "handsBarrage",
-        windowWidth > windowHeight && "noRotate"
-      )}
+      className={classNames("handsBarrage", windowWidth > windowHeight && "noRotate")}
     >
       <View
         className={cs("scrollText", typeClass)}

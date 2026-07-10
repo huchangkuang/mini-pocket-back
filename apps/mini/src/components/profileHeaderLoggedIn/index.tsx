@@ -86,11 +86,7 @@ const ProfileHeaderLoggedIn: FC<ProfileHeaderLoggedInProps> = memo(
           onChooseAvatar={(e) => onAvatarChoose?.(e.detail.avatarUrl)}
         >
           <View className="profileHeaderLoggedIn__avatarWrap">
-            <Image
-              className="profileHeaderLoggedIn__avatar"
-              src={avatarSrc}
-              mode="aspectFill"
-            />
+            <Image className="profileHeaderLoggedIn__avatar" src={avatarSrc} mode="aspectFill" />
           </View>
         </Button>
 
@@ -138,21 +134,14 @@ const ProfileHeaderLoggedIn: FC<ProfileHeaderLoggedInProps> = memo(
               </View>
             </View>
           ) : (
-            <Text
-              className="profileHeaderLoggedIn__name"
-              onClick={startEditing}
-            >
+            <Text className="profileHeaderLoggedIn__name" onClick={startEditing}>
               {user.nickname}
             </Text>
           )}
-          <Text className="profileHeaderLoggedIn__date">
-            加入于 {user.joinDate}
-          </Text>
+          <Text className="profileHeaderLoggedIn__date">加入于 {user.joinDate}</Text>
           <View className="profileHeaderLoggedIn__badge">
             <AtIcon value="star-2" size="12" color="#005ea4" />
-            <Text className="profileHeaderLoggedIn__badgeText">
-              {user.badge}
-            </Text>
+            <Text className="profileHeaderLoggedIn__badgeText">{user.badge}</Text>
           </View>
         </View>
 
@@ -163,7 +152,7 @@ const ProfileHeaderLoggedIn: FC<ProfileHeaderLoggedInProps> = memo(
         )}
       </View>
     );
-  }
+  },
 );
 
 export default ProfileHeaderLoggedIn;

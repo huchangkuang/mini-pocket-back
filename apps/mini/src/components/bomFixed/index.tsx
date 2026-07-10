@@ -1,11 +1,4 @@
-import React, {
-  CSSProperties,
-  FC,
-  Fragment,
-  PropsWithChildren,
-  useEffect,
-  useState,
-} from "react";
+import React, { CSSProperties, FC, Fragment, PropsWithChildren, useEffect, useState } from "react";
 import Taro, { View } from "@tarojs/components";
 import cs from "classnames";
 import { createSelectorQuery } from "@tarojs/taro";
@@ -17,12 +10,7 @@ interface BomFixedProps extends PropsWithChildren {
   hasPlace?: boolean;
   style?: CSSProperties;
 }
-export const BomFixed: FC<BomFixedProps> = ({
-  className,
-  children,
-  style,
-  hasPlace = true,
-}) => {
+export const BomFixed: FC<BomFixedProps> = ({ className, children, style, hasPlace = true }) => {
   const [placeHeight, setPlaceHeight] = useState(0);
 
   const calcHeight = () => {

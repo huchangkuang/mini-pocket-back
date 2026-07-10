@@ -10,34 +10,28 @@ export type MineMenuListProps = {
   onItemClick?: (id: string) => void;
 };
 
-const MineMenuList: FC<MineMenuListProps> = memo(
-  ({ items, isLoggedIn, onItemClick }) => {
-    return (
-      <View className="mineMenuList">
-        {items.map((item, index) => (
-          <View
-            key={item.id}
-            className={`mineMenuList__row${
-              index < items.length - 1 ? " mineMenuList__row--border" : ""
-            }`}
-            onClick={() => onItemClick?.(item.id)}
-          >
-            <View className="mineMenuList__left">
-              <AtIcon
-                value={item.icon}
-                size="20"
-                color={isLoggedIn ? "#0077ce" : "#005ea4"}
-              />
-              <Text className="mineMenuList__label">
-                {isLoggedIn ? item.labelLoggedIn : item.labelGuest}
-              </Text>
-            </View>
-            <AtIcon value="chevron-right" size="18" color="#707783" />
+const MineMenuList: FC<MineMenuListProps> = memo(({ items, isLoggedIn, onItemClick }) => {
+  return (
+    <View className="mineMenuList">
+      {items.map((item, index) => (
+        <View
+          key={item.id}
+          className={`mineMenuList__row${
+            index < items.length - 1 ? " mineMenuList__row--border" : ""
+          }`}
+          onClick={() => onItemClick?.(item.id)}
+        >
+          <View className="mineMenuList__left">
+            <AtIcon value={item.icon} size="20" color={isLoggedIn ? "#0077ce" : "#005ea4"} />
+            <Text className="mineMenuList__label">
+              {isLoggedIn ? item.labelLoggedIn : item.labelGuest}
+            </Text>
           </View>
-        ))}
-      </View>
-    );
-  }
-);
+          <AtIcon value="chevron-right" size="18" color="#707783" />
+        </View>
+      ))}
+    </View>
+  );
+});
 
 export default MineMenuList;

@@ -10,7 +10,7 @@ export function useThrottle(fn, delay, dep = []) {
     function () {
       current.fn = fn;
     },
-    [fn]
+    [fn],
   );
 
   return useCallback(function f(...args) {

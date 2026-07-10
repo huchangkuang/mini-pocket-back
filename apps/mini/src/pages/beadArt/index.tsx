@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import Taro, { useShareAppMessage } from "@tarojs/taro";
-import {
-  Canvas,
-  Image,
-  Slider,
-  View,
-  ScrollView,
-  Text,
-} from "@tarojs/components";
+import { Canvas, Image, Slider, View, ScrollView, Text } from "@tarojs/components";
 import ExcelJS from "exceljs";
 import "./index.scss";
 import { AtIcon, AtButton } from "taro-ui";
@@ -78,18 +71,9 @@ const BeadArt: React.FC = () => {
                 canvas.height = canvasHeight;
                 ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
 
-                const imageData = ctx.getImageData(
-                  0,
-                  0,
-                  canvasWidth,
-                  canvasHeight
-                );
+                const imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
                 setImageData(imageData.data);
-                const pixels = extractPixelData(
-                  imageData.data,
-                  canvasWidth,
-                  canvasHeight
-                );
+                const pixels = extractPixelData(imageData.data, canvasWidth, canvasHeight);
                 setPixelData(pixels);
               };
             });
@@ -101,7 +85,7 @@ const BeadArt: React.FC = () => {
   const extractPixelData = (
     imageData: Uint8ClampedArray,
     width: number,
-    height: number
+    height: number,
   ): PixelData[] => {
     const pixels: PixelData[] = [];
     const step = Math.max(1, Math.floor(pixelSize));
@@ -231,9 +215,7 @@ const BeadArt: React.FC = () => {
         const filePath = `${Taro.env.USER_DATA_PATH}/${fileName}`;
 
         const uint8Array = new Uint8Array(buffer);
-        const binaryString = Array.from(uint8Array, (byte) =>
-          String.fromCharCode(byte)
-        ).join("");
+        const binaryString = Array.from(uint8Array, (byte) => String.fromCharCode(byte)).join("");
 
         const fs = Taro.getFileSystemManager();
         fs.writeFile({
@@ -365,12 +347,9 @@ const BeadArt: React.FC = () => {
         <View className="controls">
           <View className="controlItem">
             <View className="controlLabel">
-              像素大小: {pixelSize}px{" "}
-              <Text className="unit">(调整像素后请重新生成Excel)</Text>
+              像素大小: {pixelSize}px <Text className="unit">(调整像素后请重新生成Excel)</Text>
             </View>
-            <View className="controlTip">
-              像素越小，生成的图片越精细，但同时方块格越多！
-            </View>
+            <View className="controlTip">像素越小，生成的图片越精细，但同时方块格越多！</View>
             <Slider
               value={pixelSize}
               min={3}

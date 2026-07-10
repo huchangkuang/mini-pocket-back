@@ -6,9 +6,9 @@ import {
   IsString,
   MaxLength,
   MinLength,
-} from 'class-validator';
+} from "class-validator";
 
-const FEEDBACK_TYPES = ['feature', 'performance', 'style', 'other'] as const;
+const FEEDBACK_TYPES = ["feature", "performance", "style", "other"] as const;
 
 export class CreateFeedbackDto {
   @IsIn(FEEDBACK_TYPES)

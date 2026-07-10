@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { LevelConfig } from '@prisma/client';
-import { PrismaService } from '../../prisma/prisma.service';
-import { XP_REPEAT_USE } from './xp.constants';
+import { Injectable } from "@nestjs/common";
+import { LevelConfig } from "@prisma/client";
+import { PrismaService } from "../../prisma/prisma.service";
+import { XP_REPEAT_USE } from "./xp.constants";
 
 export type UserLevelInfo = {
   current: number;
@@ -32,7 +32,7 @@ export class LevelService {
     }
 
     const levels = await this.prisma.levelConfig.findMany({
-      orderBy: { minXp: 'asc' },
+      orderBy: { minXp: "asc" },
     });
     this.levelsCache = levels;
     this.levelsCacheAt = now;
@@ -96,7 +96,7 @@ export class LevelService {
   private fallbackLevel(totalXp: number): UserLevelInfo {
     return {
       current: 1,
-      title: '工坊学徒',
+      title: "工坊学徒",
       totalXp,
       xpCurrent: totalXp,
       xpTarget: totalXp,
@@ -104,7 +104,7 @@ export class LevelService {
       nextTitle: null,
       xpToNextLevel: 0,
       usesToNextLevel: 0,
-      hint: '等级配置未初始化',
+      hint: "等级配置未初始化",
       isMaxLevel: true,
     };
   }

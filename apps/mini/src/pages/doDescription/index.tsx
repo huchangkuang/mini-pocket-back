@@ -55,7 +55,7 @@ const DoDecision: React.FC = () => {
 
   const segmentDeg = useMemo(
     () => (itemList.length > 0 ? 360 / itemList.length : 60),
-    [itemList.length]
+    [itemList.length],
   );
 
   const conicGradientStyle = useMemo(() => {
@@ -182,11 +182,7 @@ const DoDecision: React.FC = () => {
 
   return (
     <View className="doDescription">
-      <View
-        className="doDescription__menuBtn"
-        style={menuBtnStyle}
-        onClick={openMenu}
-      >
+      <View className="doDescription__menuBtn" style={menuBtnStyle} onClick={openMenu}>
         <AtIcon value="more" size="18" color="#191c1e" />
       </View>
 
@@ -227,9 +223,7 @@ const DoDecision: React.FC = () => {
                       }deg)`,
                     }}
                   >
-                    <Text className="doDescription__wheelLabelText">
-                      {label}
-                    </Text>
+                    <Text className="doDescription__wheelLabelText">{label}</Text>
                   </View>
                 ))}
               </View>
@@ -246,9 +240,7 @@ const DoDecision: React.FC = () => {
             </View>
           </View>
 
-          <Text className="doDescription__hint">
-            摇摆不定？点击按钮，让命运来为你做决定。
-          </Text>
+          <Text className="doDescription__hint">摇摆不定？点击按钮，让命运来为你做决定。</Text>
 
           <View className="doDescription__recent">
             <View className="doDescription__recentHeader">
@@ -281,9 +273,7 @@ const DoDecision: React.FC = () => {
                     <View
                       key={item.id}
                       className={`doDescription__recentItem doDescription__recentItem--${accent}${
-                        selectId === item.id
-                          ? " doDescription__recentItem--selected"
-                          : ""
+                        selectId === item.id ? " doDescription__recentItem--selected" : ""
                       }`}
                       onClick={() => selectCurItem(item)}
                     >
@@ -297,12 +287,8 @@ const DoDecision: React.FC = () => {
                         />
                       </View>
                       <View className="doDescription__recentBody">
-                        <Text className="doDescription__recentItemTitle">
-                          {item.title}
-                        </Text>
-                        <Text className="doDescription__recentItemOpts">
-                          选项：{preview}
-                        </Text>
+                        <Text className="doDescription__recentItemTitle">{item.title}</Text>
+                        <Text className="doDescription__recentItemOpts">选项：{preview}</Text>
                       </View>
                       <View
                         className="doDescription__recentDelete"
@@ -311,11 +297,7 @@ const DoDecision: React.FC = () => {
                           handleDeleteItem(item);
                         }}
                       >
-                        <AtIcon
-                          value="subtract-circle"
-                          size="18"
-                          color="#ba1a1a"
-                        />
+                        <AtIcon value="subtract-circle" size="18" color="#ba1a1a" />
                       </View>
                     </View>
                   );
@@ -325,9 +307,7 @@ const DoDecision: React.FC = () => {
           </View>
 
           <View
-            className={`doDescription__cta${
-              isSpinning ? " doDescription__cta--disabled" : ""
-            }`}
+            className={`doDescription__cta${isSpinning ? " doDescription__cta--disabled" : ""}`}
             onClick={decide}
           >
             <AtIcon value="reload" size="18" color="#ffffff" />

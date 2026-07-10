@@ -8,8 +8,6 @@ export type SubmitFeedbackPayload = {
   imageUrls?: string[];
 };
 
-export function submitFeedback(
-  data: SubmitFeedbackPayload
-): Promise<ApiSubmitFeedbackResult> {
+export function submitFeedback(data: SubmitFeedbackPayload): Promise<ApiSubmitFeedbackResult> {
   return post<ApiSubmitFeedbackResult>("/feedback", data);
 }

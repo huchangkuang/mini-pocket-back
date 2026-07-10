@@ -16,16 +16,11 @@ export function useFavorites(options?: {
   const [toggling, setToggling] = useState(false);
 
   const syncFavoritePathsFromTools = useCallback((tools: ToolItem[]) => {
-    const paths = new Set(
-      tools.filter((tool) => tool.isFavorite).map((tool) => tool.path)
-    );
+    const paths = new Set(tools.filter((tool) => tool.isFavorite).map((tool) => tool.path));
     setFavoritePaths(paths);
   }, []);
 
-  const isFavorite = useCallback(
-    (path: string) => favoritePaths.has(path),
-    [favoritePaths]
-  );
+  const isFavorite = useCallback((path: string) => favoritePaths.has(path), [favoritePaths]);
 
   const toggleFavorite = useCallback(
     async (tool: ToolItem) => {
@@ -62,7 +57,7 @@ export function useFavorites(options?: {
         setToggling(false);
       }
     },
-    [loggedIn, isReady, toggling, options]
+    [loggedIn, isReady, toggling, options],
   );
 
   const setFavoritesList = useCallback((items: FavoriteItem[]) => {

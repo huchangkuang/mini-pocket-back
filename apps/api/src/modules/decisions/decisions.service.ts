@@ -1,19 +1,11 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-import {
-  mapDecision,
-  mapDecisionSummary,
-  normalizeOptions,
-} from './decision.mapper';
-import { DecisionBodyDto, UpdateDecisionDto } from './dto/decision.dto';
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import { PrismaService } from "../../prisma/prisma.service";
+import { mapDecision, mapDecisionSummary, normalizeOptions } from "./decision.mapper";
+import { DecisionBodyDto, UpdateDecisionDto } from "./dto/decision.dto";
 
 const DEFAULT_DECISION = {
-  title: '今晚吃什么？',
-  options: ['火锅', '披萨', '寿司', '烤肉', '面条', '沙拉'],
+  title: "今晚吃什么？",
+  options: ["火锅", "披萨", "寿司", "烤肉", "面条", "沙拉"],
 };
 
 @Injectable()
@@ -25,12 +17,12 @@ export class DecisionsService {
 
     const list = await this.prisma.userDecision.findMany({
       where: { userId },
-      orderBy: [{ isActive: 'desc' }, { lastUsedAt: 'desc' }, { id: 'desc' }],
+      orderBy: [{ isActive: "desc" }, { lastUsedAt: "desc" }, { id: "desc" }],
     });
 
     const current = list.find((item) => item.isActive);
     if (!current) {
-      throw new NotFoundException('当前决策不存在');
+      throw new NotFoundException("当前决策不存在");
     }
 
     return {
@@ -123,7 +115,7 @@ export class DecisionsService {
 
     const remaining = await this.prisma.userDecision.findMany({
       where: { userId },
-      orderBy: [{ lastUsedAt: 'desc' }, { id: 'desc' }],
+      orderBy: [{ lastUsedAt: "desc" }, { id: "desc" }],
       take: 1,
     });
 
@@ -152,7 +144,7 @@ export class DecisionsService {
     if (activeCount === 0) {
       const latest = await this.prisma.userDecision.findFirst({
         where: { userId },
-        orderBy: [{ lastUsedAt: 'desc' }, { id: 'desc' }],
+        orderBy: [{ lastUsedAt: "desc" }, { id: "desc" }],
       });
 
       if (latest) {
@@ -190,11 +182,11 @@ export class DecisionsService {
     if (dto.options !== undefined) {
       data.options = this.parseOptions(dto.options);
     } else if (dto.title !== undefined && currentOptions.length < 2) {
-      throw new BadRequestException('至少填写两个选项');
+      throw new BadRequestException("至少填写两个选项");
     }
 
     if (Object.keys(data).length === 0) {
-      throw new BadRequestException('没有可更新的内容');
+      throw new BadRequestException("没有可更新的内容");
     }
 
     return data;
@@ -203,7 +195,7 @@ export class DecisionsService {
   private parseOptions(options: string[]) {
     const normalized = normalizeOptions(options);
     if (normalized.length < 2) {
-      throw new BadRequestException('至少填写两个选项');
+      throw new BadRequestException("至少填写两个选项");
     }
     return normalized;
   }
@@ -214,7 +206,7 @@ export class DecisionsService {
     });
 
     if (!decision) {
-      throw new NotFoundException('决策不存在');
+      throw new NotFoundException("决策不存在");
     }
 
     return decision;
@@ -228,7 +220,7 @@ export class DecisionsService {
     });
 
     if (!decision) {
-      throw new NotFoundException('当前决策不存在');
+      throw new NotFoundException("当前决策不存在");
     }
 
     return decision;

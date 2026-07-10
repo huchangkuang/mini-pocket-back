@@ -26,7 +26,7 @@ function SegmentedControlInner<T extends string | number>({
           key={String(option.value)}
           className={cs(
             "segmentedControl__item",
-            value === option.value && "segmentedControl__item--active"
+            value === option.value && "segmentedControl__item--active",
           )}
           onClick={() => onChange(option.value)}
         >
@@ -37,8 +37,6 @@ function SegmentedControlInner<T extends string | number>({
   );
 }
 
-const SegmentedControl = memo(
-  SegmentedControlInner
-) as typeof SegmentedControlInner;
+const SegmentedControl = memo(SegmentedControlInner) as typeof SegmentedControlInner;
 
 export default SegmentedControl;

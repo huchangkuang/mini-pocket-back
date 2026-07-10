@@ -52,9 +52,7 @@ page {
     border-radius: 50%;
     border: 16rpx solid $color-surface-container-lowest;
     background: radial-gradient(circle at center, #ffffff 0%, #f0f4f8 100%);
-    box-shadow:
-      inset 0 4rpx 8rpx rgba(0, 0, 0, 0.05),
-      0 20rpx 80rpx rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 4rpx 8rpx rgba(0, 0, 0, 0.05), 0 20rpx 80rpx rgba(0, 0, 0, 0.1);
     margin-bottom: $spacing-lg;
   }
 

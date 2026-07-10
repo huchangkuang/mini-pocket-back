@@ -8,14 +8,14 @@ page {
   .card {
     padding: 24px;
     border-radius: 16px;
-    background: #FFFFFF;
+    background: #ffffff;
     margin-bottom: 16px;
   }
   .codeWrap {
     @include flexCenter;
     #qrcode {
-      width: 300Px;
-      height: 300Px;
+      width: 300px;
+      height: 300px;
     }
   }
   .bomBtn {

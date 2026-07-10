@@ -1,12 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { User } from '@prisma/client';
-import { PrismaService } from '../../prisma/prisma.service';
-import { JwtPayload } from '../../common/types/auth-user';
-import { StatsService } from '../stats/stats.service';
-import { UpdateProfileDto } from './dto/update-profile.dto';
-import { WechatLoginDto } from './dto/wechat-login.dto';
-import { WechatService } from './wechat.service';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { User } from "@prisma/client";
+import { PrismaService } from "../../prisma/prisma.service";
+import { JwtPayload } from "../../common/types/auth-user";
+import { StatsService } from "../stats/stats.service";
+import { UpdateProfileDto } from "./dto/update-profile.dto";
+import { WechatLoginDto } from "./dto/wechat-login.dto";
+import { WechatService } from "./wechat.service";
 
 @Injectable()
 export class AuthService {
@@ -64,7 +64,7 @@ export class AuthService {
   async getProfile(userId: number) {
     const user = await this.findUserById(userId);
     if (!user) {
-      throw new NotFoundException('用户不存在');
+      throw new NotFoundException("用户不存在");
     }
 
     const { stats, level } = await this.statsService.getUserStatsWithLevel(userId);

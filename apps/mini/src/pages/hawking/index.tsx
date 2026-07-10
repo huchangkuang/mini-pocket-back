@@ -32,22 +32,10 @@ const Hawking: React.FC = () => {
 
   return (
     <View className="hawking">
-      <View
-        className={cs(
-          "hawking__screen",
-          activated && "hawking__screen--rotated"
-        )}
-      >
+      <View className={cs("hawking__screen", activated && "hawking__screen--rotated")}>
         {IS_WECHAT && (
-          <View
-            style={{ top }}
-            className="hawking__goBack"
-            onClick={navigateBackOrHome}
-          >
-            <AtIcon
-              value={showHome ? "home" : "chevron-left"}
-              size={height - 4}
-            />
+          <View style={{ top }} className="hawking__goBack" onClick={navigateBackOrHome}>
+            <AtIcon value={showHome ? "home" : "chevron-left"} size={height - 4} />
           </View>
         )}
 
@@ -57,9 +45,7 @@ const Hawking: React.FC = () => {
 
         <View className="hawking__body">
           <View className="hawking__preview">
-            <Text className="hawking__previewText">
-              {activated ? "屏幕已倾斜" : "等待确认..."}
-            </Text>
+            <Text className="hawking__previewText">{activated ? "屏幕已倾斜" : "等待确认..."}</Text>
           </View>
 
           {!activated && (

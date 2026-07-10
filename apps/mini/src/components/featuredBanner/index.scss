@@ -8,11 +8,7 @@ $banner-gradient-end: #42a5f5;
   width: 100%;
   height: 192rpx;
   border-radius: $radius-xl;
-  background: linear-gradient(
-    to right,
-    $banner-gradient-start,
-    $banner-gradient-end
-  );
+  background: linear-gradient(to right, $banner-gradient-start, $banner-gradient-end);
   color: #ffffff;
   padding: 32rpx;
   box-sizing: border-box;

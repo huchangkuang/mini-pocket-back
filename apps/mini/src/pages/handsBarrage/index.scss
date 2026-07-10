@@ -1,21 +1,37 @@
+/* 文字滚动 */
+@keyframes aniMove1 {
+  0% {
+    transform: translateX(100vh);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+/* 文字滚动 */
+@keyframes aniMove2 {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 
- /* 文字滚动 */
- @keyframes aniMove1 {
-  0% { transform: translateX(100vh); }
-  100% { transform: translateX(-100%); }
- }
- /* 文字滚动 */
- @keyframes aniMove2 {
-   0% { transform: translateX(100vw); }
-   100% { transform: translateX(-100%); }
- }
- 
- /* 抖动字幕效果 */
- @keyframes aniShake {
-  0%, 33% { text-shadow: 3px -3px 0px #FE008E, -5px 5px 0px #00FFFF; }
-  34%, 66% { text-shadow: 5px -5px 0px #FE008E, -3px 3px 0px #00FFFF; }
-  67%, 100% { text-shadow: 3px -3px 0px #00FFFF, -5px 5px 0px #FE008E; }
- }
+/* 抖动字幕效果 */
+@keyframes aniShake {
+  0%,
+  33% {
+    text-shadow: 3px -3px 0px #fe008e, -5px 5px 0px #00ffff;
+  }
+  34%,
+  66% {
+    text-shadow: 5px -5px 0px #fe008e, -3px 3px 0px #00ffff;
+  }
+  67%,
+  100% {
+    text-shadow: 3px -3px 0px #00ffff, -5px 5px 0px #fe008e;
+  }
+}
 
 .handsBarrage {
   background: #000;
@@ -72,4 +88,3 @@
     }
   }
 }
-

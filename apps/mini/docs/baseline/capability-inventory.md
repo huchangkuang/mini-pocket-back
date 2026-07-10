@@ -4,39 +4,39 @@
 
 ### 1.1 主包页面（`src/app.config.ts`）
 
-| 页面路径 | 页面名称 | 入口来源 | 状态 |
-| --- | --- | --- | --- |
-| `pages/classify/index` | 分类首页 | 默认首页 | 已启用 |
-| `pages/handsBarrage/index` | 手持弹幕展示 | `handsBarrage/edit` 提交参数后跳转 | 已启用 |
-| `pages/handsBarrage/edit/index` | 手持弹幕配置 | 分类页功能入口 | 已启用 |
-| `pages/doDescription/index` | 做个决定 | 分类页功能入口 | 已启用 |
-| `pages/doDescription/edit/index` | 做个决定编辑 | 决策页内跳转 | 已启用 |
-| `pages/fingerUp/index` | 指尖轮盘 | 分类页功能入口 | 已启用 |
-| `pages/qrcode/index` | 二维码生成 | 分类页功能入口 | 已启用 |
-| `pages/metronome/index` | 节拍器 | 分类页功能入口 | 已启用 |
-| `pages/lottery/index` | 随机数（双色球样式） | 页面注册但分类页隐藏 | 已启用（入口隐藏） |
-| `pages/returnClock/index` | 反方向的钟 | 分类页功能入口 | 已启用 |
-| `pages/guessNumber/index` | 猜数字（4A2B） | 分类页功能入口 | 已启用 |
+| 页面路径                         | 页面名称             | 入口来源                           | 状态               |
+| -------------------------------- | -------------------- | ---------------------------------- | ------------------ |
+| `pages/classify/index`           | 分类首页             | 默认首页                           | 已启用             |
+| `pages/handsBarrage/index`       | 手持弹幕展示         | `handsBarrage/edit` 提交参数后跳转 | 已启用             |
+| `pages/handsBarrage/edit/index`  | 手持弹幕配置         | 分类页功能入口                     | 已启用             |
+| `pages/doDescription/index`      | 做个决定             | 分类页功能入口                     | 已启用             |
+| `pages/doDescription/edit/index` | 做个决定编辑         | 决策页内跳转                       | 已启用             |
+| `pages/fingerUp/index`           | 指尖轮盘             | 分类页功能入口                     | 已启用             |
+| `pages/qrcode/index`             | 二维码生成           | 分类页功能入口                     | 已启用             |
+| `pages/metronome/index`          | 节拍器               | 分类页功能入口                     | 已启用             |
+| `pages/lottery/index`            | 随机数（双色球样式） | 页面注册但分类页隐藏               | 已启用（入口隐藏） |
+| `pages/returnClock/index`        | 反方向的钟           | 分类页功能入口                     | 已启用             |
+| `pages/guessNumber/index`        | 猜数字（4A2B）       | 分类页功能入口                     | 已启用             |
 
 ### 1.2 分包页面
 
-| 分包根目录 | 页面 | 功能 |
-| --- | --- | --- |
+| 分包根目录      | 页面    | 功能                      |
+| --------------- | ------- | ------------------------- |
 | `pages/beadArt` | `index` | 拼豆图片生成与 Excel 导出 |
 
 ### 1.3 分类入口映射（`src/pages/classify/constants.ts`）
 
-| 分类文案 | 跳转路径 | 备注 |
-| --- | --- | --- |
-| 手持弹幕 | `/pages/handsBarrage/edit/index` | 启用 |
-| 做个决定吧 | `/pages/doDescription/index` | 启用 |
-| 指尖轮盘 | `/pages/fingerUp/index` | 启用 |
-| 二维码生成 | `/pages/qrcode/index` | 启用 |
-| 节拍器 | `/pages/metronome/index` | 启用 |
-| 随机数 | `/pages/lottery/index` | 在 `excludeClassifyList` 中被隐藏 |
-| 反方向的钟 | `/pages/returnClock/index` | 启用 |
-| 拼豆图片生成 | `/pages/beadArt/index` | 启用（分包） |
-| 猜数字 | `/pages/guessNumber/index` | 启用 |
+| 分类文案     | 跳转路径                         | 备注                              |
+| ------------ | -------------------------------- | --------------------------------- |
+| 手持弹幕     | `/pages/handsBarrage/edit/index` | 启用                              |
+| 做个决定吧   | `/pages/doDescription/index`     | 启用                              |
+| 指尖轮盘     | `/pages/fingerUp/index`          | 启用                              |
+| 二维码生成   | `/pages/qrcode/index`            | 启用                              |
+| 节拍器       | `/pages/metronome/index`         | 启用                              |
+| 随机数       | `/pages/lottery/index`           | 在 `excludeClassifyList` 中被隐藏 |
+| 反方向的钟   | `/pages/returnClock/index`       | 启用                              |
+| 拼豆图片生成 | `/pages/beadArt/index`           | 启用（分包）                      |
+| 猜数字       | `/pages/guessNumber/index`       | 启用                              |
 
 ## 2. 复用模块与职责边界
 

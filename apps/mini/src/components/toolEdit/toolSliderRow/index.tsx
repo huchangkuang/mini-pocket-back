@@ -17,9 +17,7 @@ export type ToolSliderRowProps = {
 const ToolSliderRow: FC<ToolSliderRowProps> = memo(
   ({ label, value, min, max, unit = "", disabled = false, onChange }) => {
     return (
-      <View
-        className={cs("toolSliderRow", disabled && "toolSliderRow--disabled")}
-      >
+      <View className={cs("toolSliderRow", disabled && "toolSliderRow--disabled")}>
         <View className="toolSliderRow__header">
           <Text className="toolSliderRow__label">{label}</Text>
           <Text className="toolSliderRow__value">
@@ -39,7 +37,7 @@ const ToolSliderRow: FC<ToolSliderRowProps> = memo(
         />
       </View>
     );
-  }
+  },
 );
 
 export default ToolSliderRow;

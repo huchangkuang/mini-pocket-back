@@ -15,10 +15,7 @@ const FavoritesTopBar: FC<FavoritesTopBarProps> = memo(({ onFilter }) => {
   return (
     <>
       <View className="favoritesTopBar" style={{ height: `${barHeight}px` }}>
-        <View
-          className="favoritesTopBar__inner"
-          style={{ height: `${height}px`, top: `${top}px` }}
-        >
+        <View className="favoritesTopBar__inner" style={{ height: `${height}px`, top: `${top}px` }}>
           <View className="favoritesTopBar__left">
             <View className="favoritesTopBar__icon">
               <AtIcon value="heart" size="20" color="#005ea4" />

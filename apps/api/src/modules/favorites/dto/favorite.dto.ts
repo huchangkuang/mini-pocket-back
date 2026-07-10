@@ -1,5 +1,5 @@
-import { IsInt, IsOptional, IsString, MinLength, ValidateIf } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
+import { Type } from "class-transformer";
 
 export class FavoriteActionDto {
   @ValidateIf((dto: FavoriteActionDto) => !dto.routePath)

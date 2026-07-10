@@ -10,27 +10,25 @@ export type ColorSwatchGroupProps = {
   onChange: (color: string) => void;
 };
 
-const ColorSwatchGroup: FC<ColorSwatchGroupProps> = memo(
-  ({ label, colors, value, onChange }) => {
-    return (
-      <View className="colorSwatchGroup">
-        <Text className="colorSwatchGroup__label">{label}</Text>
-        <View className="colorSwatchGroup__swatches">
-          {colors.map((color) => (
-            <View
-              key={color}
-              className={cs(
-                "colorSwatchGroup__dot",
-                value === color && "colorSwatchGroup__dot--selected"
-              )}
-              style={{ backgroundColor: color }}
-              onClick={() => onChange(color)}
-            />
-          ))}
-        </View>
+const ColorSwatchGroup: FC<ColorSwatchGroupProps> = memo(({ label, colors, value, onChange }) => {
+  return (
+    <View className="colorSwatchGroup">
+      <Text className="colorSwatchGroup__label">{label}</Text>
+      <View className="colorSwatchGroup__swatches">
+        {colors.map((color) => (
+          <View
+            key={color}
+            className={cs(
+              "colorSwatchGroup__dot",
+              value === color && "colorSwatchGroup__dot--selected",
+            )}
+            style={{ backgroundColor: color }}
+            onClick={() => onChange(color)}
+          />
+        ))}
       </View>
-    );
-  }
-);
+    </View>
+  );
+});
 
 export default ColorSwatchGroup;

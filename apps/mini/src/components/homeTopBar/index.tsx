@@ -11,10 +11,7 @@ const HomeTopBar: FC = memo(() => {
   return (
     <>
       <View className="homeTopBar" style={{ height: `${barHeight}px` }}>
-        <View
-          className="homeTopBar__inner"
-          style={{ height: `${height}px`, top: `${top}px` }}
-        >
+        <View className="homeTopBar__inner" style={{ height: `${height}px`, top: `${top}px` }}>
           <View className="homeTopBar__brand">
             <Image className="homeTopBar__logo" src={logo} mode="aspectFit" />
             <Text className="homeTopBar__title">百宝口袋工坊</Text>

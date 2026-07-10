@@ -19,17 +19,11 @@
     "jsxFactory": "Taro.createElement",
     "allowJs": true,
     "resolveJsonModule": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "./src",
-    "./types",
-    "global.d.ts"
-  ],
+  "include": ["./src", "./types", "global.d.ts"],
   "compileOnSave": false
 }

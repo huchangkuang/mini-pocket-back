@@ -3,10 +3,10 @@ import {
   ForbiddenException,
   Injectable,
   NotFoundException,
-} from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { PrismaService } from '../../prisma/prisma.service';
-import { encrypt, decrypt } from '../../common/utils/crypto.util';
+} from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { PrismaService } from "../../prisma/prisma.service";
+import { encrypt, decrypt } from "../../common/utils/crypto.util";
 
 /**
  * Calculate Bulls (A) and Cows (B) for a single guess against the target.
@@ -51,7 +51,7 @@ export class GamesService {
   ) {}
 
   async createGame(userId: number, targetNumber: string) {
-    const secret = this.configService.getOrThrow<string>('GAME_TARGET_SECRET');
+    const secret = this.configService.getOrThrow<string>("GAME_TARGET_SECRET");
     const targetHash = encrypt(targetNumber, secret);
 
     const game = await this.prisma.game.create({
@@ -82,13 +82,13 @@ export class GamesService {
         },
         guesses: {
           where: { userId },
-          orderBy: { attemptNumber: 'asc' },
+          orderBy: { attemptNumber: "asc" },
         },
       },
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     const myHistory = game.guesses.map((g) => ({
@@ -115,34 +115,34 @@ export class GamesService {
       include: {
         guesses: {
           where: { userId },
-          orderBy: { attemptNumber: 'asc' },
+          orderBy: { attemptNumber: "asc" },
         },
       },
     });
 
     if (!game) {
-      throw new NotFoundException('游戏不存在');
+      throw new NotFoundException("游戏不存在");
     }
 
     // Prevent creator from guessing their own game
     if (game.creatorId === userId) {
-      throw new ForbiddenException('不能猜自己出的题');
+      throw new ForbiddenException("不能猜自己出的题");
     }
 
     // Check if the user has already won
-    const alreadyWon = game.guesses.some((g) => g.result === '4A0B');
+    const alreadyWon = game.guesses.some((g) => g.result === "4A0B");
     if (alreadyWon) {
-      throw new BadRequestException('你已经猜对了！');
+      throw new BadRequestException("你已经猜对了！");
     }
 
     // Decrypt the target number
-    const secret = this.configService.getOrThrow<string>('GAME_TARGET_SECRET');
+    const secret = this.configService.getOrThrow<string>("GAME_TARGET_SECRET");
     const targetNumber = decrypt(game.targetHash, secret);
 
     // Calculate result
     const result = calculateAB(targetNumber, guess);
     const attemptNumber = game.guesses.length + 1;
-    const won = result === '4A0B';
+    const won = result === "4A0B";
 
     // Create the guess record
     await this.prisma.gameGuess.create({
@@ -159,7 +159,7 @@ export class GamesService {
     if (won) {
       await this.prisma.game.update({
         where: { id: gameId },
-        data: { status: 'won' },
+        data: { status: "won" },
       });
     }
 

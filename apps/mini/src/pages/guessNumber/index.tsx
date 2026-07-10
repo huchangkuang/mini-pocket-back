@@ -28,17 +28,12 @@ type GuesserState = (typeof GUESSER_STATE)[keyof typeof GUESSER_STATE];
 const GuessNumber: React.FC = () => {
   // ── Mode detection ──
   // gameIdFromUrl: undefined = 尚未确定（onLoad 未触发）, null = 确定无 gameId, string = 有 gameId
-  const [gameIdFromUrl, setGameIdFromUrl] = useState<string | null | undefined>(
-    undefined
-  );
+  const [gameIdFromUrl, setGameIdFromUrl] = useState<string | null | undefined>(undefined);
   const [modeOverride, setModeOverride] = useState<"creator" | null>(null);
   const isGuesserMode =
-    gameIdFromUrl !== undefined &&
-    Boolean(gameIdFromUrl) &&
-    modeOverride !== "creator";
+    gameIdFromUrl !== undefined && Boolean(gameIdFromUrl) && modeOverride !== "creator";
   const isCreatorMode =
-    gameIdFromUrl !== undefined &&
-    (!gameIdFromUrl || modeOverride === "creator");
+    gameIdFromUrl !== undefined && (!gameIdFromUrl || modeOverride === "creator");
 
   // 使用 useLoad 获取页面参数——这是 Taro 中最可靠的参数获取方式
   useLoad((options) => {
@@ -55,23 +50,16 @@ const GuessNumber: React.FC = () => {
   const [createdGameId, setCreatedGameId] = useState<string | null>(null);
 
   // Creator local game state (after target locked)
-  const [creatorGuessNumber, setCreatorGuessNumber] = useState<string[]>([
-    "",
-    "",
-    "",
-    "",
-  ]);
+  const [creatorGuessNumber, setCreatorGuessNumber] = useState<string[]>(["", "", "", ""]);
   const [creatorIsGuessFocused, setCreatorIsGuessFocused] = useState(false);
-  const [creatorResults, setCreatorResults] = useState<
-    Array<{ guess: string; result: string }>
-  >([]);
+  const [creatorResults, setCreatorResults] = useState<Array<{ guess: string; result: string }>>(
+    [],
+  );
   const [creatorAttempts, setCreatorAttempts] = useState(0);
   const [creatorGameOver, setCreatorGameOver] = useState(false);
 
   // ── Guesser state ──
-  const [guesserState, setGuesserState] = useState<GuesserState>(
-    GUESSER_STATE.READY
-  );
+  const [guesserState, setGuesserState] = useState<GuesserState>(GUESSER_STATE.READY);
   const [gameInfo, setGameInfo] = useState<ApiGameInfo | null>(null);
   const [guessNumber, setGuessNumber] = useState<string[]>(["", "", "", ""]);
   const [isGuessFocused, setIsGuessFocused] = useState(false);
@@ -88,11 +76,7 @@ const GuessNumber: React.FC = () => {
 
   // ── Guesser: detect gameId from URL and start auth flow ──
   useEffect(() => {
-    if (
-      gameIdFromUrl &&
-      guesserState === GUESSER_STATE.READY &&
-      modeOverride !== "creator"
-    ) {
+    if (gameIdFromUrl && guesserState === GUESSER_STATE.READY && modeOverride !== "creator") {
       setGuesserState(GUESSER_STATE.CHECKING_AUTH);
     }
   }, [gameIdFromUrl, guesserState, modeOverride]);
@@ -152,14 +136,7 @@ const GuessNumber: React.FC = () => {
     };
 
     loadGame();
-  }, [
-    gameIdFromUrl,
-    guesserState,
-    isSessionReady,
-    isLoggedIn,
-    login,
-    modeOverride,
-  ]);
+  }, [gameIdFromUrl, guesserState, isSessionReady, isLoggedIn, login, modeOverride]);
 
   // ── Share ──
   useShareAppMessage(() => {
@@ -330,10 +307,7 @@ const GuessNumber: React.FC = () => {
     const newAttempts = creatorAttempts + 1;
     setCreatorAttempts(newAttempts);
 
-    setCreatorResults([
-      ...creatorResults,
-      { guess: creatorGuessNumber.join(""), result },
-    ]);
+    setCreatorResults([...creatorResults, { guess: creatorGuessNumber.join(""), result }]);
     setCreatorGuessNumber(["", "", "", ""]);
 
     if (result === "4A0B") {
@@ -413,15 +387,14 @@ const GuessNumber: React.FC = () => {
         locked?: boolean;
         focused: boolean;
         onFocusGrid: () => void;
-      }
+      },
     ) => {
       const inputLength = digits.join("").length;
 
       return (
         <View className="guessNumber__inputGrid" onClick={options.onFocusGrid}>
           {digits.map((num, index) => {
-            const isFocused =
-              options.focused && !options.locked && index === inputLength;
+            const isFocused = options.focused && !options.locked && index === inputLength;
 
             return (
               <View
@@ -440,7 +413,7 @@ const GuessNumber: React.FC = () => {
         </View>
       );
     },
-    []
+    [],
   );
 
   // ── Render: rules card (both modes) ──
@@ -468,7 +441,7 @@ const GuessNumber: React.FC = () => {
   // ── Render: local history list (shared) ──
   const renderLocalHistory = (
     items: Array<{ guess: string; result: string }>,
-    showEmptyState: boolean
+    showEmptyState: boolean,
   ) => (
     <View className="guessNumber__history">
       <Text className="guessNumber__sectionTitle">历史猜测</Text>
@@ -485,12 +458,8 @@ const GuessNumber: React.FC = () => {
                 <Text className="guessNumber__historyGuess">{item.guess}</Text>
               </View>
               <View className="guessNumber__historyBadges">
-                <Text className="guessNumber__badge guessNumber__badge--a">
-                  {a}A
-                </Text>
-                <Text className="guessNumber__badge guessNumber__badge--b">
-                  {b}B
-                </Text>
+                <Text className="guessNumber__badge guessNumber__badge--a">{a}A</Text>
+                <Text className="guessNumber__badge guessNumber__badge--b">{b}B</Text>
               </View>
             </View>
           );
@@ -498,9 +467,7 @@ const GuessNumber: React.FC = () => {
 
         {showEmptyState && items.length < 2 && (
           <View className="guessNumber__emptyState">
-            <Text className="guessNumber__emptyStateText">
-              继续猜测以查看更多历史
-            </Text>
+            <Text className="guessNumber__emptyStateText">继续猜测以查看更多历史</Text>
           </View>
         )}
       </View>
@@ -514,9 +481,7 @@ const GuessNumber: React.FC = () => {
       <View className="guessNumber__target">
         <View className="guessNumber__targetHeader">
           <Text className="guessNumber__sectionTitle">目标数字</Text>
-          {isTargetSet && (
-            <Text className="guessNumber__lockedBadge">已锁定</Text>
-          )}
+          {isTargetSet && <Text className="guessNumber__lockedBadge">已锁定</Text>}
         </View>
 
         {renderDigitCells(targetNumber, {
@@ -538,10 +503,7 @@ const GuessNumber: React.FC = () => {
         />
 
         {!isTargetSet && (
-          <Button
-            className="guessNumber__primaryBtn"
-            onClick={handleLockTarget}
-          >
+          <Button className="guessNumber__primaryBtn" onClick={handleLockTarget}>
             锁定目标
           </Button>
         )}
@@ -558,9 +520,7 @@ const GuessNumber: React.FC = () => {
       {/* Local guess area — shown after target is locked */}
       {isTargetSet && !creatorGameOver && (
         <View className="guessNumber__guess">
-          <Text className="guessNumber__sectionTitle">
-            猜测数字（单机模式）
-          </Text>
+          <Text className="guessNumber__sectionTitle">猜测数字（单机模式）</Text>
 
           {renderDigitCells(creatorGuessNumber, {
             focused: creatorIsGuessFocused,
@@ -578,10 +538,7 @@ const GuessNumber: React.FC = () => {
             type="number"
           />
 
-          <Button
-            className="guessNumber__primaryBtn"
-            onClick={handleCreatorVerify}
-          >
+          <Button className="guessNumber__primaryBtn" onClick={handleCreatorVerify}>
             <AtIcon value="check-circle" size="20" color="#ffffff" />
             验证
           </Button>
@@ -589,9 +546,7 @@ const GuessNumber: React.FC = () => {
       )}
 
       {/* Local guess history */}
-      {isTargetSet && creatorResults.length > 0 && (
-        <>{renderLocalHistory(creatorResults, true)}</>
-      )}
+      {isTargetSet && creatorResults.length > 0 && <>{renderLocalHistory(creatorResults, true)}</>}
     </>
   );
 
@@ -602,9 +557,7 @@ const GuessNumber: React.FC = () => {
         <View className="guessNumber__errorState">
           <AtIcon value="alert-circle" size="48" color="#ba1a1a" />
           <Text className="guessNumber__errorTitle">游戏不存在</Text>
-          <Text className="guessNumber__errorHint">
-            该游戏可能已被删除，请联系好友重新发起
-          </Text>
+          <Text className="guessNumber__errorHint">该游戏可能已被删除，请联系好友重新发起</Text>
         </View>
       );
     }
@@ -633,9 +586,7 @@ const GuessNumber: React.FC = () => {
           </View>
           <Text className="guessNumber__wonTitle">你已经猜对了！</Text>
           {results.length > 0 && (
-            <Text className="guessNumber__wonSubtitle">
-              用了 {results.length} 次猜中数字
-            </Text>
+            <Text className="guessNumber__wonSubtitle">用了 {results.length} 次猜中数字</Text>
           )}
           <View className="guessNumber__wonHistory">
             {results.map((item, index) => {
@@ -646,17 +597,11 @@ const GuessNumber: React.FC = () => {
                     <Text className="guessNumber__historyIndex">
                       #{String(index + 1).padStart(2, "0")}
                     </Text>
-                    <Text className="guessNumber__historyGuess">
-                      {item.guess}
-                    </Text>
+                    <Text className="guessNumber__historyGuess">{item.guess}</Text>
                   </View>
                   <View className="guessNumber__historyBadges">
-                    <Text className="guessNumber__badge guessNumber__badge--a">
-                      {a}A
-                    </Text>
-                    <Text className="guessNumber__badge guessNumber__badge--b">
-                      {b}B
-                    </Text>
+                    <Text className="guessNumber__badge guessNumber__badge--a">{a}A</Text>
+                    <Text className="guessNumber__badge guessNumber__badge--b">{b}B</Text>
                   </View>
                 </View>
               );
@@ -718,17 +663,11 @@ const GuessNumber: React.FC = () => {
                     <Text className="guessNumber__historyIndex">
                       #{String(index + 1).padStart(2, "0")}
                     </Text>
-                    <Text className="guessNumber__historyGuess">
-                      {item.guess}
-                    </Text>
+                    <Text className="guessNumber__historyGuess">{item.guess}</Text>
                   </View>
                   <View className="guessNumber__historyBadges">
-                    <Text className="guessNumber__badge guessNumber__badge--a">
-                      {a}A
-                    </Text>
-                    <Text className="guessNumber__badge guessNumber__badge--b">
-                      {b}B
-                    </Text>
+                    <Text className="guessNumber__badge guessNumber__badge--a">{a}A</Text>
+                    <Text className="guessNumber__badge guessNumber__badge--b">{b}B</Text>
                   </View>
                 </View>
               );
@@ -736,9 +675,7 @@ const GuessNumber: React.FC = () => {
 
             {results.length < 2 && (
               <View className="guessNumber__emptyState">
-                <Text className="guessNumber__emptyStateText">
-                  继续猜测以查看更多历史
-                </Text>
+                <Text className="guessNumber__emptyStateText">继续猜测以查看更多历史</Text>
               </View>
             )}
           </View>

@@ -1,19 +1,11 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { formatHeatScore } from '../../common/utils/heat.util';
-import { getShanghaiTodayDate } from '../../common/utils/date.util';
-import { PrismaService } from '../../prisma/prisma.service';
-import { LevelService } from '../level/level.service';
-import {
-  XP_DAILY_LIMIT_PER_TOOL,
-  XP_FIRST_USE,
-  XP_REPEAT_USE,
-} from '../level/xp.constants';
-import type { RecordToolUseInput } from './dto/record-tool-use.dto';
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import { Prisma } from "@prisma/client";
+import { formatHeatScore } from "../../common/utils/heat.util";
+import { getShanghaiTodayDate } from "../../common/utils/date.util";
+import { PrismaService } from "../../prisma/prisma.service";
+import { LevelService } from "../level/level.service";
+import { XP_DAILY_LIMIT_PER_TOOL, XP_FIRST_USE, XP_REPEAT_USE } from "../level/xp.constants";
+import type { RecordToolUseInput } from "./dto/record-tool-use.dto";
 
 function isSameDate(a: Date | null | undefined, b: Date): boolean {
   if (!a) return false;
@@ -28,16 +20,15 @@ export class StatsService {
   ) {}
 
   async getUserStats(userId: number) {
-    const [user, activeDaysCount, usedToolsCount, favoriteCount] =
-      await Promise.all([
-        this.prisma.user.findUnique({
-          where: { id: userId },
-          select: { totalXp: true },
-        }),
-        this.prisma.userActiveDay.count({ where: { userId } }),
-        this.prisma.userToolUsage.count({ where: { userId } }),
-        this.prisma.userFavorite.count({ where: { userId } }),
-      ]);
+    const [user, activeDaysCount, usedToolsCount, favoriteCount] = await Promise.all([
+      this.prisma.user.findUnique({
+        where: { id: userId },
+        select: { totalXp: true },
+      }),
+      this.prisma.userActiveDay.count({ where: { userId } }),
+      this.prisma.userToolUsage.count({ where: { userId } }),
+      this.prisma.userFavorite.count({ where: { userId } }),
+    ]);
 
     return {
       activeDaysCount,
@@ -110,7 +101,7 @@ export class StatsService {
 
       const user = await tx.user.findUnique({ where: { id: userId } });
       if (!user) {
-        throw new NotFoundException('用户不存在');
+        throw new NotFoundException("用户不存在");
       }
 
       const existing = await tx.userToolUsage.findUnique({
@@ -124,9 +115,7 @@ export class StatsService {
 
       const isFirstEver = !existing;
       const dailyCountBefore =
-        existing && isSameDate(existing.dailyUseDate, today)
-          ? existing.dailyUseCount
-          : 0;
+        existing && isSameDate(existing.dailyUseDate, today) ? existing.dailyUseCount : 0;
 
       let xpGained = 0;
       if (dailyCountBefore < XP_DAILY_LIMIT_PER_TOOL) {
@@ -146,8 +135,7 @@ export class StatsService {
           },
         });
       } else if (existing) {
-        const nextDailyCount =
-          xpGained > 0 ? dailyCountBefore + 1 : dailyCountBefore;
+        const nextDailyCount = xpGained > 0 ? dailyCountBefore + 1 : dailyCountBefore;
 
         await tx.userToolUsage.update({
           where: { id: existing.id },
@@ -166,18 +154,15 @@ export class StatsService {
         });
       }
 
-      const previousLevel =
-        await this.levelService.resolveLevel(previousTotalXp);
+      const previousLevel = await this.levelService.resolveLevel(previousTotalXp);
       const currentLevel = await this.levelService.resolveLevel(newTotalXp);
-      const leveledUp =
-        xpGained > 0 && currentLevel.current > previousLevel.current;
+      const leveledUp = xpGained > 0 && currentLevel.current > previousLevel.current;
 
-      const [activeDaysCount, usedToolsCount, favoriteCount] =
-        await Promise.all([
-          tx.userActiveDay.count({ where: { userId } }),
-          tx.userToolUsage.count({ where: { userId } }),
-          tx.userFavorite.count({ where: { userId } }),
-        ]);
+      const [activeDaysCount, usedToolsCount, favoriteCount] = await Promise.all([
+        tx.userActiveDay.count({ where: { userId } }),
+        tx.userToolUsage.count({ where: { userId } }),
+        tx.userFavorite.count({ where: { userId } }),
+      ]);
 
       return {
         toolId: updatedTool.id,
@@ -200,7 +185,7 @@ export class StatsService {
 
   private async resolveTool(dto: RecordToolUseInput) {
     if (!dto.toolId && !dto.routePath) {
-      throw new BadRequestException('toolId 或 routePath 必须提供一个');
+      throw new BadRequestException("toolId 或 routePath 必须提供一个");
     }
 
     const where: Prisma.ToolWhereInput = dto.toolId
@@ -210,7 +195,7 @@ export class StatsService {
     const tool = await this.prisma.tool.findFirst({ where });
 
     if (!tool) {
-      throw new NotFoundException('工具不存在');
+      throw new NotFoundException("工具不存在");
     }
 
     return tool;

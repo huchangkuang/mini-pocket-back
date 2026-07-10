@@ -24,7 +24,7 @@ const Qrcode: React.FC = () => {
           height: canvasSize,
         },
         canvasSize,
-        4
+        4,
       );
       setShowCode(true);
       hideLoading();

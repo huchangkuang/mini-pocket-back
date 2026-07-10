@@ -23,9 +23,7 @@ const EditBarrage: React.FC = () => {
   const [bgColor, setBgColor] = useState(BG_COLORS[0]);
   const [time, setTime] = useState(5);
   const [barrage, setBarrage] = useState("");
-  const [barrageType, setBarrageType] = useState<BarrageType>(
-    BarrageType.scroll
-  );
+  const [barrageType, setBarrageType] = useState<BarrageType>(BarrageType.scroll);
 
   const validateBarrage = () => {
     if (!barrage) {
@@ -44,9 +42,7 @@ const EditBarrage: React.FC = () => {
     }
     const data = { fontSize, fontColor, time, barrage, bgColor, barrageType };
     Taro.navigateTo({
-      url: `/pages/handsBarrage/index?data=${encodeURIComponent(
-        JSON.stringify(data)
-      )}`,
+      url: `/pages/handsBarrage/index?data=${encodeURIComponent(JSON.stringify(data))}`,
     });
   };
 

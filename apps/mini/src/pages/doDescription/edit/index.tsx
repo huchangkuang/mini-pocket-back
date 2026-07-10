@@ -22,24 +22,14 @@ type OptionRowProps = {
   onRemove: () => void;
 };
 
-const OptionRow: React.FC<OptionRowProps> = ({
-  value,
-  index,
-  variant,
-  onChange,
-  onRemove,
-}) => {
+const OptionRow: React.FC<OptionRowProps> = ({ value, index, variant, onChange, onRemove }) => {
   const accent = ACCENTS[index % ACCENTS.length];
   return (
     <View className={`editDecision__option editDecision__option--${variant}`}>
       <View
         className={`editDecision__optionIcon editDecision__optionIcon--${accent} editDecision__optionIcon--${variant}`}
       >
-        <Image
-          className="editDecision__optionIconImg"
-          src={decisionIcon}
-          mode="aspectFit"
-        />
+        <Image className="editDecision__optionIconImg" src={decisionIcon} mode="aspectFit" />
       </View>
       <View className="editDecision__optionInputWrap">
         <Input
@@ -85,8 +75,7 @@ const EditDecision: React.FC = () => {
     Taro.showLoading({ title: "保存中...", mask: true });
 
     try {
-      const apiIdFromRoute =
-        id && /^\d+$/.test(id) ? Number(id) : decisionConfig.apiId;
+      const apiIdFromRoute = id && /^\d+$/.test(id) ? Number(id) : decisionConfig.apiId;
 
       await saveDecision({
         type: isAdd ? "add" : "edit",
@@ -142,14 +131,10 @@ const EditDecision: React.FC = () => {
               <View className="editDecision__hero editDecision__hero--edit">
                 <View className="editDecision__heroBadge">
                   <AtIcon value="settings" size="14" color="#005ea4" />
-                  <Text className="editDecision__heroBadgeText">
-                    DECISION TOOL
-                  </Text>
+                  <Text className="editDecision__heroBadgeText">DECISION TOOL</Text>
                 </View>
                 <Text className="editDecision__heroTitle">去决定！！！</Text>
-                <Text className="editDecision__heroDesc">
-                  给你的犹豫一个充满趣味的答案。
-                </Text>
+                <Text className="editDecision__heroDesc">给你的犹豫一个充满趣味的答案。</Text>
               </View>
               <View className="editDecision__questionCard">
                 <Text className="editDecision__questionLabel">你的问题</Text>
@@ -169,9 +154,7 @@ const EditDecision: React.FC = () => {
 
           <View className="editDecision__optionsSection">
             <View className="editDecision__optionsHeader">
-              <Text className="editDecision__optionsTitle">
-                {isAdd ? "选择选项" : "选择"}
-              </Text>
+              <Text className="editDecision__optionsTitle">{isAdd ? "选择选项" : "选择"}</Text>
               <Text className="editDecision__optionsCount">
                 已添加 {optionCount} 个{isAdd ? "" : "选项"}
               </Text>
@@ -183,19 +166,12 @@ const EditDecision: React.FC = () => {
                   value={item}
                   index={index}
                   variant={isAdd ? "add" : "edit"}
-                  onChange={(val) =>
-                    setList((data) =>
-                      data.map((d, i) => (i === index ? val : d))
-                    )
-                  }
+                  onChange={(val) => setList((data) => data.map((d, i) => (i === index ? val : d)))}
                   onRemove={() => subtract(index)}
                 />
               ))}
             </View>
-            <View
-              className="editDecision__addOption"
-              onClick={() => setList([...list, ""])}
-            >
+            <View className="editDecision__addOption" onClick={() => setList([...list, ""])}>
               <AtIcon value="add-circle" size="18" color="#005ea4" />
               <Text className="editDecision__addOptionText">添加选项</Text>
             </View>
@@ -213,14 +189,9 @@ const EditDecision: React.FC = () => {
               </Text>
             </View>
           ) : (
-            <View
-              className="editDecision__smartBanner"
-              onClick={() => errorToast(PLACEHOLDER_MSG)}
-            >
+            <View className="editDecision__smartBanner" onClick={() => errorToast(PLACEHOLDER_MSG)}>
               <View className="editDecision__smartBannerText">
-                <Text className="editDecision__smartBannerTitle">
-                  智能生成?
-                </Text>
+                <Text className="editDecision__smartBannerTitle">智能生成?</Text>
                 <Text className="editDecision__smartBannerDesc">
                   让百宝口袋为你生成推荐的选择集。
                 </Text>
@@ -237,25 +208,15 @@ const EditDecision: React.FC = () => {
         </View>
       </ScrollView>
 
-      <View
-        className={`editDecision__footer${
-          isAdd ? " editDecision__footer--add" : ""
-        }`}
-      >
+      <View className={`editDecision__footer${isAdd ? " editDecision__footer--add" : ""}`}>
         <View
-          className={`editDecision__saveBtn${
-            isAdd ? " editDecision__saveBtn--add" : ""
-          }`}
+          className={`editDecision__saveBtn${isAdd ? " editDecision__saveBtn--add" : ""}`}
           onClick={onSave}
         >
           {isAdd && <AtIcon value="check" size="18" color="#fdfcff" />}
           <Text className="editDecision__saveBtnText">保存</Text>
         </View>
-        {!isAdd && (
-          <Text className="editDecision__footerHint">
-            修改后将即时同步到主页转盘
-          </Text>
-        )}
+        {!isAdd && <Text className="editDecision__footerHint">修改后将即时同步到主页转盘</Text>}
       </View>
     </View>
   );

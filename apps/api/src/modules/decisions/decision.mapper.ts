@@ -1,5 +1,5 @@
-import { UserDecision } from '@prisma/client';
-import type { ApiDecision, ApiDecisionSummary } from '@mini-pocket/shared';
+import { UserDecision } from "@prisma/client";
+import type { ApiDecision, ApiDecisionSummary } from "@mini-pocket/shared";
 
 export type DecisionOptions = string[];
 

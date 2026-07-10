@@ -9,24 +9,20 @@ export type ToolFormCardProps = PropsWithChildren<{
   className?: string;
 }>;
 
-const ToolFormCard: FC<ToolFormCardProps> = memo(
-  ({ icon, title, className, children }) => {
-    const showHeader = Boolean(icon || title);
+const ToolFormCard: FC<ToolFormCardProps> = memo(({ icon, title, className, children }) => {
+  const showHeader = Boolean(icon || title);
 
-    return (
-      <View className={`toolFormCard ${className ?? ""}`}>
-        {showHeader ? (
-          <View className="toolFormCard__header">
-            {icon ? <AtIcon value={icon} size="18" color="#005ea4" /> : null}
-            {title ? (
-              <Text className="toolFormCard__title">{title}</Text>
-            ) : null}
-          </View>
-        ) : null}
-        {children}
-      </View>
-    );
-  }
-);
+  return (
+    <View className={`toolFormCard ${className ?? ""}`}>
+      {showHeader ? (
+        <View className="toolFormCard__header">
+          {icon ? <AtIcon value={icon} size="18" color="#005ea4" /> : null}
+          {title ? <Text className="toolFormCard__title">{title}</Text> : null}
+        </View>
+      ) : null}
+      {children}
+    </View>
+  );
+});
 
 export default ToolFormCard;

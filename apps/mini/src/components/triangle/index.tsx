@@ -11,13 +11,7 @@ type Props = {
   color?: string;
 } & ViewProps;
 const Triangle: React.FC<Props> = (props) => {
-  const {
-    className,
-    direction = "right",
-    size = 5,
-    color = "#fff",
-    ...rest
-  } = props;
+  const { className, direction = "right", size = 5, color = "#fff", ...rest } = props;
   const directionMap = {
     right: "borderLeftColor",
     left: "borderRightColor",

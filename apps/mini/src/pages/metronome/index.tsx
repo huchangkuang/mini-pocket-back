@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Taro, { useShareAppMessage } from "@tarojs/taro";
 import { Input, ScrollView, Switch, View } from "@tarojs/components";
 import "./index.scss";
@@ -31,9 +25,7 @@ const Metronome: React.FC = () => {
   const [curN, setCurN] = useState<number>();
   const [beating, setBeating] = useState(false);
   const [showAllPanel, setShowAllPanel] = useState(false);
-  const [settings, setSettings] = useState<MetronomeSettings>(() =>
-    loadMetronomeSettings()
-  );
+  const [settings, setSettings] = useState<MetronomeSettings>(() => loadMetronomeSettings());
 
   const isStop = useRef(true);
   const beatingRef = useRef(false);
@@ -114,14 +106,14 @@ const Metronome: React.FC = () => {
         restartMetronome();
       }
     },
-    [restartMetronome]
+    [restartMetronome],
   );
 
   const changeBpm = useCallback(
     (delta: number) => {
       setBpm(bpmRef.current + delta);
     },
-    [setBpm]
+    [setBpm],
   );
 
   const validate = () => {
@@ -210,7 +202,7 @@ const Metronome: React.FC = () => {
                 className={cs(
                   "metronome__beat",
                   n === 0 && "metronome__beat--first",
-                  n === curN && "metronome__beat--active"
+                  n === curN && "metronome__beat--active",
                 )}
               />
             ))}
@@ -228,17 +220,11 @@ const Metronome: React.FC = () => {
             <View className="metronome__dialCenter">
               <View className="metronome__dialLabel">TEMPO</View>
               <View className="metronome__dialControls">
-                <View
-                  className="metronome__dialBtn"
-                  onClick={() => changeBpm(-1)}
-                >
+                <View className="metronome__dialBtn" onClick={() => changeBpm(-1)}>
                   <AtIcon value="subtract" size="16" color="#005ea4" />
                 </View>
                 <View className="metronome__dialValue">{bpm}</View>
-                <View
-                  className="metronome__dialBtn"
-                  onClick={() => changeBpm(1)}
-                >
+                <View className="metronome__dialBtn" onClick={() => changeBpm(1)}>
                   <AtIcon value="add" size="16" color="#005ea4" />
                 </View>
               </View>
@@ -249,10 +235,7 @@ const Metronome: React.FC = () => {
           <View className="metronome__section">
             <View className="metronome__sectionHeader">
               <View className="metronome__sectionTitle">常用节拍</View>
-              <View
-                className="metronome__viewAll"
-                onClick={() => setShowAllPanel(true)}
-              >
+              <View className="metronome__viewAll" onClick={() => setShowAllPanel(true)}>
                 查看全部
               </View>
             </View>
@@ -262,9 +245,7 @@ const Metronome: React.FC = () => {
                   key={preset}
                   className={cs(
                     "metronome__preset",
-                    bpm === preset &&
-                      !customInput &&
-                      "metronome__preset--active"
+                    bpm === preset && !customInput && "metronome__preset--active",
                   )}
                   onClick={() => {
                     setCustomInput("");
@@ -272,9 +253,7 @@ const Metronome: React.FC = () => {
                   }}
                 >
                   <View className="metronome__presetValue">{preset}</View>
-                  <View className="metronome__presetLabel">
-                    {PRESET_BPM_LABELS[preset]}
-                  </View>
+                  <View className="metronome__presetLabel">{PRESET_BPM_LABELS[preset]}</View>
                 </View>
               ))}
             </View>
@@ -293,10 +272,7 @@ const Metronome: React.FC = () => {
                   placeholderClass="metronome__inputPlaceholder"
                 />
               </View>
-              <View
-                className="metronome__inputClear"
-                onClick={clearCustomInput}
-              >
+              <View className="metronome__inputClear" onClick={clearCustomInput}>
                 <AtIcon value="close-circle" size="16" color="#404752" />
               </View>
             </View>
@@ -310,9 +286,7 @@ const Metronome: React.FC = () => {
                 <Switch
                   checked={settings.soundEnabled}
                   color="#0077ce"
-                  onChange={(e) =>
-                    updateSettings({ soundEnabled: e.detail.value })
-                  }
+                  onChange={(e) => updateSettings({ soundEnabled: e.detail.value })}
                 />
               </View>
               <View className="metronome__toggleCard">
@@ -323,9 +297,7 @@ const Metronome: React.FC = () => {
                 <Switch
                   checked={settings.vibrateEnabled}
                   color="#0077ce"
-                  onChange={(e) =>
-                    updateSettings({ vibrateEnabled: e.detail.value })
-                  }
+                  onChange={(e) => updateSettings({ vibrateEnabled: e.detail.value })}
                 />
               </View>
             </View>
@@ -349,17 +321,11 @@ const Metronome: React.FC = () => {
 
       {showAllPanel && (
         <View className="metronome__panel">
-          <View
-            className="metronome__panelMask"
-            onClick={() => setShowAllPanel(false)}
-          />
+          <View className="metronome__panelMask" onClick={() => setShowAllPanel(false)} />
           <View className="metronome__panelBody">
             <View className="metronome__panelHeader">
               <View className="metronome__panelTitle">全部常用节拍</View>
-              <View
-                className="metronome__panelClose"
-                onClick={() => setShowAllPanel(false)}
-              >
+              <View className="metronome__panelClose" onClick={() => setShowAllPanel(false)}>
                 <AtIcon value="close" size="16" color="#404752" />
               </View>
             </View>
@@ -370,7 +336,7 @@ const Metronome: React.FC = () => {
                     key={item}
                     className={cs(
                       "metronome__panelItem",
-                      bpm === item && "metronome__panelItem--active"
+                      bpm === item && "metronome__panelItem--active",
                     )}
                     onClick={() => selectFromAllList(item)}
                   >

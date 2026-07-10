@@ -1,11 +1,11 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import { CurrentUser } from '../../common/decorators/current-user.decorator';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
-import { AuthUser } from '../../common/types/auth-user';
-import { CreateFeedbackDto } from './dto/create-feedback.dto';
-import { FeedbackService } from './feedback.service';
+import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import { CurrentUser } from "../../common/decorators/current-user.decorator";
+import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { AuthUser } from "../../common/types/auth-user";
+import { CreateFeedbackDto } from "./dto/create-feedback.dto";
+import { FeedbackService } from "./feedback.service";
 
-@Controller('feedback')
+@Controller("feedback")
 @UseGuards(JwtAuthGuard)
 export class FeedbackController {
   constructor(private readonly feedbackService: FeedbackService) {}

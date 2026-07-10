@@ -1,7 +1,4 @@
-import type {
-  ApiRecordActiveDayResult,
-  ApiRecordToolUseResult,
-} from "@/types/api";
+import type { ApiRecordActiveDayResult, ApiRecordToolUseResult } from "@/types/api";
 import { post } from "@/utils/request";
 
 export function recordActiveDay(): Promise<ApiRecordActiveDayResult> {

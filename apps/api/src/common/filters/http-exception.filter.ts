@@ -1,12 +1,6 @@
-import {
-  ArgumentsHost,
-  Catch,
-  ExceptionFilter,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
-import { Response } from 'express';
-import { fail } from '../types/api-response';
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from "@nestjs/common";
+import { Response } from "express";
+import { fail } from "../types/api-response";
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -18,20 +12,19 @@ export class HttpExceptionFilter implements ExceptionFilter {
       const status = exception.getStatus();
       const exceptionResponse = exception.getResponse();
       const message =
-        typeof exceptionResponse === 'string'
+        typeof exceptionResponse === "string"
           ? exceptionResponse
-          : ((exceptionResponse as { message?: string | string[] }).message ??
-            exception.message);
+          : (exceptionResponse as { message?: string | string[] }).message ?? exception.message;
 
-      response.status(status).json(
-        fail(status, Array.isArray(message) ? message.join('; ') : message),
-      );
+      response
+        .status(status)
+        .json(fail(status, Array.isArray(message) ? message.join("; ") : message));
       return;
     }
 
     console.error(exception);
     response
       .status(HttpStatus.INTERNAL_SERVER_ERROR)
-      .json(fail(HttpStatus.INTERNAL_SERVER_ERROR, 'Internal server error'));
+      .json(fail(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"));
   }
 }

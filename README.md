@@ -4,11 +4,11 @@
 
 ## 技术栈
 
-| 层级 | 技术 |
-|------|------|
-| 包管理 | pnpm workspace |
-| 后端 | NestJS、Prisma、MySQL、TypeScript |
-| 部署 | git pull + 构建 + pm2 |
+| 层级   | 技术                              |
+| ------ | --------------------------------- |
+| 包管理 | pnpm workspace                    |
+| 后端   | NestJS、Prisma、MySQL、TypeScript |
+| 部署   | git pull + 构建 + pm2             |
 
 ## 项目结构
 
@@ -74,18 +74,18 @@ curl https://api.mini-pocket.qiexuxing.top/api/health
 
 ## 常用命令
 
-| 命令 | 说明 |
-|------|------|
-| `pnpm dev` | 开发模式（热重载） |
-| `pnpm build` | 构建 API |
-| `pnpm start` | 生产模式启动（本地） |
-| `pnpm db:generate` | 生成 Prisma Client（`install` 后也会自动执行） |
-| `pnpm db:migrate` | 开发环境数据库迁移 |
-| `pnpm db:migrate:deploy` | 生产环境应用迁移 |
-| `pnpm db:seed` | 导入工具种子数据 |
+| 命令                     | 说明                                           |
+| ------------------------ | ---------------------------------------------- |
+| `pnpm dev`               | 开发模式（热重载）                             |
+| `pnpm build`             | 构建 API                                       |
+| `pnpm start`             | 生产模式启动（本地）                           |
+| `pnpm db:generate`       | 生成 Prisma Client（`install` 后也会自动执行） |
+| `pnpm db:migrate`        | 开发环境数据库迁移                             |
+| `pnpm db:migrate:deploy` | 生产环境应用迁移                               |
+| `pnpm db:seed`           | 导入工具种子数据                               |
 
 ## 端口
 
 | 服务 | 默认端口 |
-|------|----------|
-| API | 3035 |
+| ---- | -------- |
+| API  | 3035     |

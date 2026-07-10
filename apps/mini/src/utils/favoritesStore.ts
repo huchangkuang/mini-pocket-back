@@ -1,8 +1,5 @@
 import type { ToolItem } from "@/pages/classify/constants";
-import type {
-  FavoriteCategory,
-  FavoriteItem,
-} from "@/pages/favorites/constants";
+import type { FavoriteCategory, FavoriteItem } from "@/pages/favorites/constants";
 import { mapApiFavoriteToFavoriteItem } from "@/utils/toolMapper";
 import type { ApiFavorite } from "@/types/api";
 
@@ -10,9 +7,7 @@ export function apiFavoritesToItems(items: ApiFavorite[]): FavoriteItem[] {
   return items.map(mapApiFavoriteToFavoriteItem);
 }
 
-export function categoryToFavoriteCategory(
-  category?: string
-): FavoriteCategory {
+export function categoryToFavoriteCategory(category?: string): FavoriteCategory {
   if (category === "efficiency") return "efficiency";
   if (category === "dev") return "dev";
   return "fun";

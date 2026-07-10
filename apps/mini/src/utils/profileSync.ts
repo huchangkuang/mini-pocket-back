@@ -16,9 +16,7 @@ function isLocalTempPath(path: string): boolean {
   );
 }
 
-export async function resolveAvatarLocalPath(
-  source?: string
-): Promise<string | null> {
+export async function resolveAvatarLocalPath(source?: string): Promise<string | null> {
   if (!source) return null;
 
   if (isLocalTempPath(source)) {
@@ -33,9 +31,7 @@ export async function resolveAvatarLocalPath(
   return source;
 }
 
-export async function syncProfileAfterLogin(
-  profile?: LoginProfile
-): Promise<void> {
+export async function syncProfileAfterLogin(profile?: LoginProfile): Promise<void> {
   const nickname = profile?.nickname?.trim();
   const updates: { nickname?: string; avatarUrl?: string } = {};
 

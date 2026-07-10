@@ -1,9 +1,9 @@
-export type UploadKind = 'image';
+export type UploadKind = "image";
 
-const IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 
 export function resolveUploadKind(mimeType: string): UploadKind | null {
-  if (IMAGE_TYPES.has(mimeType)) return 'image';
+  if (IMAGE_TYPES.has(mimeType)) return "image";
   return null;
 }
 

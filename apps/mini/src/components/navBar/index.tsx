@@ -1,11 +1,4 @@
-import React, {
-  CSSProperties,
-  FC,
-  PropsWithChildren,
-  memo,
-  Fragment,
-  useState,
-} from "react";
+import React, { CSSProperties, FC, PropsWithChildren, memo, Fragment, useState } from "react";
 import Taro, { View } from "@tarojs/components";
 import { getMenuButtonBoundingClientRect, useDidShow } from "@tarojs/taro";
 import { isFirstPageInStack, navigateBackOrHome } from "@/utils/navigation";
@@ -23,14 +16,7 @@ export type NavBarProps = {
 };
 
 const NavBar: FC<PropsWithChildren<NavBarProps>> = memo((props) => {
-  const {
-    children,
-    custom = false,
-    contentClass = "",
-    goBack,
-    style,
-    hasPlace = true,
-  } = props;
+  const { children, custom = false, contentClass = "", goBack, style, hasPlace = true } = props;
   const { height, top } = getMenuButtonBoundingClientRect();
   const [showHome, setShowHome] = useState(() => isFirstPageInStack());
 
@@ -56,10 +42,7 @@ const NavBar: FC<PropsWithChildren<NavBarProps>> = memo((props) => {
   return (
     <Fragment>
       <View style={wrapperStyle} className="navBarWrapper">
-        <View
-          className="childrenWrapper"
-          style={`height: ${height}px;top:${top}px;`}
-        >
+        <View className="childrenWrapper" style={`height: ${height}px;top:${top}px;`}>
           {custom ? (
             children
           ) : (

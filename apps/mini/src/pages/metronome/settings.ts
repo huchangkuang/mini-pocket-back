@@ -14,9 +14,7 @@ const DEFAULT_SETTINGS: MetronomeSettings = {
 
 export function loadMetronomeSettings(): MetronomeSettings {
   try {
-    const stored = getStorageSync(METRONOME_SETTINGS_KEY) as
-      | MetronomeSettings
-      | undefined;
+    const stored = getStorageSync(METRONOME_SETTINGS_KEY) as MetronomeSettings | undefined;
     if (stored && typeof stored.soundEnabled === "boolean") {
       return {
         soundEnabled: stored.soundEnabled,

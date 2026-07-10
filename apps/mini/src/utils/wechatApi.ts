@@ -50,10 +50,7 @@ export const getWechatSetting = async () => {
     });
   });
 };
-export const canvasSaveImg = (
-  canvasId: string,
-  option?: Taro.canvasToTempFilePath.Option
-) => {
+export const canvasSaveImg = (canvasId: string, option?: Taro.canvasToTempFilePath.Option) => {
   return new Promise((resolve, reject) => {
     canvasToTempFilePath({
       ...option,

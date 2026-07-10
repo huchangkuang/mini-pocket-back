@@ -5,6 +5,7 @@
 ## Goals / Non-Goals
 
 **Goals:**
+
 - 出题者创建游戏会话（存储目标数字哈希）
 - 猜题者获取游戏信息（不返回目标数字）
 - 猜题者提交猜测，服务端计算 A/B 结果
@@ -13,6 +14,7 @@
 - 猜对后禁止再猜（400）
 
 **Non-Goals:**
+
 - 不做游戏列表查询
 - 不做实时通知（WebSocket/SSE）
 - 不做游戏过期自动清理（第一版不过期）
@@ -63,6 +65,7 @@ enum GameStatus {
 - `GameGuess` 复合唯一约束防止同一用户同一次尝试重复提交
 
 **Alternatives considered**:
+
 - UUID v4 → 太长，分享 URL 不友好
 - 明文存储目标数字 → 安全风险，运维人员或 DB 泄露会导致题目答案暴露
 - 单表设计（Game 内嵌 JSON guesses）→ 不满足 Prisma 关系查询习惯，也不利于按用户查历史
@@ -103,7 +106,7 @@ POST /games/:gameId/guess
 ├── Guard: JwtAuthGuard
 ├── Body: { guess: string }
 ├── DTO: SubmitGuessDto (class-validator: @IsString, @Length(4,4), @Matches(/\d{4}/))
-├── Service: 
+├── Service:
 │   1. 查 Game，验证存在
 │   2. 校验 creatorId !== userId（否则 403）
 │   3. 查当前用户历史，判断是否已猜对（否则 400）

@@ -1,10 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import Taro, {
-  CustomWrapper,
-  MovableArea,
-  MovableView,
-  View,
-} from "@tarojs/components";
+import Taro, { CustomWrapper, MovableArea, MovableView, View } from "@tarojs/components";
 import "./index.scss";
 import { AtIcon } from "taro-ui";
 import {
@@ -39,8 +34,7 @@ function isUiZoneTouch(pageX: number, pageY: number) {
   const startTop = windowHeight - 160;
   const startLeft = windowWidth / 2 - 120;
   const startRight = windowWidth / 2 + 120;
-  const inStartZone =
-    pageY >= startTop && pageX >= startLeft && pageX <= startRight;
+  const inStartZone = pageY >= startTop && pageX >= startLeft && pageX <= startRight;
 
   return inBackZone || inStartZone;
 }
@@ -65,9 +59,7 @@ const FingerUp: React.FC = () => {
   const touchStart = (e: Taro.ITouchEvent) => {
     if (timer.current) return;
 
-    const validTouches = e.touches.filter(
-      (t) => !isUiZoneTouch(t.pageX, t.pageY)
-    );
+    const validTouches = e.touches.filter((t) => !isUiZoneTouch(t.pageX, t.pageY));
     if (validTouches.length === 0) return;
 
     validTouches.forEach((t) => activeTouchIdsRef.current.add(t.identifier));
@@ -92,22 +84,18 @@ const FingerUp: React.FC = () => {
   };
 
   const touchMove = (e: Taro.ITouchEvent) => {
-    const moves = new Map(
-      e.changedTouches.map((t) => [t.identifier, { x: t.pageX, y: t.pageY }])
-    );
+    const moves = new Map(e.changedTouches.map((t) => [t.identifier, { x: t.pageX, y: t.pageY }]));
     if (moves.size === 0) return;
     setFingers((prev) =>
       prev.map((f) => {
         const pos = moves.get(f.id);
         return pos ? { ...f, ...pos } : f;
-      })
+      }),
     );
   };
 
   const handleTouchEndOrCancel = (e: Taro.ITouchEvent) => {
-    e.changedTouches.forEach((t) =>
-      activeTouchIdsRef.current.delete(t.identifier)
-    );
+    e.changedTouches.forEach((t) => activeTouchIdsRef.current.delete(t.identifier));
 
     const activeTouchIds = new Set(e.touches.map((t) => t.identifier));
     activeTouchIdsRef.current.forEach((id) => {
@@ -122,9 +110,7 @@ const FingerUp: React.FC = () => {
       return;
     }
 
-    setFingers((prev) =>
-      prev.filter((f) => activeTouchIdsRef.current.has(f.id))
-    );
+    setFingers((prev) => prev.filter((f) => activeTouchIdsRef.current.has(f.id)));
   };
 
   const generateRandomArr = () => {
@@ -215,10 +201,7 @@ const FingerUp: React.FC = () => {
     <View className="fingerUp">
       {IS_WECHAT && (
         <View style={{ top }} className="goBack" onClick={navigateBackOrHome}>
-          <AtIcon
-            value={showHome ? "home" : "chevron-left"}
-            size={height - 4}
-          />
+          <AtIcon value={showHome ? "home" : "chevron-left"} size={height - 4} />
         </View>
       )}
 
@@ -240,8 +223,7 @@ const FingerUp: React.FC = () => {
                 className="item"
                 style={{
                   "--bgColor": i.color,
-                  opacity:
-                    typeof selectId === "number" && i.id !== selectId ? 0.5 : 1,
+                  opacity: typeof selectId === "number" && i.id !== selectId ? 0.5 : 1,
                 }}
               >
                 {[0, 1].map((ring) => (
@@ -249,9 +231,7 @@ const FingerUp: React.FC = () => {
                     key={ring}
                     className={cs(
                       "bg",
-                      typeof selectId === "number" &&
-                        i.id !== selectId &&
-                        "dark"
+                      typeof selectId === "number" && i.id !== selectId && "dark",
                     )}
                   />
                 ))}
@@ -263,9 +243,7 @@ const FingerUp: React.FC = () => {
           <View className="tips">
             <View>1.请每位玩家（2~5）人用一根手指按住屏幕</View>
             <View>2.等待3秒后自动开始或点击下方开始按钮</View>
-            <View>
-              3.继续按住屏幕直到动画结束，被选中者（赢家）将会被高亮显示
-            </View>
+            <View>3.继续按住屏幕直到动画结束，被选中者（赢家）将会被高亮显示</View>
           </View>
         )}
       </View>

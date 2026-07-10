@@ -35,15 +35,8 @@ const XiahouDun: React.FC = () => {
       {activated && <View className="xiahouDun__overlay" />}
 
       {IS_WECHAT && (
-        <View
-          style={{ top }}
-          className="xiahouDun__goBack"
-          onClick={navigateBackOrHome}
-        >
-          <AtIcon
-            value={showHome ? "home" : "chevron-left"}
-            size={height - 4}
-          />
+        <View style={{ top }} className="xiahouDun__goBack" onClick={navigateBackOrHome}>
+          <AtIcon value={showHome ? "home" : "chevron-left"} size={height - 4} />
         </View>
       )}
 
@@ -52,9 +45,7 @@ const XiahouDun: React.FC = () => {
       </View>
 
       <View className="xiahouDun__body">
-        {!activated && (
-          <ToolBottomBar label="确认" icon="check" onClick={handleConfirm} />
-        )}
+        {!activated && <ToolBottomBar label="确认" icon="check" onClick={handleConfirm} />}
       </View>
     </View>
   );

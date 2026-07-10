@@ -24,12 +24,7 @@ const FavoriteCard: FC<FavoriteCardProps> = memo(
 
     return (
       <View className="favoriteCard" onClick={onClick}>
-        <View
-          className={cs(
-            "favoriteCard__iconWrap",
-            `favoriteCard__iconWrap--${accent}`
-          )}
-        >
+        <View className={cs("favoriteCard__iconWrap", `favoriteCard__iconWrap--${accent}`)}>
           <Image className="favoriteCard__icon" src={icon} mode="aspectFit" />
         </View>
         <View className="favoriteCard__content">
@@ -46,7 +41,7 @@ const FavoriteCard: FC<FavoriteCardProps> = memo(
         </View>
       </View>
     );
-  }
+  },
 );
 
 export default FavoriteCard;

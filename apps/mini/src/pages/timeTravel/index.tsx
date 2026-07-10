@@ -10,9 +10,7 @@ import "./index.scss";
 type Phase = "idle" | "traveling";
 
 const CLOCK_NUMBERS = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-const NUMBER_ANGLES = [
-  0, -30, -60, -90, -120, -150, -180, -210, -240, -270, -300, -330,
-];
+const NUMBER_ANGLES = [0, -30, -60, -90, -120, -150, -180, -210, -240, -270, -300, -330];
 const TRAVEL_SPEED_MULTIPLIER = 60;
 
 const pad2 = (n: number) => n.toString().padStart(2, "0");
@@ -146,9 +144,7 @@ const TimeTravel: React.FC = () => {
                     style={{
                       transform: `rotate(${
                         NUMBER_ANGLES[i]
-                      }deg) translateY(-220rpx) rotate(${-NUMBER_ANGLES[
-                        i
-                      ]}deg)`,
+                      }deg) translateY(-220rpx) rotate(${-NUMBER_ANGLES[i]}deg)`,
                     }}
                   >
                     <Text>{num}</Text>
@@ -181,10 +177,7 @@ const TimeTravel: React.FC = () => {
             <View className="timeTravel__digital">{digitalTime}</View>
 
             <View
-              className={cs(
-                "timeTravel__status",
-                isTraveling && "timeTravel__status--breathe"
-              )}
+              className={cs("timeTravel__status", isTraveling && "timeTravel__status--breathe")}
             >
               <View className="timeTravel__statusDot" />
               <Text className="timeTravel__statusText">
@@ -205,9 +198,7 @@ const TimeTravel: React.FC = () => {
         </View>
       </ScrollView>
 
-      {!isTraveling && (
-        <ToolBottomBar label="开始穿越" icon="play" onClick={handleConfirm} />
-      )}
+      {!isTraveling && <ToolBottomBar label="开始穿越" icon="play" onClick={handleConfirm} />}
     </View>
   );
 };

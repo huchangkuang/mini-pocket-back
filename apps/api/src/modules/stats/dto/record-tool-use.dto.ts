@@ -1,5 +1,5 @@
-import { Type } from 'class-transformer';
-import { IsInt, IsString, MinLength, ValidateIf } from 'class-validator';
+import { Type } from "class-transformer";
+import { IsInt, IsString, MinLength, ValidateIf } from "class-validator";
 
 export class RecordToolUseDto {
   @ValidateIf((dto: RecordToolUseDto) => !dto.routePath)
@@ -13,7 +13,4 @@ export class RecordToolUseDto {
   routePath?: string;
 }
 
-export type RecordToolUseInput = Pick<
-  RecordToolUseDto,
-  'toolId' | 'routePath'
->;
+export type RecordToolUseInput = Pick<RecordToolUseDto, "toolId" | "routePath">;

@@ -15,10 +15,7 @@ const MineTopBar: FC<MineTopBarProps> = memo(({ onNotification }) => {
   return (
     <>
       <View className="mineTopBar" style={{ height: `${barHeight}px` }}>
-        <View
-          className="mineTopBar__inner"
-          style={{ height: `${height}px`, top: `${top}px` }}
-        >
+        <View className="mineTopBar__inner" style={{ height: `${height}px`, top: `${top}px` }}>
           <View className="mineTopBar__left">
             <View className="mineTopBar__icon">
               <AtIcon value="user" size="20" color="#005ea4" />

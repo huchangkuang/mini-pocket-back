@@ -22,8 +22,7 @@ const decisionIdFn = idGenerator(DESCRIPTION_KEY);
 
 export const getDecisionId = (ids?: string[]): string => {
   let id = decisionIdFn() as string;
-  const idList: string[] =
-    ids ?? (getStorageSync(USE_LIST) || []).map((i) => i.id);
+  const idList: string[] = ids ?? (getStorageSync(USE_LIST) || []).map((i) => i.id);
   while (idList.includes(id)) {
     id = decisionIdFn() as string;
   }
@@ -50,6 +49,6 @@ export const deleteLocalItem = (id: string) => {
   const list: DecisionItem[] = getStorageSync(USE_LIST) || [];
   setStorageSync(
     USE_LIST,
-    list.filter((i) => i.id !== id)
+    list.filter((i) => i.id !== id),
   );
 };

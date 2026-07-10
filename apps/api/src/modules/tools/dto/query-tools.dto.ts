@@ -1,5 +1,5 @@
-import { IsIn, IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsIn, IsInt, IsOptional, IsString, Max, Min } from "class-validator";
+import { Type } from "class-transformer";
 
 export class QueryToolsDto {
   @IsOptional()
@@ -11,12 +11,12 @@ export class QueryToolsDto {
   keyword?: string;
 
   @IsOptional()
-  @IsIn(['heat', 'default'])
-  sort?: 'heat' | 'default';
+  @IsIn(["heat", "default"])
+  sort?: "heat" | "default";
 
   @IsOptional()
-  @IsIn(['asc', 'desc'])
-  order?: 'asc' | 'desc';
+  @IsIn(["asc", "desc"])
+  order?: "asc" | "desc";
 
   @IsOptional()
   @Type(() => Number)

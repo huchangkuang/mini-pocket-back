@@ -1,7 +1,7 @@
-import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'crypto';
+import { createCipheriv, createDecipheriv, createHash, randomBytes } from "crypto";
 
 function deriveKey(secret: string): Buffer {
-  return createHash('sha256').update(secret).digest();
+  return createHash("sha256").update(secret).digest();
 }
 
 /**
@@ -11,15 +11,12 @@ function deriveKey(secret: string): Buffer {
 export function encrypt(plaintext: string, secret: string): string {
   const key = deriveKey(secret);
   const iv = randomBytes(12);
-  const cipher = createCipheriv('aes-256-gcm', key, iv);
+  const cipher = createCipheriv("aes-256-gcm", key, iv);
 
-  const encrypted = Buffer.concat([
-    cipher.update(plaintext, 'utf8'),
-    cipher.final(),
-  ]);
+  const encrypted = Buffer.concat([cipher.update(plaintext, "utf8"), cipher.final()]);
   const authTag = cipher.getAuthTag();
 
-  return `${iv.toString('base64')}:${encrypted.toString('base64')}:${authTag.toString('base64')}`;
+  return `${iv.toString("base64")}:${encrypted.toString("base64")}:${authTag.toString("base64")}`;
 }
 
 /**
@@ -27,22 +24,19 @@ export function encrypt(plaintext: string, secret: string): string {
  */
 export function decrypt(encoded: string, secret: string): string {
   const key = deriveKey(secret);
-  const [ivB64, cipherB64, authTagB64] = encoded.split(':');
+  const [ivB64, cipherB64, authTagB64] = encoded.split(":");
   if (!ivB64 || !cipherB64 || !authTagB64) {
-    throw new Error('Invalid encrypted data format');
+    throw new Error("Invalid encrypted data format");
   }
 
-  const iv = Buffer.from(ivB64, 'base64');
-  const ciphertext = Buffer.from(cipherB64, 'base64');
-  const authTag = Buffer.from(authTagB64, 'base64');
+  const iv = Buffer.from(ivB64, "base64");
+  const ciphertext = Buffer.from(cipherB64, "base64");
+  const authTag = Buffer.from(authTagB64, "base64");
 
-  const decipher = createDecipheriv('aes-256-gcm', key, iv);
+  const decipher = createDecipheriv("aes-256-gcm", key, iv);
   decipher.setAuthTag(authTag);
 
-  const decrypted = Buffer.concat([
-    decipher.update(ciphertext),
-    decipher.final(),
-  ]);
+  const decrypted = Buffer.concat([decipher.update(ciphertext), decipher.final()]);
 
-  return decrypted.toString('utf8');
+  return decrypted.toString("utf8");
 }

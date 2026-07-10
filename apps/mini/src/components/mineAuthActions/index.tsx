@@ -36,7 +36,7 @@ const MineAuthActions: FC<MineAuthActionsProps> = memo(
         </View>
       </View>
     );
-  }
+  },
 );
 
 export default MineAuthActions;

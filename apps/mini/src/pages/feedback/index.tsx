@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import Taro from "@tarojs/taro";
-import {
-  Image,
-  Input,
-  ScrollView,
-  Text,
-  Textarea,
-  View,
-} from "@tarojs/components";
+import { Image, Input, ScrollView, Text, Textarea, View } from "@tarojs/components";
 import { AtIcon } from "taro-ui";
 import { BomFixed } from "@/components/bomFixed";
 import { submitFeedback } from "@/services/feedbackApi";
@@ -51,8 +44,8 @@ const Feedback: React.FC = () => {
                 ossKey: uploaded.ossKey,
                 status: "done",
               }
-            : item
-        )
+            : item,
+        ),
       );
     } catch (e) {
       setImages((prev) => prev.filter((item) => item.id !== id));
@@ -153,9 +146,7 @@ const Feedback: React.FC = () => {
                 <View
                   key={item.value}
                   className={`feedbackPage__tag${
-                    feedbackType === item.value
-                      ? " feedbackPage__tag--active"
-                      : ""
+                    feedbackType === item.value ? " feedbackPage__tag--active" : ""
                   }`}
                   onClick={() => setFeedbackType(item.value)}
                 >
@@ -197,15 +188,10 @@ const Feedback: React.FC = () => {
                   />
                   {item.status === "uploading" ? (
                     <View className="feedbackPage__imageLoading">
-                      <Text className="feedbackPage__imageLoadingText">
-                        上传中
-                      </Text>
+                      <Text className="feedbackPage__imageLoadingText">上传中</Text>
                     </View>
                   ) : null}
-                  <View
-                    className="feedbackPage__imageRemove"
-                    onClick={() => removeImage(item.id)}
-                  >
+                  <View className="feedbackPage__imageRemove" onClick={() => removeImage(item.id)}>
                     <AtIcon value="close" size="12" color="#ffffff" />
                   </View>
                 </View>
@@ -222,8 +208,7 @@ const Feedback: React.FC = () => {
           <View className="feedbackPage__info">
             <AtIcon value="alert-circle" size="20" color="#004881" />
             <Text className="feedbackPage__infoText">
-              您的反馈将帮助「百宝口袋工坊」变得更好。我们通常会在 48
-              小时内处理您的建议。
+              您的反馈将帮助「百宝口袋工坊」变得更好。我们通常会在 48 小时内处理您的建议。
             </Text>
           </View>
         </View>
@@ -231,15 +216,11 @@ const Feedback: React.FC = () => {
 
       <BomFixed className="feedbackPage__footer">
         <View
-          className={`feedbackPage__submit${
-            submitting ? " feedbackPage__submit--disabled" : ""
-          }`}
+          className={`feedbackPage__submit${submitting ? " feedbackPage__submit--disabled" : ""}`}
           onClick={submitting ? undefined : handleSubmit}
         >
           <AtIcon value="mail" size="20" color="#ffffff" />
-          <Text className="feedbackPage__submitText">
-            {submitting ? "正在提交..." : "提交"}
-          </Text>
+          <Text className="feedbackPage__submitText">{submitting ? "正在提交..." : "提交"}</Text>
         </View>
       </BomFixed>
     </View>

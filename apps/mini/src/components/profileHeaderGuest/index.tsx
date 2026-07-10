@@ -12,11 +12,7 @@ const ProfileHeaderGuest: FC<ProfileHeaderGuestProps> = memo(({ onLogin }) => {
     <View className="profileHeaderGuest">
       <View className="profileHeaderGuest__decor" />
       <View className="profileHeaderGuest__avatarWrap">
-        <Image
-          className="profileHeaderGuest__avatar"
-          src={avatarPlaceholder}
-          mode="aspectFill"
-        />
+        <Image className="profileHeaderGuest__avatar" src={avatarPlaceholder} mode="aspectFill" />
       </View>
       <View className="profileHeaderGuest__content">
         <Text className="profileHeaderGuest__cta" onClick={() => onLogin?.()}>

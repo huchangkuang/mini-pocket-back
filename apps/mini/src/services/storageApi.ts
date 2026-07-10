@@ -9,10 +9,7 @@ import { getToken } from "@/utils/authStore";
 import { ApiError } from "@/utils/request";
 import { post } from "@/utils/request";
 
-async function uploadFileTo(
-  path: "avatar" | "upload",
-  filePath: string
-): Promise<ApiUploadResult> {
+async function uploadFileTo(path: "avatar" | "upload", filePath: string): Promise<ApiUploadResult> {
   const token = getToken();
   if (!token) {
     throw new ApiError("请先登录", 401);
@@ -39,11 +36,7 @@ async function uploadFileTo(
     throw new ApiError("上传响应解析失败", response.statusCode);
   }
 
-  if (
-    response.statusCode < 200 ||
-    response.statusCode >= 300 ||
-    body.code !== 0
-  ) {
+  if (response.statusCode < 200 || response.statusCode >= 300 || body.code !== 0) {
     throw new ApiError(body?.message || "上传失败", response.statusCode);
   }
 
@@ -63,7 +56,7 @@ export function uploadTempFile(filePath: string): Promise<ApiUploadResult> {
 /** 保存时将 temp 文件复制到永久目录 */
 export function persistStorageFiles(
   ossKeys: string[],
-  scope: PersistScope = "general"
+  scope: PersistScope = "general",
 ): Promise<ApiPersistStorageResult> {
   return post<ApiPersistStorageResult>("/storage/persist", { ossKeys, scope });
 }

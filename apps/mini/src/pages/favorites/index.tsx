@@ -59,7 +59,7 @@ const Favorites: React.FC = () => {
 
   const filteredFavorites = useMemo(
     () => filterFavorites(favorites, searchQuery, selectedChip),
-    [favorites, searchQuery, selectedChip]
+    [favorites, searchQuery, selectedChip],
   );
 
   const viewToPage = (path: string, toolId?: number) => {
@@ -92,11 +92,7 @@ const Favorites: React.FC = () => {
       <View className="favoritesPage">
         <FavoritesTopBar onFilter={() => errorToast(PLACEHOLDER_MSG)} />
         <View className="favoritesPage__emptyWrap">
-          <FavoritesEmpty
-            variant="guest"
-            onLogin={handleLogin}
-            loading={loggingIn}
-          />
+          <FavoritesEmpty variant="guest" onLogin={handleLogin} loading={loggingIn} />
         </View>
       </View>
     );

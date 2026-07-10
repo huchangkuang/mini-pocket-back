@@ -13,11 +13,7 @@ const About: React.FC = () => {
             <View className="aboutPage__logoWrap">
               <View className="aboutPage__logoShadow" />
               <View className="aboutPage__logoBox">
-                <Image
-                  className="aboutPage__logo"
-                  src={logo}
-                  mode="aspectFit"
-                />
+                <Image className="aboutPage__logo" src={logo} mode="aspectFit" />
               </View>
             </View>
             <Text className="aboutPage__appName">百宝口袋工坊</Text>

@@ -1,12 +1,6 @@
 // 共享类型 — 从 @mini-pocket/shared re-export
 export type { ApiResponse } from "@mini-pocket/shared";
-export type {
-  Accent,
-  Category,
-  Tool,
-  ApiToolsList,
-  ListToolsQuery,
-} from "@mini-pocket/shared";
+export type { Accent, Category, Tool, ApiToolsList, ListToolsQuery } from "@mini-pocket/shared";
 export type {
   FavoriteCategory,
   ApiFavorite,
@@ -23,11 +17,7 @@ export type {
   ApiRecordActiveDayResult,
   ApiRecordToolUseResult,
 } from "@mini-pocket/shared";
-export type {
-  ApiDecision,
-  ApiDecisionSummary,
-  ApiDecisionsList,
-} from "@mini-pocket/shared";
+export type { ApiDecision, ApiDecisionSummary, ApiDecisionsList } from "@mini-pocket/shared";
 export type { FeedbackType, ApiSubmitFeedbackResult } from "@mini-pocket/shared";
 export type {
   PersistScope,

@@ -1,7 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
-import { LevelService } from './level.service';
+import { Controller, Get } from "@nestjs/common";
+import { LevelService } from "./level.service";
 
-@Controller('levels')
+@Controller("levels")
 export class LevelController {
   constructor(private readonly levelService: LevelService) {}
 

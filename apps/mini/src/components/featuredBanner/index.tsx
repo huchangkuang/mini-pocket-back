@@ -15,9 +15,7 @@ const FeaturedBanner: FC = memo(() => {
       <View className="featuredBanner__content">
         <Text className="featuredBanner__label">今日推荐</Text>
         <Text className="featuredBanner__title">全新工具上线</Text>
-        <Text className="featuredBanner__desc">
-          探索指尖轮盘 2.0，有趣更智能
-        </Text>
+        <Text className="featuredBanner__desc">探索指尖轮盘 2.0，有趣更智能</Text>
       </View>
       <View className="featuredBanner__cta" onClick={goFingerUp}>
         <Text className="featuredBanner__ctaText">立即查看</Text>

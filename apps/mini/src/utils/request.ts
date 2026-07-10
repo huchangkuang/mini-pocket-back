@@ -21,10 +21,7 @@ export class ApiError extends Error {
   }
 }
 
-function buildUrl(
-  path: string,
-  query?: Record<string, string | number | undefined>
-) {
+function buildUrl(path: string, query?: Record<string, string | number | undefined>) {
   const base = API_BASE_URL.replace(/\/$/, "");
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   let url = `${base}${normalizedPath}`;
@@ -32,10 +29,7 @@ function buildUrl(
   if (query) {
     const params = Object.entries(query)
       .filter(([, value]) => value !== undefined && value !== "")
-      .map(
-        ([key, value]) =>
-          `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`
-      )
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`)
       .join("&");
     if (params) url += `?${params}`;
   }
@@ -43,10 +37,7 @@ function buildUrl(
   return url;
 }
 
-async function request<T>(
-  path: string,
-  options: RequestOptions = {}
-): Promise<T> {
+async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { method = "GET", data, auth = true, query } = options;
   const header: Record<string, string> = {
     "Content-Type": "application/json",
@@ -77,8 +68,7 @@ async function request<T>(
   }
 
   if (statusCode < 200 || statusCode >= 300) {
-    const message =
-      typeof body?.message === "string" ? body.message : "请求失败";
+    const message = typeof body?.message === "string" ? body.message : "请求失败";
     throw new ApiError(message, statusCode);
   }
 
@@ -92,24 +82,16 @@ async function request<T>(
 export function get<T>(
   path: string,
   query?: Record<string, string | number | undefined>,
-  auth = true
+  auth = true,
 ): Promise<T> {
   return request<T>(path, { method: "GET", query, auth });
 }
 
-export function post<T>(
-  path: string,
-  data?: Record<string, unknown>,
-  auth = true
-): Promise<T> {
+export function post<T>(path: string, data?: Record<string, unknown>, auth = true): Promise<T> {
   return request<T>(path, { method: "POST", data, auth });
 }
 
-export function patch<T>(
-  path: string,
-  data?: Record<string, unknown>,
-  auth = true
-): Promise<T> {
+export function patch<T>(path: string, data?: Record<string, unknown>, auth = true): Promise<T> {
   return request<T>(path, { method: "PATCH", data, auth });
 }
 

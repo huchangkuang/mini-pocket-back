@@ -1,8 +1,4 @@
-import {
-  getStorageSync,
-  removeStorageSync,
-  setStorageSync,
-} from "@tarojs/taro";
+import { getStorageSync, removeStorageSync, setStorageSync } from "@tarojs/taro";
 import type { ApiUserLevel, ApiUserMe, ApiUserStats } from "@/types/api";
 
 const TOKEN_KEY = "mini_pocket_auth_token";
@@ -60,10 +56,7 @@ export function updateUserStats(stats: ApiUserStats): void {
   notify();
 }
 
-export function updateUserProgress(
-  stats: ApiUserStats,
-  level: ApiUserLevel
-): void {
+export function updateUserProgress(stats: ApiUserStats, level: ApiUserLevel): void {
   if (!cachedUser) return;
   cachedUser = { ...cachedUser, stats, level };
   setStorageSync(USER_KEY, cachedUser);

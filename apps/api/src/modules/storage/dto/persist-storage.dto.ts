@@ -6,9 +6,9 @@ import {
   IsOptional,
   IsString,
   MinLength,
-} from 'class-validator';
+} from "class-validator";
 
-export const PERSIST_SCOPES = ['feedback', 'general'] as const;
+export const PERSIST_SCOPES = ["feedback", "general"] as const;
 export type PersistScope = (typeof PERSIST_SCOPES)[number];
 
 export class PersistStorageDto {

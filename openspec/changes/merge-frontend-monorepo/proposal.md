@@ -1,6 +1,7 @@
 ## Why
 
 前端项目 `mini-pocket`（Taro 小程序）和后端项目 `mini-pocket-back`（NestJS API）目前分开管理，导致：
+
 - API 类型定义手动同步，改了一端另一端不报错，运行时才暴露问题
 - 开发体验不统一（两套包管理、两套 lint 规则）
 - 无法利用 pnpm workspace 做跨项目类型共享和依赖复用
@@ -21,9 +22,11 @@
 ## Capabilities
 
 ### New Capabilities
+
 - `shared-types`: `packages/shared` 包，定义前后端共用的 API 契约类型（ApiResponse、Tool、Category、User、Game 等），前后端都从此包导入
 
 ### Modified Capabilities
+
 <!-- 无已有 spec 的需求变更 -->
 
 ## Impact

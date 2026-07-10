@@ -22,18 +22,18 @@
 
 ## 4. 功能地图与优先级
 
-| 功能域 | 页面 | 说明 | 优先级 |
-| --- | --- | --- | --- |
-| 聚合入口 | `pages/classify/index` | 功能分类与跳转 | P0 |
-| 手持弹幕 | `handsBarrage/edit` + `handsBarrage/index` | 参数配置+全屏展示 | P0 |
-| 做个决定 | `doDescription/index` + `doDescription/edit` | 本地配置、随机转盘、常用项管理 | P0 |
-| 指尖轮盘 | `fingerUp/index` | 多触点随机选择 | P0 |
-| 二维码生成 | `qrcode/index` | 文本转码、Canvas 绘制、保存相册 | P0 |
-| 节拍器 | `metronome/index` | 频率设定与音频节拍 | P0 |
-| 拼豆图片生成 | `beadArt/index` | 图像像素化、Excel 导出 | P1 |
-| 反方向的钟 | `returnClock/index` | 逆时针动态时钟 | P2 |
-| 猜数字 | `guessNumber/index` | 4A2B 双人/同屏玩法 | P1 |
-| 随机数（隐藏入口） | `lottery/index` | 双色球样式随机数生成 | P2（候选恢复） |
+| 功能域             | 页面                                         | 说明                            | 优先级         |
+| ------------------ | -------------------------------------------- | ------------------------------- | -------------- |
+| 聚合入口           | `pages/classify/index`                       | 功能分类与跳转                  | P0             |
+| 手持弹幕           | `handsBarrage/edit` + `handsBarrage/index`   | 参数配置+全屏展示               | P0             |
+| 做个决定           | `doDescription/index` + `doDescription/edit` | 本地配置、随机转盘、常用项管理  | P0             |
+| 指尖轮盘           | `fingerUp/index`                             | 多触点随机选择                  | P0             |
+| 二维码生成         | `qrcode/index`                               | 文本转码、Canvas 绘制、保存相册 | P0             |
+| 节拍器             | `metronome/index`                            | 频率设定与音频节拍              | P0             |
+| 拼豆图片生成       | `beadArt/index`                              | 图像像素化、Excel 导出          | P1             |
+| 反方向的钟         | `returnClock/index`                          | 逆时针动态时钟                  | P2             |
+| 猜数字             | `guessNumber/index`                          | 4A2B 双人/同屏玩法              | P1             |
+| 随机数（隐藏入口） | `lottery/index`                              | 双色球样式随机数生成            | P2（候选恢复） |
 
 ## 5. 模块级输入/输出与限制
 

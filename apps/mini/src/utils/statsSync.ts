@@ -20,9 +20,7 @@ export function getShanghaiDateString(date = new Date()): string {
 
 function readActiveDayRecord(): StoredActiveDay | null {
   try {
-    const stored = Taro.getStorageSync(ACTIVE_DAY_KEY) as
-      | StoredActiveDay
-      | undefined;
+    const stored = Taro.getStorageSync(ACTIVE_DAY_KEY) as StoredActiveDay | undefined;
     return stored ?? null;
   } catch {
     return null;

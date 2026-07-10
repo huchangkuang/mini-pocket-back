@@ -1,12 +1,8 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { PrismaService } from '../../prisma/prisma.service';
-import { FavoriteActionDto, QueryFavoritesDto } from './dto/favorite.dto';
-import { mapFavorite } from './favorite.mapper';
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import { Prisma } from "@prisma/client";
+import { PrismaService } from "../../prisma/prisma.service";
+import { FavoriteActionDto, QueryFavoritesDto } from "./dto/favorite.dto";
+import { mapFavorite } from "./favorite.mapper";
 
 @Injectable()
 export class FavoritesService {
@@ -20,14 +16,12 @@ export class FavoritesService {
           include: { category: true },
         },
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
     });
 
-    let items = favorites
-      .filter((item) => item.tool.enabled)
-      .map((item) => mapFavorite(item.tool));
+    let items = favorites.filter((item) => item.tool.enabled).map((item) => mapFavorite(item.tool));
 
-    if (query.category && query.category !== 'all') {
+    if (query.category && query.category !== "all") {
       items = items.filter((item) => item.favoriteCategory === query.category);
     }
 
@@ -111,7 +105,7 @@ export class FavoritesService {
 
   private async resolveTool(dto: FavoriteActionDto) {
     if (!dto.toolId && !dto.routePath) {
-      throw new BadRequestException('toolId 或 routePath 必须提供一个');
+      throw new BadRequestException("toolId 或 routePath 必须提供一个");
     }
 
     const where: Prisma.ToolWhereInput = dto.toolId
@@ -124,7 +118,7 @@ export class FavoritesService {
     });
 
     if (!tool) {
-      throw new NotFoundException('工具不存在');
+      throw new NotFoundException("工具不存在");
     }
 
     return tool;

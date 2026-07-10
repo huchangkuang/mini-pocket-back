@@ -42,23 +42,11 @@ const BottomNav: FC<BottomNavProps> = memo(({ active, onSwitch }) => {
           return (
             <View
               key={tab.key}
-              className={cs(
-                "bottomNav__item",
-                isActive && "bottomNav__item--active"
-              )}
+              className={cs("bottomNav__item", isActive && "bottomNav__item--active")}
               onClick={() => switchTab(tab.key)}
             >
-              <AtIcon
-                value={tab.icon}
-                size="22"
-                color={isActive ? "#005ea4" : "#404752"}
-              />
-              <Text
-                className={cs(
-                  "bottomNav__label",
-                  isActive && "bottomNav__label--active"
-                )}
-              >
+              <AtIcon value={tab.icon} size="22" color={isActive ? "#005ea4" : "#404752"} />
+              <Text className={cs("bottomNav__label", isActive && "bottomNav__label--active")}>
                 {tab.label}
               </Text>
             </View>

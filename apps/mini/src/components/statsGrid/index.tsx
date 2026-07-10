@@ -12,9 +12,7 @@ const StatsGrid: FC<StatsGridProps> = memo(({ items }) => {
     <View className="statsGrid">
       {items.map((item) => (
         <View key={item.label} className="statsGrid__item">
-          <Text className={`statsGrid__value statsGrid__value--${item.color}`}>
-            {item.value}
-          </Text>
+          <Text className={`statsGrid__value statsGrid__value--${item.color}`}>{item.value}</Text>
           <Text className="statsGrid__label">{item.label}</Text>
         </View>
       ))}

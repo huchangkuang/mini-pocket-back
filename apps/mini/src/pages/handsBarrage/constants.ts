@@ -12,11 +12,7 @@ export const barrageTypeMap: Record<BarrageType, BarrageTypeStr> = {
   [BarrageType.static]: "静止弹幕",
 };
 
-export const BarrageTypeRange: BarrageTypeStr[] = [
-  "滚动弹幕",
-  "抖动文字",
-  "静止弹幕",
-];
+export const BarrageTypeRange: BarrageTypeStr[] = ["滚动弹幕", "抖动文字", "静止弹幕"];
 
 export const classMap = {
   [BarrageType.scroll]: "scroll",

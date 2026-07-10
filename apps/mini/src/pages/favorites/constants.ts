@@ -1,8 +1,4 @@
-import {
-  classifyList,
-  type Accent,
-  type CategoryChip,
-} from "@/pages/classify/constants";
+import { classifyList, type Accent, type CategoryChip } from "@/pages/classify/constants";
 
 export type FavoriteCategory = "dev" | "efficiency" | "fun";
 
@@ -47,26 +43,24 @@ const demoFavoriteConfig: {
   },
 ];
 
-export const demoFavorites: FavoriteItem[] = demoFavoriteConfig.map(
-  (cfg, index) => {
-    const tool = classifyList.find((item) => item.path === cfg.path)!;
-    return {
-      id: `demo-${index}`,
-      icon: tool.icon,
-      text: tool.text,
-      desc: tool.desc,
-      path: tool.path,
-      accent: tool.accent,
-      tag: cfg.tag,
-      favoriteCategory: cfg.favoriteCategory,
-    };
-  }
-);
+export const demoFavorites: FavoriteItem[] = demoFavoriteConfig.map((cfg, index) => {
+  const tool = classifyList.find((item) => item.path === cfg.path)!;
+  return {
+    id: `demo-${index}`,
+    icon: tool.icon,
+    text: tool.text,
+    desc: tool.desc,
+    path: tool.path,
+    accent: tool.accent,
+    tag: cfg.tag,
+    favoriteCategory: cfg.favoriteCategory,
+  };
+});
 
 export function filterFavorites(
   items: FavoriteItem[],
   query: string,
-  chipId: string
+  chipId: string,
 ): FavoriteItem[] {
   const normalizedQuery = query.trim().toLowerCase();
 

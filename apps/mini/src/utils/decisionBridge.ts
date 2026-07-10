@@ -120,9 +120,7 @@ export type SaveDecisionParams = {
   editCurrent?: boolean;
 };
 
-export async function saveDecision(
-  params: SaveDecisionParams
-): Promise<DecisionViewItem> {
+export async function saveDecision(params: SaveDecisionParams): Promise<DecisionViewItem> {
   const title = params.title.trim();
   const options = params.options;
 

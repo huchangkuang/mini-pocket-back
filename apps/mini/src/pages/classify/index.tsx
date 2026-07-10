@@ -27,13 +27,12 @@ const Classify: React.FC = () => {
   const { tools, categoryChips, updateToolFavorite } = useTools(
     selectedCategory,
     searchQuery,
-    sortByHeatDesc
+    sortByHeatDesc,
   );
 
-  const { isFavorite, toggleFavorite, syncFavoritePathsFromTools } =
-    useFavorites({
-      onToolFavoriteChange: updateToolFavorite,
-    });
+  const { isFavorite, toggleFavorite, syncFavoritePathsFromTools } = useFavorites({
+    onToolFavoriteChange: updateToolFavorite,
+  });
 
   useEffect(() => {
     syncFavoritePathsFromTools(tools);
@@ -75,11 +74,7 @@ const Classify: React.FC = () => {
               selectedId={selectedCategory}
               onSelect={setSelectedCategory}
             />
-            <SearchBar
-              value={searchQuery}
-              placeholder="搜索工具..."
-              onChange={setSearchQuery}
-            />
+            <SearchBar value={searchQuery} placeholder="搜索工具..." onChange={setSearchQuery} />
           </View>
 
           <View className="workshop__section">
@@ -89,7 +84,7 @@ const Classify: React.FC = () => {
                 <View
                   className={cs(
                     "workshop__actionBtn",
-                    sortByHeatDesc && "workshop__actionBtn--active"
+                    sortByHeatDesc && "workshop__actionBtn--active",
                   )}
                   onClick={toggleSortByHeat}
                 >
@@ -100,10 +95,7 @@ const Classify: React.FC = () => {
                     color="#005ea4"
                   />
                 </View>
-                <View
-                  className="workshop__actionBtn"
-                  onClick={toggleLayoutMode}
-                >
+                <View className="workshop__actionBtn" onClick={toggleLayoutMode}>
                   <AtIcon value="chevron-left" size="10" color="#005ea4" />
                   <Text className="workshop__actionBtnText">
                     {layoutMode === "grid" ? "方格" : "列表"}
@@ -113,11 +105,7 @@ const Classify: React.FC = () => {
               </View>
             </View>
 
-            <View
-              className={cs(
-                layoutMode === "grid" ? "workshop__grid" : "workshop__list"
-              )}
-            >
+            <View className={cs(layoutMode === "grid" ? "workshop__grid" : "workshop__list")}>
               {tools.map((item) => (
                 <ToolCard
                   key={item.path}

@@ -4,11 +4,11 @@ import {
   Logger,
   NotFoundException,
   ServiceUnavailableException,
-} from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import OSS from 'ali-oss';
-import { randomUUID } from 'crypto';
-import type { PersistScope } from './dto/persist-storage.dto';
+} from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import OSS from "ali-oss";
+import { randomUUID } from "crypto";
+import type { PersistScope } from "./dto/persist-storage.dto";
 
 export type PersistedObject = {
   ossKey: string;
@@ -28,11 +28,11 @@ export class StorageService {
   private readonly mockMode: boolean;
 
   constructor(private readonly config: ConfigService) {
-    this.mockMode = config.get<string>('STORAGE_MOCK') === 'true';
-    const region = config.get<string>('OSS_REGION');
-    const accessKeyId = config.get<string>('OSS_ACCESS_KEY_ID');
-    const accessKeySecret = config.get<string>('OSS_ACCESS_KEY_SECRET');
-    const bucket = config.get<string>('OSS_BUCKET');
+    this.mockMode = config.get<string>("STORAGE_MOCK") === "true";
+    const region = config.get<string>("OSS_REGION");
+    const accessKeyId = config.get<string>("OSS_ACCESS_KEY_ID");
+    const accessKeySecret = config.get<string>("OSS_ACCESS_KEY_SECRET");
+    const bucket = config.get<string>("OSS_BUCKET");
 
     if (!this.mockMode && region && accessKeyId && accessKeySecret && bucket) {
       this.client = new OSS({
@@ -40,34 +40,30 @@ export class StorageService {
         accessKeyId,
         accessKeySecret,
         bucket,
-        endpoint: config.get<string>('OSS_ENDPOINT') || undefined,
+        endpoint: config.get<string>("OSS_ENDPOINT") || undefined,
         secure: true,
       });
       this.logger.log(`OSS 已启用（Bucket: ${bucket}）`);
     } else {
       this.client = null;
       if (!this.mockMode) {
-        this.logger.warn('OSS 凭证不完整，请检查 .env 或设置 STORAGE_MOCK=true');
+        this.logger.warn("OSS 凭证不完整，请检查 .env 或设置 STORAGE_MOCK=true");
       }
     }
   }
 
-  async uploadBuffer(
-    key: string,
-    buffer: Buffer,
-    mimeType: string,
-  ): Promise<PersistedObject> {
+  async uploadBuffer(key: string, buffer: Buffer, mimeType: string): Promise<PersistedObject> {
     if (this.mockMode) {
       this.logger.debug(`Mock upload: ${key}`);
       return { ossKey: key, mimeType };
     }
     if (!this.client) {
       throw new ServiceUnavailableException(
-        '对象存储未配置，请设置 STORAGE_MOCK=true 或填写 OSS 凭证',
+        "对象存储未配置，请设置 STORAGE_MOCK=true 或填写 OSS 凭证",
       );
     }
     await this.client.put(key, buffer, {
-      headers: { 'Content-Type': mimeType },
+      headers: { "Content-Type": mimeType },
     });
     return { ossKey: key, mimeType };
   }
@@ -110,7 +106,7 @@ export class StorageService {
       }
 
       if (!this.client) {
-        throw new ServiceUnavailableException('对象存储未配置');
+        throw new ServiceUnavailableException("对象存储未配置");
       }
 
       await this.client.copy(destKey, sourceKey);
@@ -125,15 +121,15 @@ export class StorageService {
   }
 
   async getAccessUrl(ossKey: string, expiresSeconds = 3600 * 24 * 7) {
-    const publicBase = this.config.get<string>('OSS_PUBLIC_BASE');
+    const publicBase = this.config.get<string>("OSS_PUBLIC_BASE");
     if (publicBase) {
-      return `${publicBase.replace(/\/$/, '')}/${ossKey}`;
+      return `${publicBase.replace(/\/$/, "")}/${ossKey}`;
     }
     if (this.mockMode) {
       return `https://mock.local/${ossKey}`;
     }
     if (!this.client) {
-      throw new ServiceUnavailableException('对象存储未配置');
+      throw new ServiceUnavailableException("对象存储未配置");
     }
     return this.client.signatureUrl(ossKey, { expires: expiresSeconds });
   }
@@ -146,20 +142,20 @@ export class StorageService {
   private assertTempKeyOwnedByUser(ossKey: string, userId: number) {
     const expectedPrefix = `temp/${userId}/`;
     if (!ossKey.startsWith(expectedPrefix)) {
-      throw new ForbiddenException('无权操作该文件');
+      throw new ForbiddenException("无权操作该文件");
     }
   }
 
   private resolveExtension(mimeType: string) {
-    if (mimeType === 'image/png') return 'png';
-    if (mimeType === 'image/webp') return 'webp';
-    return 'jpg';
+    if (mimeType === "image/png") return "png";
+    if (mimeType === "image/webp") return "webp";
+    return "jpg";
   }
 
   private extractExtension(key: string) {
-    const ext = key.split('.').pop()?.toLowerCase();
-    if (ext === 'png' || ext === 'webp' || ext === 'jpg' || ext === 'jpeg') {
-      return ext === 'jpeg' ? 'jpg' : ext;
+    const ext = key.split(".").pop()?.toLowerCase();
+    if (ext === "png" || ext === "webp" || ext === "jpg" || ext === "jpeg") {
+      return ext === "jpeg" ? "jpg" : ext;
     }
     throw new NotFoundException(`无法识别文件类型: ${key}`);
   }

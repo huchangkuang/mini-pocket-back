@@ -3,13 +3,9 @@ import { get, patch, post } from "@/utils/request";
 
 export function wechatLogin(
   code: string,
-  profile?: { nickname?: string; avatarUrl?: string }
+  profile?: { nickname?: string; avatarUrl?: string },
 ): Promise<ApiLoginResult> {
-  return post<ApiLoginResult>(
-    "/auth/wechat/login",
-    { code, ...profile },
-    false
-  );
+  return post<ApiLoginResult>("/auth/wechat/login", { code, ...profile }, false);
 }
 
 export function getMe(): Promise<ApiUserMe> {

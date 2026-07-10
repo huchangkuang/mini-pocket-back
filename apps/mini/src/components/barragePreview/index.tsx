@@ -28,30 +28,24 @@ const BarragePreview: FC<BarragePreviewProps> = memo(
           color: fontColor,
           "--time": `${scrollTime}s`,
         } as React.CSSProperties),
-      [previewFontSize, fontColor, scrollTime]
+      [previewFontSize, fontColor, scrollTime],
     );
 
     return (
       <View className="barragePreview">
-        <View
-          className="barragePreview__screen"
-          style={{ backgroundColor: bgColor }}
-        >
+        <View className="barragePreview__screen" style={{ backgroundColor: bgColor }}>
           <View className="barragePreview__badge">
             <Text className="barragePreview__badgeText">LIVE PREVIEW</Text>
           </View>
           <View className="barragePreview__content">
-            <Text
-              className={cs("barragePreview__text", typeClass)}
-              style={textStyle}
-            >
+            <Text className={cs("barragePreview__text", typeClass)} style={textStyle}>
               {displayText}
             </Text>
           </View>
         </View>
       </View>
     );
-  }
+  },
 );
 
 export default BarragePreview;

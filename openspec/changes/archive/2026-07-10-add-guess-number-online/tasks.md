@@ -10,8 +10,8 @@
 
 ## 3. Games 模块
 
-- [x] 3.1 创建 DTO：`CreateGameDto`（targetNumber 校验：长度4、纯数字）、`SubmitGuessDto`（guess 校验：长度4、纯数字）
-- [x] 3.2 创建 `GamesService`：实现 `createGame`（加密+入库）、`getGameInfo`（查库+拼装响应）、`submitGuess`（解密+计算A/B+入库+判断胜负）
+- [x] 3.1 创建 DTO：`CreateGameDto`（targetNumber 校验：长度 4、纯数字）、`SubmitGuessDto`（guess 校验：长度 4、纯数字）
+- [x] 3.2 创建 `GamesService`：实现 `createGame`（加密+入库）、`getGameInfo`（查库+拼装响应）、`submitGuess`（解密+计算 A/B+入库+判断胜负）
 - [x] 3.3 实现 A/B 计算函数（Bulls and Cows 算法，支持重复数字）
 - [x] 3.4 创建 `GamesController`：三个端点（POST /games、GET /games/:gameId、POST /games/:gameId/guess），使用 `@CurrentUser()` 和 `JwtAuthGuard`
 - [x] 3.5 创建 `GamesModule`，注册 controller 和 service

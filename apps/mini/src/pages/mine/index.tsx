@@ -18,25 +18,14 @@ import {
   mineMenuItems,
   guestLevelProgress,
 } from "@/pages/mine/constants";
-import {
-  DEFAULT_USER_LEVEL,
-  mapLevelToProgressData,
-} from "@/utils/levelMapper";
+import { DEFAULT_USER_LEVEL, mapLevelToProgressData } from "@/utils/levelMapper";
 import "./index.scss";
 
 const PLACEHOLDER_MSG = "更多功能正在开发中...";
 
 const Mine: React.FC = () => {
   useTabBarSelected("mine");
-  const {
-    user,
-    isLoggedIn,
-    isReady,
-    loggingIn,
-    login,
-    logout,
-    refreshProfile,
-  } = useAuth();
+  const { user, isLoggedIn, isReady, loggingIn, login, logout, refreshProfile } = useAuth();
 
   const stats = useMemo(() => {
     if (!isLoggedIn || !user) {
@@ -173,10 +162,7 @@ const Mine: React.FC = () => {
             />
           ) : null}
 
-          <LevelProgress
-            variant={isLoggedIn ? "loggedIn" : "guest"}
-            data={levelProgress}
-          />
+          <LevelProgress variant={isLoggedIn ? "loggedIn" : "guest"} data={levelProgress} />
         </View>
       </ScrollView>
     </View>

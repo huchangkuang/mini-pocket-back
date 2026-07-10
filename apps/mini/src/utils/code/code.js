@@ -12,7 +12,7 @@ function barc(id, code, width, height, rotate = false) {
     code,
     convert_length(width),
     convert_length(height),
-    rotate
+    rotate,
   );
 }
 
