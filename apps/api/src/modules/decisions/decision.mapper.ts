@@ -1,4 +1,5 @@
 import { UserDecision } from '@prisma/client';
+import type { ApiDecision, ApiDecisionSummary } from '@mini-pocket/shared';
 
 export type DecisionOptions = string[];
 
@@ -6,7 +7,7 @@ export function normalizeOptions(options: string[]): DecisionOptions {
   return options.map((item) => item.trim()).filter(Boolean);
 }
 
-export function mapDecision(decision: UserDecision) {
+export function mapDecision(decision: UserDecision): ApiDecision {
   return {
     id: decision.id,
     title: decision.title,
@@ -18,7 +19,7 @@ export function mapDecision(decision: UserDecision) {
   };
 }
 
-export function mapDecisionSummary(decision: UserDecision) {
+export function mapDecisionSummary(decision: UserDecision): ApiDecisionSummary {
   return {
     id: decision.id,
     title: decision.title,

@@ -1,0 +1,23 @@
+@import "../../../style/tokens.scss";
+
+.toolFormCard {
+  background: $color-surface-container-lowest;
+  padding: $spacing-md;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  box-sizing: border-box;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__title {
+    font-size: $font-body-md;
+    font-weight: 700;
+    color: $color-on-surface;
+    line-height: $line-height-body-md;
+  }
+}

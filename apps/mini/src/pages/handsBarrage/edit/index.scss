@@ -1,0 +1,80 @@
+@import "../../../style/tokens.scss";
+
+page {
+  background: $color-surface;
+}
+
+.editBarrage {
+  min-height: 100vh;
+  background: $color-surface;
+
+  &__scroll {
+    height: 100vh;
+    box-sizing: border-box;
+  }
+
+  &__content {
+    padding: $spacing-md $margin-mobile;
+    padding-bottom: calc(200rpx + env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    box-sizing: border-box;
+  }
+
+  &__inputWrap {
+    width: 100%;
+    background: $color-surface-container-low;
+    border-radius: $radius-lg;
+    overflow: hidden;
+  }
+
+  &__input {
+    width: 100%;
+    height: 96rpx;
+    line-height: 96rpx;
+    padding: 0 32rpx;
+    background: transparent;
+    font-size: $font-body-md;
+    color: $color-on-surface;
+    box-sizing: border-box;
+  }
+
+  &__placeholder {
+    color: $color-outline;
+    font-size: $font-body-md;
+  }
+
+  &__charCount {
+    display: block;
+    margin-top: $spacing-xs;
+    text-align: right;
+    font-size: $font-label-sm;
+    color: $color-outline;
+    line-height: $line-height-label-sm;
+  }
+
+  &__grid {
+    display: flex;
+    gap: $spacing-md;
+  }
+
+  &__gridItem {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__colorGroups {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  &__sliders {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    height: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,30 @@
+@import "../../../style/tokens.scss";
+
+.colorSwatchGroup {
+  &__label {
+    display: block;
+    font-size: $font-label-sm;
+    color: $color-outline;
+    line-height: $line-height-label-sm;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+  }
+
+  &__dot {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: $radius-full;
+    border: 2rpx solid $color-outline-variant;
+    box-sizing: border-box;
+
+    &--selected {
+      border-color: $color-primary;
+      border-width: 4rpx;
+    }
+  }
+}

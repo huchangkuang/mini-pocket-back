@@ -1,0 +1,153 @@
+@import "src/style/common";
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+}
+
+page {
+  background: $color-surface;
+}
+
+.timeTravel {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__scroll {
+    flex: 1;
+    height: 100vh;
+  }
+
+  &__content {
+    padding: $spacing-md $margin-mobile 200rpx;
+    box-sizing: border-box;
+  }
+
+  &__clockWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: $spacing-lg 0;
+  }
+
+  &__face {
+    position: relative;
+    width: 576rpx;
+    height: 576rpx;
+    border-radius: 50%;
+    border: 16rpx solid $color-surface-container-lowest;
+    background: radial-gradient(circle at center, #ffffff 0%, #f0f4f8 100%);
+    box-shadow:
+      inset 0 4rpx 8rpx rgba(0, 0, 0, 0.05),
+      0 20rpx 80rpx rgba(0, 0, 0, 0.1);
+    margin-bottom: $spacing-md;
+  }
+
+  &__numbers {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  &__number {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 48rpx;
+    margin-left: -24rpx;
+    margin-top: -20rpx;
+    text-align: center;
+    font-size: $font-body-md;
+    font-weight: 600;
+    color: $color-on-surface-variant;
+    opacity: 0.6;
+  }
+
+  &__arms {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+  }
+
+  &__arm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 50% 100%;
+    border-radius: 999rpx;
+
+    &--hour {
+      width: 12rpx;
+      height: 128rpx;
+      background: $color-on-surface;
+      z-index: 10;
+    }
+
+    &--minute {
+      width: 8rpx;
+      height: 192rpx;
+      background: $color-on-surface-variant;
+      z-index: 10;
+    }
+
+    &--second {
+      width: 4rpx;
+      height: 224rpx;
+      background: $color-secondary;
+      z-index: 20;
+    }
+  }
+
+  &__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24rpx;
+    height: 24rpx;
+    margin: -12rpx 0 0 -12rpx;
+    border-radius: 50%;
+    background: $color-primary;
+    z-index: 30;
+  }
+
+  &__digital {
+    font-size: 64rpx;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: $color-on-surface;
+    letter-spacing: 4rpx;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 12rpx;
+
+    &--breathe {
+      animation: breathe 2s ease-in-out infinite;
+    }
+  }
+
+  &__statusDot {
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    background: $color-primary;
+  }
+
+  &__statusText {
+    font-size: $font-label-sm;
+    color: $color-on-surface-variant;
+  }
+}

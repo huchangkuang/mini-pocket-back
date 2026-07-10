@@ -1,0 +1,45 @@
+@import "./tokens.scss";
+
+@mixin flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@mixin spaceBetween {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+@mixin ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@mixin tabPageShell {
+  height: 100vh;
+  overflow: hidden;
+}
+
+@mixin tabPageRoot {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-bottom: calc(#{$bottom-nav-height} + env(safe-area-inset-bottom));
+}
+
+@mixin tabPageScroll {
+  flex: 1;
+  min-height: 0;
+  height: auto;
+  box-sizing: border-box;
+}
+
+@mixin tabPageContent {
+  padding-left: $margin-mobile;
+  padding-right: $margin-mobile;
+  padding-bottom: $spacing-md;
+  box-sizing: border-box;
+}

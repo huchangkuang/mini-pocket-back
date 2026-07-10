@@ -28,3 +28,10 @@ Thumbs.db
 
 # test
 coverage/
+
+# Taro / mini-program
+.deploy_versions/
+.temp/
+.rn_temp/
+.swc
+project.private.config.json

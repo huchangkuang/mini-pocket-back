@@ -1,0 +1,55 @@
+@import "../../style/common.scss";
+
+page {
+  @include tabPageShell;
+  background: $color-surface;
+}
+
+.favoritesPage {
+  @include tabPageRoot;
+  background: $color-surface;
+  position: relative;
+
+  &__scroll {
+    @include tabPageScroll;
+  }
+
+  &__content {
+    @include tabPageContent;
+    padding-top: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    .categoryChips__row {
+      gap: 12rpx;
+      padding-bottom: 0;
+    }
+
+    .categoryChips__chip {
+      padding: 10rpx 28rpx;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $gutter-mobile;
+    margin-top: 0;
+  }
+
+  &__noResults {
+    padding: 80rpx 32rpx;
+    text-align: center;
+    font-size: $font-body-md;
+    color: $color-on-surface-variant;
+  }
+
+  &__emptyWrap {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

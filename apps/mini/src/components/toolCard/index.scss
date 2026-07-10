@@ -1,0 +1,173 @@
+@import "../../style/common.scss";
+
+.toolCard {
+  background: $color-surface-container-lowest;
+  padding: 40rpx;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  border: 1rpx solid rgba($color-outline-variant, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32rpx;
+  box-sizing: border-box;
+
+  &:active {
+    transform: scale(0.96);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__header {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__favorite {
+    width: 64rpx;
+    height: 64rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: -8rpx -8rpx 0 0;
+
+    &:active {
+      opacity: 0.7;
+    }
+  }
+
+  &__iconWrap {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: $radius-xl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--primary {
+      background: rgba($color-primary, 0.1);
+    }
+
+    &--secondary {
+      background: rgba($color-secondary-container, 0.1);
+    }
+
+    &--tertiary {
+      background: rgba($color-tertiary-container, 0.2);
+    }
+  }
+
+  &__icon {
+    width: 56rpx;
+    height: 56rpx;
+  }
+
+  &__text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8rpx;
+  }
+
+  &__title {
+    font-size: $font-body-lg;
+    font-weight: 700;
+    color: $color-on-surface;
+    line-height: $line-height-body-lg;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8rpx;
+  }
+
+  &__desc {
+    flex: 1;
+    min-width: 0;
+    font-size: 22rpx;
+    font-weight: 500;
+    color: rgba($color-on-surface-variant, 0.7);
+    line-height: $line-height-label-sm;
+    @include ellipsis;
+  }
+
+  &__heat {
+    flex-shrink: 0;
+    font-size: 20rpx;
+    font-weight: 500;
+    color: rgba($color-primary, 0.8);
+    background: rgba($color-primary, 0.05);
+    padding: 4rpx 12rpx;
+    border-radius: $radius-sm;
+    line-height: 28rpx;
+  }
+
+  &--list {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32rpx;
+    padding: 32rpx;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__listHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16rpx;
+  }
+
+  &__listDesc {
+    display: block;
+    margin-top: 8rpx;
+    font-size: $font-label-sm;
+    font-weight: 500;
+    color: $color-on-surface-variant;
+    line-height: $line-height-label-sm;
+  }
+
+  &__tags {
+    margin-top: 24rpx;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16rpx;
+  }
+
+  &__tag {
+    padding: 4rpx 16rpx;
+    border-radius: $radius-sm;
+    background: $color-surface-container-high;
+    font-size: 20rpx;
+    font-weight: 700;
+    color: $color-outline;
+    letter-spacing: 1rpx;
+    text-transform: uppercase;
+
+    &--heat {
+      color: rgba($color-primary, 0.8);
+      background: rgba($color-primary, 0.08);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+  }
+
+  &--list &__iconWrap {
+    width: 128rpx;
+    height: 128rpx;
+    flex-shrink: 0;
+  }
+
+  &--list &__icon {
+    width: 64rpx;
+    height: 64rpx;
+  }
+}

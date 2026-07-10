@@ -1,0 +1,36 @@
+@import "../../../style/tokens.scss";
+
+.segmentedControl {
+  display: flex;
+  padding: 8rpx;
+  background: $color-surface-container-low;
+  border-radius: $radius-xl;
+  gap: 8rpx;
+
+  &__item {
+    flex: 1;
+    padding: 16rpx 8rpx;
+    border-radius: $radius-lg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &--active {
+      background: $color-surface-container-lowest;
+      box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  &__label {
+    font-size: $font-label-sm;
+    font-weight: 700;
+    color: $color-on-surface-variant;
+    line-height: $line-height-label-sm;
+    text-align: center;
+  }
+
+  &__item--active &__label {
+    color: $color-primary;
+  }
+}

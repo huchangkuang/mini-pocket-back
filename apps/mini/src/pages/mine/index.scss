@@ -1,0 +1,24 @@
+@import "../../style/common.scss";
+
+page {
+  @include tabPageShell;
+  background: $color-surface;
+}
+
+.minePage {
+  @include tabPageRoot;
+  background: $color-surface;
+  position: relative;
+
+  &__scroll {
+    @include tabPageScroll;
+  }
+
+  &__content {
+    @include tabPageContent;
+    padding-top: $spacing-xs;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+}

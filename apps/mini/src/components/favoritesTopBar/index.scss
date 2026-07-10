@@ -1,0 +1,58 @@
+@import "../../style/tokens.scss";
+
+.favoritesTopBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: $color-surface;
+
+  &__inner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $margin-mobile;
+    box-sizing: border-box;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: $font-headline-md;
+    font-weight: 700;
+    color: $color-primary;
+    line-height: $line-height-headline-md;
+  }
+
+  &__icon {
+    width: 80rpx;
+    height: 80rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__action {
+    width: 80rpx;
+    height: 80rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+
+    &:active {
+      background: $color-surface-container-low;
+    }
+  }
+}

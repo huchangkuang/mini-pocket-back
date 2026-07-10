@@ -1,0 +1,26 @@
+@import "src/style/global.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/modal.scss";
+@import "~taro-ui/dist/style/components/slider.scss";
+@import "~taro-ui/dist/style/components/modal.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+
+view, text {
+  box-sizing: border-box;
+}
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spaceBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

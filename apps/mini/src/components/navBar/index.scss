@@ -1,0 +1,24 @@
+.navBarWrapper {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: 100%;
+  .childrenWrapper {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    .content {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-right: 80rpx;
+      .goBackIcon {
+        width: 48rpx;
+        height: 48rpx;
+        padding: 0 20rpx;
+      }
+    }
+  }
+}

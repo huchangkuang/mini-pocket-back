@@ -1,0 +1,38 @@
+@import "../../style/tokens.scss";
+
+.mineMenuList {
+  background: $color-surface-container-lowest;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  box-shadow: $shadow-card;
+  border: 1rpx solid rgba(192, 199, 212, 0.3);
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-md;
+    box-sizing: border-box;
+
+    &--border {
+      border-bottom: 1rpx solid $color-surface-variant;
+    }
+
+    &:active {
+      transform: scale(0.98);
+      background: $color-surface-container-low;
+    }
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__label {
+    font-size: $font-body-lg;
+    color: $color-on-surface;
+    line-height: $line-height-body-lg;
+  }
+}

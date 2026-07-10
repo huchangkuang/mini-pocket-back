@@ -1,0 +1,38 @@
+@import "../../../style/tokens.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+
+.toolBottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  padding: $margin-mobile;
+  padding-bottom: calc(#{$margin-mobile} + env(safe-area-inset-bottom));
+  background: rgba($color-surface-container-lowest, 0.9);
+  border-top: 1rpx solid rgba($color-outline-variant, 0.3);
+  box-sizing: border-box;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    width: 100%;
+    padding: 32rpx;
+    background: $color-primary;
+    border-radius: $radius-full;
+    box-shadow: $shadow-fab;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  &__label {
+    font-size: $font-body-lg;
+    font-weight: 700;
+    color: $color-on-primary;
+    line-height: $line-height-body-lg;
+  }
+}

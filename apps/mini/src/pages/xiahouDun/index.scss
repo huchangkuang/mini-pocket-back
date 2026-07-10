@@ -1,0 +1,50 @@
+@import "src/style/common";
+
+page {
+  background: $color-surface;
+}
+
+.xiahouDun {
+  position: relative;
+  min-height: 100vh;
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    height: 100vh;
+    background: #000;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  &__goBack {
+    position: fixed;
+    left: 16px;
+    z-index: 10;
+    min-width: 88px;
+    min-height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  &__nav {
+    padding: 120rpx $margin-mobile $spacing-md;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: $font-headline-md;
+    font-weight: 700;
+    color: $color-on-surface;
+  }
+
+  &__body {
+    padding: 0 $margin-mobile 200rpx;
+    box-sizing: border-box;
+  }
+}

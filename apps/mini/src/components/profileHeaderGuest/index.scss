@@ -1,0 +1,67 @@
+@import "../../style/tokens.scss";
+
+.profileHeaderGuest {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-md;
+  background: $color-surface-container-lowest;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  text-align: center;
+
+  &:active {
+    transform: scale(0.99);
+  }
+
+  &__decor {
+    position: absolute;
+    top: -96rpx;
+    right: -96rpx;
+    width: 256rpx;
+    height: 256rpx;
+    border-radius: $radius-full;
+    background: rgba(0, 94, 164, 0.05);
+  }
+
+  &__avatarWrap {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: $radius-full;
+    border: 8rpx solid $color-surface-container;
+    background: $color-surface-container-high;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: $spacing-sm;
+    box-shadow: inset 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
+  }
+
+  &__avatar {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: 0 $spacing-sm;
+  }
+
+  &__cta {
+    font-size: $font-headline-md;
+    font-weight: 600;
+    color: $color-on-surface;
+    line-height: $line-height-headline-md;
+  }
+
+  &__desc {
+    font-size: $font-label-sm;
+    color: $color-on-surface-variant;
+    line-height: $line-height-label-sm;
+  }
+}

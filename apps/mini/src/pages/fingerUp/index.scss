@@ -1,0 +1,98 @@
+@import "src/style/common";
+
+page {
+  background: #f9f9f9;
+}
+@keyframes scaleC {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+.fingerUp {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+
+  &__playArea {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .tips {
+    color: #333333;
+    font-size: 24px;
+    margin-top: 400px;
+    padding: 0 48px;
+    pointer-events: none;
+    view {
+      margin-bottom: 8px;
+    }
+  }
+  .goBack {
+    position: fixed;
+    left: 16px;
+    z-index: 10;
+    min-width: 88px;
+    min-height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  .area {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    .item {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: var(--bgColor);
+      position: relative;
+      pointer-events: none;
+      .bg {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: radial-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, var(--bgColor) 100%);
+        animation: scaleC 2s linear infinite;
+        &:nth-child(2) {
+          animation: scaleC 2s linear 1s infinite;
+        }
+        &.dark {
+          animation: none;
+        }
+      }
+    }
+  }
+  .start {
+    z-index: 10;
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    @include flexCenter;
+    width: 200px;
+    height: 60px;
+    border-radius: 8px;
+    font-size: 28px;
+    color: #ffffff;
+    background: rgba(15, 224, 123, 0.8);
+    &.disabled {
+      color: #ccc;
+      background: #eeeeee;
+    }
+  }
+}

@@ -1,0 +1,92 @@
+@import "src/style/common";
+
+page {
+  background: #000;
+}
+
+.hawking {
+  min-height: 100vh;
+  background: #000;
+  overflow: hidden;
+
+  &__screen {
+    min-height: 100vh;
+    background: #f7f9fc;
+    transform: rotate(0deg);
+    transform-origin: center center;
+    transition: transform 0.6s ease-out;
+
+    &--rotated {
+      transform: rotate(30deg);
+    }
+  }
+
+  &__goBack {
+    position: fixed;
+    left: 16px;
+    z-index: 10;
+    min-width: 88px;
+    min-height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  &__nav {
+    padding: 120rpx $margin-mobile $spacing-md;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: $font-headline-md;
+    font-weight: 700;
+    color: $color-on-surface;
+  }
+
+  &__body {
+    padding: 0 $margin-mobile $spacing-xl;
+  }
+
+  &__preview {
+    margin-top: $spacing-lg;
+    height: 400rpx;
+    border-radius: $radius-lg;
+    background: $color-surface-container-low;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2rpx solid $color-outline-variant;
+  }
+
+  &__previewText {
+    font-size: $font-body-lg;
+    color: $color-on-surface-variant;
+  }
+
+  &__confirm {
+    margin-top: $spacing-xl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12rpx;
+    height: 96rpx;
+    border-radius: $radius-full;
+    background: $color-primary;
+  }
+
+  &__confirmLabel {
+    font-size: $font-body-md;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  &__hint {
+    display: block;
+    margin-top: $spacing-lg;
+    text-align: center;
+    font-size: $font-label-sm;
+    color: $color-on-surface-variant;
+  }
+}

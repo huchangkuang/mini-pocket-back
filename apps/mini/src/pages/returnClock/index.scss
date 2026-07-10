@@ -1,0 +1,239 @@
+@import "src/style/common";
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+}
+
+page {
+  background: $color-surface;
+}
+
+.returnClock {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl $margin-mobile;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  &__grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, $color-primary 1px, transparent 1px);
+    background-size: 64rpx 64rpx;
+    opacity: 0.03;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__face {
+    position: relative;
+    width: 576rpx;
+    height: 576rpx;
+    border-radius: 50%;
+    border: 16rpx solid $color-surface-container-lowest;
+    background: radial-gradient(circle at center, #ffffff 0%, #f0f4f8 100%);
+    box-shadow:
+      inset 0 4rpx 8rpx rgba(0, 0, 0, 0.05),
+      0 20rpx 80rpx rgba(0, 0, 0, 0.1);
+    margin-bottom: $spacing-lg;
+  }
+
+  &__numbers {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  &__number {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 48rpx;
+    margin-left: -24rpx;
+    margin-top: -20rpx;
+    text-align: center;
+    font-size: $font-body-md;
+    font-weight: 600;
+    color: $color-on-surface-variant;
+    opacity: 0.6;
+  }
+
+  &__arms {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+  }
+
+  &__arm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 50% 100%;
+    border-radius: 999rpx;
+
+    &--hour {
+      width: 12rpx;
+      height: 128rpx;
+      background: $color-on-surface;
+      z-index: 10;
+    }
+
+    &--minute {
+      width: 8rpx;
+      height: 192rpx;
+      background: $color-on-surface-variant;
+      z-index: 10;
+    }
+
+    &--second {
+      width: 4rpx;
+      height: 224rpx;
+      background: $color-secondary;
+      z-index: 20;
+    }
+  }
+
+  &__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32rpx;
+    height: 32rpx;
+    margin: -16rpx 0 0 -16rpx;
+    border-radius: 50%;
+    background: $color-primary;
+    border: 4rpx solid $color-surface-container-lowest;
+    box-shadow: 0 4rpx 12rpx rgba(0, 94, 164, 0.3);
+    z-index: 30;
+  }
+
+  &__digital {
+    font-size: 96rpx;
+    line-height: 1.1;
+    font-weight: 700;
+    color: $color-on-surface;
+    letter-spacing: -2rpx;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-xl;
+
+    &--breathe {
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+    &--primary {
+      .returnClock__statusDot {
+        background: $color-primary;
+      }
+      .returnClock__statusText {
+        color: $color-primary;
+      }
+    }
+
+    &--outline {
+      .returnClock__statusDot {
+        background: $color-outline;
+      }
+      .returnClock__statusText {
+        color: $color-outline;
+      }
+    }
+
+    &--secondary {
+      .returnClock__statusDot {
+        background: $color-secondary;
+      }
+      .returnClock__statusText {
+        color: $color-secondary;
+      }
+    }
+  }
+
+  &__statusDot {
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__statusText {
+    font-size: $font-label-sm;
+    line-height: $line-height-label-sm;
+    font-weight: 500;
+    letter-spacing: 1rpx;
+  }
+
+  &__controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-md;
+    width: 100%;
+    max-width: 640rpx;
+  }
+
+  &__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-md;
+    background: $color-surface-container-low;
+    border: 2rpx solid $color-outline-variant;
+    border-radius: $radius-xl;
+    box-shadow: $shadow-card;
+    transition: transform 0.15s ease;
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &--active {
+      background: $color-primary;
+      border-color: $color-primary;
+      box-shadow: 0 8rpx 24rpx rgba(0, 94, 164, 0.3);
+
+      .returnClock__btnLabel {
+        color: $color-on-primary;
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__btnLabel {
+    font-size: $font-label-sm;
+    line-height: $line-height-label-sm;
+    font-weight: 500;
+    color: $color-on-surface;
+    margin-top: $spacing-xs;
+    text-align: center;
+  }
+}

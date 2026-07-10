@@ -1,0 +1,63 @@
+export default defineAppConfig({
+  pages: [
+    "pages/classify/index",
+    "pages/favorites/index",
+    "pages/mine/index",
+    "pages/handsBarrage/index",
+    "pages/handsBarrage/edit/index",
+    "pages/doDescription/index",
+    "pages/doDescription/edit/index",
+    "pages/fingerUp/index",
+    "pages/qrcode/index",
+    "pages/metronome/index",
+    "pages/lottery/index",
+    "pages/returnClock/index",
+    "pages/guessNumber/index",
+    "pages/timeTravel/index",
+    "pages/xiahouDun/index",
+    "pages/hawking/index",
+    "pages/feedback/index",
+    "pages/about/index",
+  ],
+  subPackages: [
+    {
+      root: "pages/beadArt",
+      pages: ["index"],
+    },
+  ],
+  window: {
+    backgroundTextStyle: "light",
+    navigationBarBackgroundColor: "#f7f9fc",
+    navigationBarTitleText: "百宝口袋工坊",
+    navigationBarTextStyle: "black",
+    backgroundColor: "#f7f9fc",
+  },
+  cloud: true,
+  tabBar: {
+    custom: true,
+    color: "#404752",
+    selectedColor: "#005ea4",
+    backgroundColor: "#ffffff",
+    borderStyle: "white",
+    list: [
+      {
+        pagePath: "pages/classify/index",
+        text: "工作坊",
+        iconPath: "images/tabbar/workshop.png",
+        selectedIconPath: "images/tabbar/workshop-active.png",
+      },
+      {
+        pagePath: "pages/favorites/index",
+        text: "收藏",
+        iconPath: "images/tabbar/favorites.png",
+        selectedIconPath: "images/tabbar/favorites-active.png",
+      },
+      {
+        pagePath: "pages/mine/index",
+        text: "我的",
+        iconPath: "images/tabbar/mine.png",
+        selectedIconPath: "images/tabbar/mine-active.png",
+      },
+    ],
+  },
+});

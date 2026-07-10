@@ -1,0 +1,19 @@
+@import "../../../style/tokens.scss";
+
+.toolTipCard {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: rgba($color-primary, 0.05);
+  border: 1rpx solid rgba($color-primary, 0.1);
+  border-radius: $radius-xl;
+  box-sizing: border-box;
+
+  &__text {
+    flex: 1;
+    font-size: $font-label-sm;
+    color: $color-on-surface-variant;
+    line-height: 40rpx;
+  }
+}

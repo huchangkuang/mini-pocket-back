@@ -1,0 +1,70 @@
+// MD3 design tokens (Stitch → rpx, 750 design draft)
+
+// Colors
+$color-primary: #005ea4;
+$color-primary-container: #0077ce;
+$color-on-primary: #ffffff;
+$color-on-primary-container: #fdfcff;
+
+$color-secondary: #b7131a;
+$color-secondary-container: #db322f;
+$color-on-secondary: #ffffff;
+
+$color-tertiary: #705d00;
+$color-tertiary-container: #c9a900;
+$color-on-tertiary: #ffffff;
+
+$color-surface: #f7f9fc;
+$color-surface-bright: #f7f9fc;
+$color-surface-container-lowest: #ffffff;
+$color-surface-container-low: #f2f4f7;
+$color-surface-container: #eceef1;
+$color-surface-container-high: #e6e8eb;
+$color-surface-container-highest: #e0e3e6;
+$color-surface-dim: #d8dadd;
+$color-surface-variant: #e0e3e6;
+
+$color-on-surface: #191c1e;
+$color-on-surface-variant: #404752;
+$color-outline: #707783;
+$color-outline-variant: #c0c7d4;
+
+$color-error: #ba1a1a;
+
+// Spacing
+$spacing-xs: 16rpx;
+$spacing-sm: 24rpx;
+$spacing-md: 32rpx;
+$spacing-lg: 48rpx;
+$spacing-xl: 64rpx;
+$margin-mobile: 32rpx;
+$gutter-mobile: 24rpx;
+
+// Radius
+$radius-sm: 8rpx;
+$radius-md: 16rpx;
+$radius-lg: 24rpx;
+$radius-xl: 32rpx;
+$radius-full: 9999rpx;
+
+// Typography
+$font-headline-lg: 48rpx;
+$font-headline-md: 40rpx;
+$font-body-lg: 32rpx;
+$font-body-md: 28rpx;
+$font-label-sm: 24rpx;
+
+$line-height-headline-lg: 64rpx;
+$line-height-headline-md: 56rpx;
+$line-height-body-lg: 48rpx;
+$line-height-body-md: 40rpx;
+$line-height-label-sm: 32rpx;
+
+// Shadows
+$shadow-card: 0 8rpx 40rpx rgba(0, 0, 0, 0.05);
+$shadow-fab: 0 16rpx 48rpx rgba(0, 94, 164, 0.25);
+
+// Layout
+$top-bar-height: 112rpx;
+$bottom-nav-height: 120rpx;
+$fab-size: 112rpx;

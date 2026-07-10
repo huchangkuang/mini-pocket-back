@@ -1,0 +1,74 @@
+@import "../../app.scss";
+@import "src/style/common";
+
+page {
+  background: #f9f9f9;
+}
+.lottery {
+  position: relative;
+  padding: 32px;
+  height: 100vh;
+  .content {
+    padding-bottom: 152px;
+    height: 100%;
+    overflow: auto;
+  }
+  .link {
+    color: #4282cc;
+    font-size: 28px;
+  }
+  .filterWrapper {
+    margin-bottom: 20px;
+    .form {
+      display: flex;
+      align-items: center;
+      .label {
+        font-size: 24px;
+        color: #666;
+        margin-right: 20px;
+      }
+    }
+  }
+  .titleWrapper {
+    @include spaceBetween;
+    margin-bottom: 40px;
+    .btn {
+      font-size: 22px;
+      color: #fff;
+      height: 40px;
+      padding-left: 8px;
+      padding-right: 8px;
+      @include flexCenter;
+      border-radius: 10px;
+      &.add {
+        background: #cb6918;
+      }
+      &.reset {
+        background: #cb4e18;
+      }
+    }
+  }
+  .bomBtn {
+    padding: 16px 24px;
+  }
+}
+.numWrapper {
+  @include spaceBetween;
+  margin-bottom: 20px;
+  .redBallNum {
+    display: flex;
+  }
+  .squareItem {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    border: 2rpx solid #eee;
+    @include flexCenter;
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+    &.noRight {
+      margin-right: 0;
+    }
+  }
+}

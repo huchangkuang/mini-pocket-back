@@ -1,0 +1,41 @@
+@import "../../style/tokens.scss";
+
+.categoryChips {
+  width: 100%;
+  white-space: nowrap;
+
+  &__row {
+    display: inline-flex;
+    gap: 16rpx;
+    padding: 0 0 16rpx;
+  }
+
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16rpx 40rpx;
+    border-radius: $radius-full;
+    background: $color-surface-container;
+    flex-shrink: 0;
+
+    &--active {
+      background: $color-primary;
+    }
+
+    &:active {
+      opacity: 0.9;
+    }
+  }
+
+  &__text {
+    font-size: $font-label-sm;
+    font-weight: 500;
+    color: $color-on-surface-variant;
+    line-height: $line-height-label-sm;
+
+    &--active {
+      color: $color-on-primary;
+    }
+  }
+}

@@ -1,0 +1,81 @@
+@import "../../style/tokens.scss";
+
+.aboutPage {
+  min-height: 100vh;
+  background: $color-surface;
+  box-sizing: border-box;
+
+  &__scroll {
+    height: 100vh;
+  }
+
+  &__content {
+    padding: $spacing-xl $margin-mobile $spacing-xl;
+    box-sizing: border-box;
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__logoWrap {
+    position: relative;
+    width: 224rpx;
+    height: 224rpx;
+    margin-bottom: $spacing-md;
+  }
+
+  &__logoShadow {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 94, 164, 0.1);
+    border-radius: 64rpx;
+    transform: rotate(6deg);
+  }
+
+  &__logoBox {
+    position: absolute;
+    inset: 0;
+    background: $color-surface-container-lowest;
+    border-radius: 64rpx;
+    border: 1rpx solid rgba(192, 199, 212, 0.3);
+    box-shadow: $shadow-card;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  &__logo {
+    width: 160rpx;
+    height: 160rpx;
+  }
+
+  &__appName {
+    font-size: $font-headline-lg;
+    line-height: $line-height-headline-lg;
+    font-weight: 700;
+    color: $color-primary;
+  }
+
+  &__vision {
+    padding: $spacing-lg;
+    margin-bottom: $spacing-xl;
+    border-radius: $radius-xl;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1rpx solid rgba(192, 199, 212, 0.4);
+    box-shadow: $shadow-card;
+  }
+
+  &__visionText {
+    font-size: $font-body-lg;
+    line-height: $line-height-body-lg;
+    color: $color-on-surface;
+    text-align: center;
+    font-style: italic;
+  }
+}
