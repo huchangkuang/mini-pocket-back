@@ -2,8 +2,8 @@ import React, { CSSProperties, FC, PropsWithChildren, memo, Fragment, useState }
 import Taro, { View } from "@tarojs/components";
 import { getMenuButtonBoundingClientRect, useDidShow } from "@tarojs/taro";
 import { isFirstPageInStack, navigateBackOrHome } from "@/utils/navigation";
+import { getIconComponent } from "@/utils/iconMap";
 import "./index.scss";
-import { AtIcon } from "taro-ui";
 
 export type NavBarProps = {
   img?: string;
@@ -47,7 +47,10 @@ const NavBar: FC<PropsWithChildren<NavBarProps>> = memo((props) => {
             children
           ) : (
             <View className="content">
-              <AtIcon value={navIcon} size={height - 4} onClick={back} />
+              {React.createElement(getIconComponent(navIcon), {
+                size: height - 4,
+                onClick: back,
+              })}
               <View className={contentClass}>{children}</View>
             </View>
           )}

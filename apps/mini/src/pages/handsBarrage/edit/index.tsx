@@ -108,23 +108,31 @@ const EditBarrage: React.FC = () => {
 
             <ToolFormCard className="editBarrage__gridItem">
               <View className="editBarrage__sliders">
-                <ToolSliderRow
-                  label="字体大小"
-                  value={fontSize}
-                  min={20}
-                  max={100}
-                  unit="px"
-                  onChange={setFontSize}
-                />
-                <ToolSliderRow
-                  label="滚动时间"
-                  value={time}
-                  min={1}
-                  max={10}
-                  unit="s"
-                  disabled={scrollTimeDisabled}
-                  onChange={setTime}
-                />
+                <View className="editBarrage__sliderItem">
+                  <View className="editBarrage__sliderLabel">
+                    <Text className="editBarrage__sliderLabelText">字体大小</Text>
+                    <Text className="editBarrage__sliderValue">{fontSize}px</Text>
+                  </View>
+                  <ToolSliderRow
+                    value={fontSize}
+                    min={20}
+                    max={100}
+                    onChange={setFontSize}
+                  />
+                </View>
+                <View className="editBarrage__sliderItem">
+                  <View className="editBarrage__sliderLabel">
+                    <Text className="editBarrage__sliderLabelText">滚动时间</Text>
+                    <Text className="editBarrage__sliderValue">{time}s</Text>
+                  </View>
+                  <ToolSliderRow
+                    value={time}
+                    min={1}
+                    max={10}
+                    disabled={scrollTimeDisabled}
+                    onChange={setTime}
+                  />
+                </View>
               </View>
             </ToolFormCard>
           </View>

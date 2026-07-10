@@ -1,13 +1,24 @@
 @import "src/style/global.scss";
-@import "~taro-ui/dist/style/components/icon.scss";
-@import "~taro-ui/dist/style/components/modal.scss";
-@import "~taro-ui/dist/style/components/slider.scss";
-@import "~taro-ui/dist/style/components/modal.scss";
-@import "~taro-ui/dist/style/components/button.scss";
+@import "src/style/tokens.scss";
+@import "~@nutui/nutui-react-taro/dist/style.scss";
+
+// 确保页面底部安全区域背景色与 TabBar 一致
+page {
+  background-color: $color-surface-container-lowest;
+}
 
 view,
 text {
   box-sizing: border-box;
+}
+
+// NutUI Range 数字字体覆盖
+.nut-range-min,
+.nut-range-max {
+  font-size: 24px !important;
+}
+.nut-range-button-number {
+  font-size: 20px !important;
 }
 
 .flexCenter {

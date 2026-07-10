@@ -5,7 +5,8 @@ import Taro, {
   useShareAppMessage,
 } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
+import { getIconComponent } from "@/utils/iconMap";
 import cs from "classnames";
 import { IS_WECHAT } from "@/utils/constant";
 import { isFirstPageInStack, navigateBackOrHome } from "@/utils/navigation";
@@ -35,7 +36,9 @@ const Hawking: React.FC = () => {
       <View className={cs("hawking__screen", activated && "hawking__screen--rotated")}>
         {IS_WECHAT && (
           <View style={{ top }} className="hawking__goBack" onClick={navigateBackOrHome}>
-            <AtIcon value={showHome ? "home" : "chevron-left"} size={height - 4} />
+            {React.createElement(getIconComponent(showHome ? "home" : "chevron-left"), {
+              size: height - 4,
+            })}
           </View>
         )}
 
@@ -50,7 +53,7 @@ const Hawking: React.FC = () => {
 
           {!activated && (
             <View className="hawking__confirm" onClick={handleConfirm}>
-              <AtIcon value="check" size="20" color="#ffffff" />
+              <Icon name="check" size={20} color="#ffffff" />
               <Text className="hawking__confirmLabel">确认</Text>
             </View>
           )}

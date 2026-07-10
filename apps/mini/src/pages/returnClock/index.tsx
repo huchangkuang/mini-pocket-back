@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Taro, { useDidHide, useDidShow, useShareAppMessage } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import cs from "classnames";
 import "./index.scss";
 
@@ -216,18 +216,18 @@ const ReturnClock: React.FC = () => {
             className={cs("returnClock__btn", isReverseActive && "returnClock__btn--active")}
             onClick={handleReverseClick}
           >
-            {!isReverseActive && <AtIcon value="reload" size="32" color="#005ea4" />}
+            {!isReverseActive && <Icon name="refresh" size={32} color="#005ea4" />}
             <Text className="returnClock__btnLabel">加速逆流</Text>
           </View>
           <View className="returnClock__btn" onClick={handlePauseToggle}>
-            <AtIcon value={isPaused ? "play" : "pause"} size="32" color="#005ea4" />
+            {isPaused ? <Icon name="play-start" size={32} color="#005ea4" /> : <Icon name="play-stop" size={32} color="#005ea4" />}
             <Text className="returnClock__btnLabel">时空暂停</Text>
           </View>
           <View
             className={cs("returnClock__btn", isNormalActive && "returnClock__btn--active")}
             onClick={handleNormalClick}
           >
-            {!isNormalActive && <AtIcon value="play" size="32" color="#005ea4" />}
+            {!isNormalActive && <Icon name="play-start" size={32} color="#005ea4" />}
             <Text className="returnClock__btnLabel">正常流动</Text>
           </View>
         </View>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Taro from "@tarojs/taro";
 import { Image, Input, ScrollView, Text, Textarea, View } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import { BomFixed } from "@/components/bomFixed";
 import { submitFeedback } from "@/services/feedbackApi";
 import { persistStorageFiles, uploadTempFile } from "@/services/storageApi";
@@ -192,13 +192,13 @@ const Feedback: React.FC = () => {
                     </View>
                   ) : null}
                   <View className="feedbackPage__imageRemove" onClick={() => removeImage(item.id)}>
-                    <AtIcon value="close" size="12" color="#ffffff" />
+                    <Icon name="close" size={12} color="#ffffff" />
                   </View>
                 </View>
               ))}
               {images.length < MAX_IMAGES ? (
                 <View className="feedbackPage__imageAdd" onClick={chooseImage}>
-                  <AtIcon value="add" size="32" color="#707783" />
+                  <Icon name="plus" size={32} color="#707783" />
                   <Text className="feedbackPage__imageAddText">添加截图</Text>
                 </View>
               ) : null}
@@ -206,7 +206,7 @@ const Feedback: React.FC = () => {
           </View>
 
           <View className="feedbackPage__info">
-            <AtIcon value="alert-circle" size="20" color="#004881" />
+            <Icon name="warning" size={20} color="#004881" />
             <Text className="feedbackPage__infoText">
               您的反馈将帮助「百宝口袋工坊」变得更好。我们通常会在 48 小时内处理您的建议。
             </Text>
@@ -219,7 +219,7 @@ const Feedback: React.FC = () => {
           className={`feedbackPage__submit${submitting ? " feedbackPage__submit--disabled" : ""}`}
           onClick={submitting ? undefined : handleSubmit}
         >
-          <AtIcon value="mail" size="20" color="#ffffff" />
+          <Icon name="mail" size={20} color="#ffffff" />
           <Text className="feedbackPage__submitText">{submitting ? "正在提交..." : "提交"}</Text>
         </View>
       </BomFixed>

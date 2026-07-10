@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Taro, { useShareAppMessage } from "@tarojs/taro";
 import { Canvas, Textarea, View } from "@tarojs/components";
+import { Button } from "@nutui/nutui-react-taro";
 import "./index.scss";
 import { createCanvasContext, hideLoading, showLoading } from "@tarojs/taro";
 import { BomFixed } from "@/components/bomFixed";
 import qrcode from "@/utils/code/qrcode";
 import { canvasSaveImg, getWechatSetting } from "@/utils/wechatApi";
 import { errorToast } from "@/utils/errorToast";
-import { AtButton } from "taro-ui";
 
 const Qrcode: React.FC = () => {
   const [text, setText] = useState("");
@@ -67,9 +67,9 @@ const Qrcode: React.FC = () => {
       )}
       <BomFixed>
         <View className="bomBtn">
-          <AtButton type="primary" onClick={save}>
+          <Button type="primary" onClick={save}>
             保存二维码
-          </AtButton>
+          </Button>
         </View>
       </BomFixed>
     </View>

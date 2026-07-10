@@ -1,6 +1,6 @@
 import React, { FC, memo } from "react";
 import { View, Text } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import type { LevelProgressData } from "@/pages/mine/constants";
 import "./index.scss";
 
@@ -14,7 +14,7 @@ const LevelProgress: FC<LevelProgressProps> = memo(({ data, variant }) => {
     <View className={`levelProgress levelProgress--${variant}`}>
       <View className="levelProgress__header">
         <View className="levelProgress__titleWrap">
-          {data.showMedal && <AtIcon value="star-2" size="16" color="#705d00" />}
+          {data.showMedal && <Icon name="star-fill" size={16} color="#705d00" />}
           <Text className="levelProgress__title">{data.title}</Text>
         </View>
         <Text className="levelProgress__xp">

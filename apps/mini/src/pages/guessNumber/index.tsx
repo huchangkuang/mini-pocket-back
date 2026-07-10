@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Taro, { useLoad, useShareAppMessage } from "@tarojs/taro";
 import { View, Text, Input, Button } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import cs from "classnames";
 import { useAuth } from "@/hooks/useAuth";
 import { createGame, getGameInfo, submitGuess } from "@/services/gamesApi";
@@ -421,7 +421,7 @@ const GuessNumber: React.FC = () => {
     <View className="guessNumber__rules">
       <View className="guessNumber__rulesInner">
         <View className="guessNumber__rulesIcon">
-          <AtIcon value="alert-circle" size="20" color="#005ea4" />
+          <Icon name="warning" size={20} color="#005ea4" />
         </View>
         <View className="guessNumber__rulesBody">
           <Text className="guessNumber__rulesTitle">游戏规则</Text>
@@ -511,7 +511,7 @@ const GuessNumber: React.FC = () => {
         {/* Share button — shown after target is locked, directly opens share panel */}
         {isTargetSet && (
           <Button className="guessNumber__shareBtn" openType="share">
-            <AtIcon value="share" size="20" color="#6750a4" />
+            <Icon name="share" size={20} color="#6750a4" />
             {createdGameId ? "邀请好友来猜" : "邀请好友来猜"}
           </Button>
         )}
@@ -539,7 +539,7 @@ const GuessNumber: React.FC = () => {
           />
 
           <Button className="guessNumber__primaryBtn" onClick={handleCreatorVerify}>
-            <AtIcon value="check-circle" size="20" color="#ffffff" />
+            <Icon name="check" size={20} color="#ffffff" />
             验证
           </Button>
         </View>
@@ -555,7 +555,7 @@ const GuessNumber: React.FC = () => {
     if (guesserState === GUESSER_STATE.NOT_FOUND) {
       return (
         <View className="guessNumber__errorState">
-          <AtIcon value="alert-circle" size="48" color="#ba1a1a" />
+          <Icon name="warning" size={48} color="#ba1a1a" />
           <Text className="guessNumber__errorTitle">游戏不存在</Text>
           <Text className="guessNumber__errorHint">该游戏可能已被删除，请联系好友重新发起</Text>
         </View>
@@ -565,7 +565,7 @@ const GuessNumber: React.FC = () => {
     if (guesserState === GUESSER_STATE.ERROR) {
       return (
         <View className="guessNumber__errorState">
-          <AtIcon value="close-circle" size="48" color="#ba1a1a" />
+          <Icon name="close" size={48} color="#ba1a1a" />
           <Text className="guessNumber__errorTitle">加载失败</Text>
           <Text className="guessNumber__errorHint">网络异常，请稍后重试</Text>
           <Button
@@ -582,7 +582,7 @@ const GuessNumber: React.FC = () => {
       return (
         <View className="guessNumber__wonState">
           <View className="guessNumber__wonIcon">
-            <AtIcon value="check-circle" size="48" color="#4caf50" />
+            <Icon name="check" size={48} color="#4caf50" />
           </View>
           <Text className="guessNumber__wonTitle">你已经猜对了！</Text>
           {results.length > 0 && (
@@ -647,7 +647,7 @@ const GuessNumber: React.FC = () => {
           onClick={handleVerifyGuess}
           disabled={submittingGuess || !gameInfo}
         >
-          <AtIcon value="check-circle" size="20" color="#ffffff" />
+          <Icon name="check" size={20} color="#ffffff" />
           {submittingGuess ? "验证中..." : "验证"}
         </Button>
 
@@ -691,7 +691,7 @@ const GuessNumber: React.FC = () => {
         <View className="guessNumber__content">
           {renderRulesCard()}
           <View className="guessNumber__loadingState">
-            <AtIcon value="loading" size="24" color="#6750a4" />
+            <Icon name="loading" size={24} color="#6750a4" />
             <Text className="guessNumber__loadingText">加载中...</Text>
           </View>
         </View>

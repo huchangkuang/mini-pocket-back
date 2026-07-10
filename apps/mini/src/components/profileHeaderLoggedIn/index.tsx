@@ -1,7 +1,7 @@
 import React, { FC, memo, useEffect, useRef, useState } from "react";
 import Taro from "@tarojs/taro";
 import { Button, View, Text, Image, Input } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import avatarDemo from "@/images/mine/avatar-demo.svg";
 import "./index.scss";
 
@@ -140,14 +140,14 @@ const ProfileHeaderLoggedIn: FC<ProfileHeaderLoggedInProps> = memo(
           )}
           <Text className="profileHeaderLoggedIn__date">加入于 {user.joinDate}</Text>
           <View className="profileHeaderLoggedIn__badge">
-            <AtIcon value="star-2" size="12" color="#005ea4" />
+            <Icon name="star-fill" size={12} color="#005ea4" />
             <Text className="profileHeaderLoggedIn__badgeText">{user.badge}</Text>
           </View>
         </View>
 
         {!isEditingName && (
           <View className="profileHeaderLoggedIn__edit" onClick={startEditing}>
-            <AtIcon value="edit" size="20" color="#005ea4" />
+            <Icon name="edit" size={20} color="#005ea4" />
           </View>
         )}
       </View>

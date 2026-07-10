@@ -1,11 +1,12 @@
 import React, { FC, useState } from "react";
 import Taro, { useShareAppMessage } from "@tarojs/taro";
 import { View, Text, Switch } from "@tarojs/components";
+import { Button, Switch as NutSwitch } from "@nutui/nutui-react-taro";
+import Icon from "@/components/Icon";
 import "./index.scss";
 import { errorToast } from "@/utils/errorToast";
 import { generateNumList, randomNum } from "@/utils/generateNum";
 import { useThrottle } from "@/hooks/useThrottle";
-import { AtButton, AtIcon, AtSwitch } from "taro-ui";
 import { BomFixed } from "@/components/bomFixed";
 
 type RedBall = (number | string)[];
@@ -46,7 +47,7 @@ const NumWrapper: FC<NumWrapperProps> = ({ redBall = [], blueBall = "", onSubtra
       <View className="link" onClick={copy}>
         复制
       </View>
-      <AtIcon value="subtract-circle" size={16} onClick={onSubtract} />
+      <Icon name="del" size={16} />
     </View>
   );
 };
@@ -114,7 +115,7 @@ const Lottery: FC = () => {
         <View className="filterWrapper">
           <View className="form">
             <View className="label">可重复：</View>
-            <AtSwitch checked={repeatBlue} onChange={(v) => setRepeatBlue(v)} />
+            <NutSwitch checked={repeatBlue} onChange={(v) => setRepeatBlue(v)} />
           </View>
         </View>
         <View className="titleWrapper">
@@ -143,9 +144,9 @@ const Lottery: FC = () => {
       </View>
       <BomFixed>
         <View className="bomBtn">
-          <AtButton type="primary" onClick={onNumScroll}>
+          <Button type="primary" onClick={onNumScroll}>
             随机选择
-          </AtButton>
+          </Button>
         </View>
       </BomFixed>
     </View>

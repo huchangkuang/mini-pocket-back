@@ -5,7 +5,7 @@ import Taro, {
   useShareAppMessage,
 } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import { getIconComponent } from "@/utils/iconMap";
 import { IS_WECHAT } from "@/utils/constant";
 import { isFirstPageInStack, navigateBackOrHome } from "@/utils/navigation";
 import ToolBottomBar from "@/components/toolEdit/toolBottomBar";
@@ -36,7 +36,9 @@ const XiahouDun: React.FC = () => {
 
       {IS_WECHAT && (
         <View style={{ top }} className="xiahouDun__goBack" onClick={navigateBackOrHome}>
-          <AtIcon value={showHome ? "home" : "chevron-left"} size={height - 4} />
+          {React.createElement(getIconComponent(showHome ? "home" : "chevron-left"), {
+            size: height - 4,
+          })}
         </View>
       )}
 

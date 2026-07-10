@@ -4,7 +4,7 @@ import { Input, ScrollView, Switch, View } from "@tarojs/components";
 import "./index.scss";
 import cs from "classnames";
 import voice from "@/audio/beat_cut.mp3";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import { errorToast } from "@/utils/errorToast";
 import {
   CommonBeatList,
@@ -221,11 +221,11 @@ const Metronome: React.FC = () => {
               <View className="metronome__dialLabel">TEMPO</View>
               <View className="metronome__dialControls">
                 <View className="metronome__dialBtn" onClick={() => changeBpm(-1)}>
-                  <AtIcon value="subtract" size="16" color="#005ea4" />
+                  <Icon name="minus" size={16} color="#005ea4" />
                 </View>
                 <View className="metronome__dialValue">{bpm}</View>
                 <View className="metronome__dialBtn" onClick={() => changeBpm(1)}>
-                  <AtIcon value="add" size="16" color="#005ea4" />
+                  <Icon name="add" size={16} color="#005ea4" />
                 </View>
               </View>
               <View className="metronome__dialUnit">BPM</View>
@@ -273,14 +273,14 @@ const Metronome: React.FC = () => {
                 />
               </View>
               <View className="metronome__inputClear" onClick={clearCustomInput}>
-                <AtIcon value="close-circle" size="16" color="#404752" />
+                <Icon name="close" size={16} color="#404752" />
               </View>
             </View>
 
             <View className="metronome__toggles">
               <View className="metronome__toggleCard">
                 <View className="metronome__toggleInfo">
-                  <AtIcon value="sound" size="18" color="#005ea4" />
+                  <Icon name="volume-max" size={18} color="#005ea4" />
                   <View className="metronome__toggleText">声音提示</View>
                 </View>
                 <Switch
@@ -291,7 +291,7 @@ const Metronome: React.FC = () => {
               </View>
               <View className="metronome__toggleCard">
                 <View className="metronome__toggleInfo">
-                  <AtIcon value="streaming" size="18" color="#005ea4" />
+                  <Icon name="volume-mute" size={18} color="#005ea4" />
                   <View className="metronome__toggleText">震动反馈</View>
                 </View>
                 <Switch
@@ -310,10 +310,10 @@ const Metronome: React.FC = () => {
       <View className="metronome__playZone">
         <View className="metronome__fab" onClick={onToggle}>
           {beating ? (
-            <AtIcon value="pause" size="40" color="#fdfcff" />
+            <Icon name="play-stop" size={40} color="#fdfcff" />
           ) : (
             <View className="metronome__fabPlay">
-              <AtIcon value="play" size="40" color="#fdfcff" />
+              <Icon name="play-start" size={40} color="#fdfcff" />
             </View>
           )}
         </View>
@@ -326,7 +326,7 @@ const Metronome: React.FC = () => {
             <View className="metronome__panelHeader">
               <View className="metronome__panelTitle">全部常用节拍</View>
               <View className="metronome__panelClose" onClick={() => setShowAllPanel(false)}>
-                <AtIcon value="close" size="16" color="#404752" />
+                <Icon name="close" size={16} color="#404752" />
               </View>
             </View>
             <ScrollView scrollY className="metronome__panelScroll">

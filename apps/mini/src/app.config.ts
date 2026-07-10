@@ -30,7 +30,7 @@ export default defineAppConfig({
     navigationBarBackgroundColor: "#f7f9fc",
     navigationBarTitleText: "百宝口袋工坊",
     navigationBarTextStyle: "black",
-    backgroundColor: "#f7f9fc",
+    backgroundColor: "#ffffff",
   },
   cloud: true,
   tabBar: {

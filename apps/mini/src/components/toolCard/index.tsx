@@ -1,7 +1,7 @@
 import React, { FC, memo } from "react";
 import { Image, View, Text } from "@tarojs/components";
 import cs from "classnames";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import type { Accent } from "@/pages/classify/constants";
 import "./index.scss";
 
@@ -40,11 +40,11 @@ const ToolCard: FC<ToolCardProps> = memo(
 
     const favoriteBtn = onFavoriteToggle ? (
       <View className="toolCard__favorite" onClick={handleFavoriteToggle}>
-        <AtIcon
-          value={isFavorite ? "heart-2" : "heart"}
-          size="20"
-          color={isFavorite ? "#b7131a" : "#707783"}
-        />
+        {isFavorite ? (
+          <Icon name="heart-fill" size={20} color="#b7131a" />
+        ) : (
+          <Icon name="heart" size={20} color="#707783" />
+        )}
       </View>
     ) : null;
 

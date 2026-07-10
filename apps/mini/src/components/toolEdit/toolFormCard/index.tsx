@@ -1,6 +1,6 @@
 import React, { FC, memo, PropsWithChildren } from "react";
 import { View, Text } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import { getIconComponent } from "@/utils/iconMap";
 import "./index.scss";
 
 export type ToolFormCardProps = PropsWithChildren<{
@@ -16,7 +16,7 @@ const ToolFormCard: FC<ToolFormCardProps> = memo(({ icon, title, className, chil
     <View className={`toolFormCard ${className ?? ""}`}>
       {showHeader ? (
         <View className="toolFormCard__header">
-          {icon ? <AtIcon value={icon} size="18" color="#005ea4" /> : null}
+          {icon ? React.createElement(getIconComponent(icon), { size: "18", color: "#005ea4" }) : null}
           {title ? <Text className="toolFormCard__title">{title}</Text> : null}
         </View>
       ) : null}

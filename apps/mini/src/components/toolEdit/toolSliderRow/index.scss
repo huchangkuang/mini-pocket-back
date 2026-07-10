@@ -1,25 +1,24 @@
 @import "../../../style/tokens.scss";
-@import "~taro-ui/dist/style/components/slider.scss";
 
 .toolSliderRow {
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $spacing-sm;
   }
 
   &__label {
-    font-size: $font-label-sm;
+    font-size: $font-body-md;
     color: $color-outline;
-    line-height: $line-height-label-sm;
+    line-height: $line-height-body-md;
   }
 
   &__value {
-    font-size: $font-label-sm;
+    font-size: $font-body-md;
     font-weight: 700;
     color: $color-primary;
-    line-height: $line-height-label-sm;
+    line-height: $line-height-body-md;
   }
 
   &--disabled {

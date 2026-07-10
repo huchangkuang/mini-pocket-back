@@ -11,4 +11,16 @@ module.exports = {
     ],
     ["@babel/preset-env", { targets: { node: "current" } }],
   ],
+  plugins: [
+    [
+      "import",
+      {
+        libraryName: "@nutui/nutui-react-taro",
+        libraryDirectory: "dist/es/packages",
+        camel2DashComponentName: false,
+        style: false,
+      },
+      "nutui-react-taro",
+    ],
+  ],
 };

@@ -1,12 +1,9 @@
 import React, { useMemo, useRef, useState } from "react";
 import { Image, ScrollView, Text, View } from "@tarojs/components";
 import "./index.scss";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import Taro, {
-  getMenuButtonBoundingClientRect,
-  getSystemInfoSync,
   navigateTo,
-  showActionSheet,
   showModal,
   useDidShow,
   useShareAppMessage,
@@ -44,14 +41,6 @@ const DoDecision: React.FC = () => {
   const [useList, setUseList] = useState<DecisionViewItem[]>([]);
   const [selectId, setSelectId] = useState<string>();
   const [loading, setLoading] = useState(false);
-
-  const { windowWidth = 375 } = getSystemInfoSync();
-  const menuRect = getMenuButtonBoundingClientRect();
-  const menuBtnStyle = {
-    top: `${menuRect.top}px`,
-    height: `${menuRect.height}px`,
-    right: `${windowWidth - menuRect.right + menuRect.width + 8}px`,
-  };
 
   const segmentDeg = useMemo(
     () => (itemList.length > 0 ? 360 / itemList.length : 60),
@@ -142,17 +131,6 @@ const DoDecision: React.FC = () => {
     });
   };
 
-  const openMenu = () => {
-    showActionSheet({
-      itemList: ["分享给朋友"],
-      success(res) {
-        if (res.tapIndex === 0) {
-          Taro.showToast({ title: "请点击右上角菜单分享", icon: "none" });
-        }
-      },
-    });
-  };
-
   useDidShow(() => {
     setRotateDeg(0);
     setIsSpinning(false);
@@ -182,10 +160,6 @@ const DoDecision: React.FC = () => {
 
   return (
     <View className="doDescription">
-      <View className="doDescription__menuBtn" style={menuBtnStyle} onClick={openMenu}>
-        <AtIcon value="more" size="18" color="#191c1e" />
-      </View>
-
       <ScrollView scrollY className="doDescription__scroll">
         <View className="doDescription__content">
           <View className="doDescription__questionCard">
@@ -194,13 +168,13 @@ const DoDecision: React.FC = () => {
               <Text className="doDescription__questionTitle">{title}</Text>
             </View>
             <View className="doDescription__editBtn" onClick={goEdit}>
-              <AtIcon value="edit" size="16" color="#0077ce" />
+              <Icon name="edit" size={16} color="#0077ce" />
             </View>
           </View>
 
           <View className="doDescription__wheelSection">
             <View className="doDescription__pointer">
-              <AtIcon value="map-pin" size="20" color="#005ea4" />
+              <Icon name="location" size={20} color="#005ea4" />
             </View>
             <View className="doDescription__wheelWrap">
               <View
@@ -246,7 +220,7 @@ const DoDecision: React.FC = () => {
             <View className="doDescription__recentHeader">
               <Text className="doDescription__recentTitle">最近常用</Text>
               <View className="doDescription__newBtn" onClick={goAdd}>
-                <AtIcon value="add" size="12" color="#005ea4" />
+                <Icon name="plus" size={12} color="#005ea4" />
                 <Text className="doDescription__newBtnText">新建</Text>
               </View>
             </View>
@@ -297,7 +271,7 @@ const DoDecision: React.FC = () => {
                           handleDeleteItem(item);
                         }}
                       >
-                        <AtIcon value="subtract-circle" size="18" color="#ba1a1a" />
+                        <Icon name="del" size={18} color="#ba1a1a" />
                       </View>
                     </View>
                   );
@@ -310,7 +284,7 @@ const DoDecision: React.FC = () => {
             className={`doDescription__cta${isSpinning ? " doDescription__cta--disabled" : ""}`}
             onClick={decide}
           >
-            <AtIcon value="reload" size="18" color="#ffffff" />
+            <Icon name="refresh" size={18} color="#ffffff" />
             <Text className="doDescription__ctaText">开始抽取</Text>
           </View>
         </View>

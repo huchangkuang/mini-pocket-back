@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { ScrollView, View, Text } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import cs from "classnames";
 import HomeTopBar from "@/components/homeTopBar";
 import FeaturedBanner from "@/components/featuredBanner";
@@ -89,18 +89,18 @@ const Classify: React.FC = () => {
                   onClick={toggleSortByHeat}
                 >
                   <Text className="workshop__actionBtnText">热度</Text>
-                  <AtIcon
-                    value={sortByHeatDesc ? "chevron-up" : "chevron-down"}
-                    size="12"
-                    color="#005ea4"
-                  />
+                  {sortByHeatDesc ? (
+                    <Icon name="arrow-up" size={12} color="#005ea4" />
+                  ) : (
+                    <Icon name="arrow-down" size={12} color="#005ea4" />
+                  )}
                 </View>
                 <View className="workshop__actionBtn" onClick={toggleLayoutMode}>
-                  <AtIcon value="chevron-left" size="10" color="#005ea4" />
+                  <Icon name="arrow-left" size={10} color="#005ea4" />
                   <Text className="workshop__actionBtnText">
                     {layoutMode === "grid" ? "方格" : "列表"}
                   </Text>
-                  <AtIcon value="chevron-right" size="10" color="#005ea4" />
+                  <Icon name="arrow-right" size={10} color="#005ea4" />
                 </View>
               </View>
             </View>

@@ -1,6 +1,6 @@
 import React, { FC, memo } from "react";
 import { Button, View, Text } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import "./index.scss";
 
 export type MineAuthActionsProps = {
@@ -21,7 +21,7 @@ const MineAuthActions: FC<MineAuthActionsProps> = memo(
             disabled={loggingIn}
             onClick={onLogin}
           >
-            <AtIcon value="user" size="20" color="#ffffff" />
+            <Icon name="user" size={20} color="#ffffff" />
             <Text className="mineAuthActions__loginText">重试登录</Text>
           </Button>
         </View>
@@ -31,7 +31,7 @@ const MineAuthActions: FC<MineAuthActionsProps> = memo(
     return (
       <View className="mineAuthActions mineAuthActions--loggedIn">
         <View className="mineAuthActions__logout" onClick={onLogout}>
-          <AtIcon value="close" size="18" color="#404752" />
+          <Icon name="close" size={18} color="#404752" />
           <Text className="mineAuthActions__logoutText">退出登录</Text>
         </View>
       </View>

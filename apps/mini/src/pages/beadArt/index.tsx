@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Taro, { useShareAppMessage } from "@tarojs/taro";
 import { Canvas, Image, Slider, View, ScrollView, Text } from "@tarojs/components";
+import { Button } from "@nutui/nutui-react-taro";
+import Icon from "@/components/Icon";
 import ExcelJS from "exceljs";
 import "./index.scss";
-import { AtIcon, AtButton } from "taro-ui";
 
 interface PixelData {
   color: string;
@@ -326,16 +327,13 @@ const BeadArt: React.FC = () => {
       <View className="uploadSection">
         {!imageUrl ? (
           <View className="uploadPlaceholder" onClick={chooseImage}>
-            <AtIcon value="image" size="60" color="#d5f5e3" />
+            <Icon name="image-error" size={60} color="#d5f5e3" />
             <View className="uploadText">点击上传图片</View>
           </View>
         ) : (
           <View className="imagePreview">
             <Image src={imageUrl} mode="aspectFit" className="previewImage" />
-            <AtIcon
-              value="close-circle"
-              size="24"
-              color="#999"
+                        <Icon name="close" size={24} color="#999999"
               className="closeIcon"
               onClick={clearImage}
             />
@@ -362,23 +360,24 @@ const BeadArt: React.FC = () => {
             />
           </View>
           <View className="buttonGroup">
-            <AtButton
+            <Button
               type="primary"
               size="normal"
               className="generateButton"
               onClick={generateExcel}
             >
               生成Excel
-            </AtButton>
-            <AtButton
-              type="secondary"
+            </Button>
+            <Button
+              type="default"
+              fill="outline"
               size="normal"
               className="downloadButton"
               onClick={downloadExcel}
               disabled={!isExcelGenerated}
             >
               保存Excel
-            </AtButton>
+            </Button>
           </View>
         </View>
       )}

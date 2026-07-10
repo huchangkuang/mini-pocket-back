@@ -1,6 +1,6 @@
 import React, { FC, memo } from "react";
 import { Input, View } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import "./index.scss";
 
 export type SearchBarProps = {
@@ -13,7 +13,7 @@ const SearchBar: FC<SearchBarProps> = memo(({ value, placeholder = "搜索...", 
   return (
     <View className="searchBar">
       <View className="searchBar__icon">
-        <AtIcon value="search" size="18" color="#707783" />
+        <Icon name="search" size={18} color="#707783" />
       </View>
       <Input
         className="searchBar__input"

@@ -1,6 +1,6 @@
 import React, { FC, memo } from "react";
 import { View, Text } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import { getIconComponent } from "@/utils/iconMap";
 import "./index.scss";
 
 export type ToolBottomBarProps = {
@@ -13,7 +13,7 @@ const ToolBottomBar: FC<ToolBottomBarProps> = memo(({ label, icon = "play", onCl
   return (
     <View className="toolBottomBar">
       <View className="toolBottomBar__btn" onClick={onClick}>
-        <AtIcon value={icon} size="20" color="#ffffff" />
+        {React.createElement(getIconComponent(icon), { size: "20", color: "#ffffff" })}
         <Text className="toolBottomBar__label">{label}</Text>
       </View>
     </View>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Image, Input, ScrollView, Text, View } from "@tarojs/components";
 import "./index.scss";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
 import type { Accent } from "@/pages/classify/constants";
 import decisionIcon from "@/images/classify/decision.svg";
 import terminalIcon from "@/images/common/terminal.svg";
@@ -42,7 +42,7 @@ const OptionRow: React.FC<OptionRowProps> = ({ value, index, variant, onChange, 
         />
       </View>
       <View className="editDecision__optionRemove" onClick={onRemove}>
-        <AtIcon value="subtract-circle" size="18" color="#ba1a1a" />
+        <Icon name="del" size={18} color="#ba1a1a" />
       </View>
     </View>
   );
@@ -118,10 +118,10 @@ const EditDecision: React.FC = () => {
                     onInput={(e) => setTitle(e.detail.value)}
                   />
                 </View>
-                <AtIcon
+                <Icon
                   className="editDecision__titleInputIcon"
-                  value="edit"
-                  size="16"
+                  name="edit"
+                  size={16}
                   color="#0077ce"
                 />
               </View>
@@ -130,7 +130,7 @@ const EditDecision: React.FC = () => {
             <>
               <View className="editDecision__hero editDecision__hero--edit">
                 <View className="editDecision__heroBadge">
-                  <AtIcon value="settings" size="14" color="#005ea4" />
+                  <Icon name="setting" size={14} color="#005ea4" />
                   <Text className="editDecision__heroBadgeText">DECISION TOOL</Text>
                 </View>
                 <Text className="editDecision__heroTitle">去决定！！！</Text>
@@ -172,7 +172,7 @@ const EditDecision: React.FC = () => {
               ))}
             </View>
             <View className="editDecision__addOption" onClick={() => setList([...list, ""])}>
-              <AtIcon value="add-circle" size="18" color="#005ea4" />
+              <Icon name="plus" size={18} color="#005ea4" />
               <Text className="editDecision__addOptionText">添加选项</Text>
             </View>
           </View>
@@ -213,7 +213,7 @@ const EditDecision: React.FC = () => {
           className={`editDecision__saveBtn${isAdd ? " editDecision__saveBtn--add" : ""}`}
           onClick={onSave}
         >
-          {isAdd && <AtIcon value="check" size="18" color="#fdfcff" />}
+          {isAdd && <Icon name="check" size={18} color="#fdfcff" />}
           <Text className="editDecision__saveBtnText">保存</Text>
         </View>
         {!isAdd && <Text className="editDecision__footerHint">修改后将即时同步到主页转盘</Text>}

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Taro, { CustomWrapper, MovableArea, MovableView, View } from "@tarojs/components";
 import "./index.scss";
-import { AtIcon } from "taro-ui";
+import { getIconComponent } from "@/utils/iconMap";
 import {
   getMenuButtonBoundingClientRect,
   getSystemInfoSync,
@@ -201,7 +201,9 @@ const FingerUp: React.FC = () => {
     <View className="fingerUp">
       {IS_WECHAT && (
         <View style={{ top }} className="goBack" onClick={navigateBackOrHome}>
-          <AtIcon value={showHome ? "home" : "chevron-left"} size={height - 4} />
+          {React.createElement(getIconComponent(showHome ? "home" : "chevron-left"), {
+            size: height - 4,
+          })}
         </View>
       )}
 

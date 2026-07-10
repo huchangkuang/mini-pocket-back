@@ -1,6 +1,7 @@
 import React, { FC, memo } from "react";
 import { View, Text } from "@tarojs/components";
-import { AtIcon } from "taro-ui";
+import Icon from "@/components/Icon";
+import { getIconComponent } from "@/utils/iconMap";
 import type { MineMenuItem } from "@/pages/mine/constants";
 import "./index.scss";
 
@@ -22,12 +23,15 @@ const MineMenuList: FC<MineMenuListProps> = memo(({ items, isLoggedIn, onItemCli
           onClick={() => onItemClick?.(item.id)}
         >
           <View className="mineMenuList__left">
-            <AtIcon value={item.icon} size="20" color={isLoggedIn ? "#0077ce" : "#005ea4"} />
+            {React.createElement(getIconComponent(item.icon), {
+              size: "20",
+              color: isLoggedIn ? "#0077ce" : "#005ea4",
+            })}
             <Text className="mineMenuList__label">
               {isLoggedIn ? item.labelLoggedIn : item.labelGuest}
             </Text>
           </View>
-          <AtIcon value="chevron-right" size="18" color="#707783" />
+          <Icon name="arrow-right" size={18} color="#707783" />
         </View>
       ))}
     </View>
