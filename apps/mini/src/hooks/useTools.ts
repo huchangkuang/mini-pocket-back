@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import { showToast } from "@tarojs/taro";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { showToast, useDidShow } from "@tarojs/taro";
 import type { CategoryChip, ToolItem } from "@/pages/classify/constants";
 import {
   categoryChips as fallbackCategoryChips,
@@ -24,6 +24,7 @@ export function useTools(selectedCategory: string, searchQuery: string, sortByHe
   const [loading, setLoading] = useState(true);
   const [usingFallback, setUsingFallback] = useState(false);
   const [debouncedKeyword, setDebouncedKeyword] = useState(searchQuery);
+  const skipNextFilterFetch = useRef(true);
 
   const debouncedSetKeyword = useDebounce((value: string) => {
     setDebouncedKeyword(value);
@@ -34,6 +35,7 @@ export function useTools(selectedCategory: string, searchQuery: string, sortByHe
   }, [searchQuery, debouncedSetKeyword]);
 
   useEffect(() => {
+    // 分类列表同样无需登录
     listCategories()
       .then((categories) => {
         setCategoryChips([
@@ -70,8 +72,18 @@ export function useTools(selectedCategory: string, searchQuery: string, sortByHe
     }
   }, [selectedCategory, debouncedKeyword, sortByHeatDesc]);
 
+  // 工具列表无登录门槛：页面每次 show 拉一次
+  useDidShow(() => {
+    void fetchTools();
+  });
+
+  // 筛选/搜索/排序变化时再拉；首轮由 useDidShow 负责，避免重复请求
   useEffect(() => {
-    fetchTools();
+    if (skipNextFilterFetch.current) {
+      skipNextFilterFetch.current = false;
+      return;
+    }
+    void fetchTools();
   }, [fetchTools]);
 
   const updateToolFavorite = useCallback((path: string, isFavorite: boolean) => {
