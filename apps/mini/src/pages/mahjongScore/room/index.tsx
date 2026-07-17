@@ -33,6 +33,12 @@ function seatLabel(snap: ApiMahjongSessionSnapshot, seat: number) {
   return p?.nickname || `座位${seat + 1}`;
 }
 
+/** 历史记录列头：有昵称则展示，否则回退「座x」 */
+function seatDisplayName(snap: ApiMahjongSessionSnapshot, seat: number) {
+  const nick = snap.participants.find((x) => x.seatIndex === seat)?.nickname?.trim();
+  return nick || `座${seat + 1}`;
+}
+
 function isProfileIncomplete(user: {
   nickname?: string | null;
   avatarUrl?: string | null;
@@ -53,19 +59,27 @@ function parseScoreInput(raw: string): number | null {
   return n;
 }
 
-/** 输入过程中清洗：仅允许可选负号 + 数字，绝对值不超过上限 */
-function sanitizeScoreTyping(raw: string): string {
-  let v = raw.replace(/[^\d-]/g, "");
-  if (v.includes("-")) {
-    v = `-${v.replace(/-/g, "")}`;
-  }
-  if (v === "-" || v === "") return v;
-  const digits = v.startsWith("-") ? v.slice(1) : v;
-  if (digits.length === 0) return v;
-  const n = Number(digits);
-  if (!Number.isFinite(n)) return v.startsWith("-") ? "-" : "";
+/** 输入框只展示绝对值数字部分 */
+function scoreDigits(raw: string): string {
+  if (raw === "" || raw === "-" || raw === "+") return "";
+  return raw.startsWith("-") ? raw.slice(1) : raw;
+}
+
+function isNegativeScore(raw: string): boolean {
+  return raw.startsWith("-");
+}
+
+function composeScore(negative: boolean, digits: string): string {
+  const cleaned = digits.replace(/\D/g, "");
+  if (cleaned === "") return negative ? "-" : "";
+  const n = Number(cleaned);
+  if (!Number.isFinite(n)) return negative ? "-" : "";
   const clamped = Math.min(n, MAX_ABS_SCORE);
-  return v.startsWith("-") ? `-${clamped}` : String(clamped);
+  return negative ? `-${clamped}` : String(clamped);
+}
+
+function toggleScoreSign(raw: string): string {
+  return composeScore(!isNegativeScore(raw), scoreDigits(raw));
 }
 
 export default function MahjongRoomPage() {
@@ -511,7 +525,7 @@ export default function MahjongRoomPage() {
                 <View className="mjRoom__roundScores">
                   {round.scores.map((s, i) => (
                     <View key={i} className="mjRoom__roundScore">
-                      <Text className="mjRoom__roundSeat">座{i + 1}</Text>
+                      <Text className="mjRoom__roundSeat">{seatDisplayName(snap, i)}</Text>
                       <Text
                         className={
                           (s ?? 0) >= 0 ? "mjRoom__total--pos" : "mjRoom__total--neg"
@@ -546,26 +560,44 @@ export default function MahjongRoomPage() {
               </Text>
             </View>
             <View className="mjRoom__modalGrid">
-              {[0, 1, 2, 3].map((seat) => (
-                <View key={seat} className="mjRoom__modalField">
-                  <Text className="mjRoom__modalName">{seatLabel(snap, seat)}</Text>
-                  <Input
-                    className="mjRoom__modalInput"
-                    type="number"
-                    placeholder="分数"
-                    maxlength={6}
-                    value={inputs[seat]}
-                    onInput={(e) => {
-                      const v = sanitizeScoreTyping(e.detail.value);
-                      setInputs((prev) => {
-                        const next = [...prev] as [string, string, string, string];
-                        next[seat] = v;
-                        return next;
-                      });
-                    }}
-                  />
-                </View>
-              ))}
+              {[0, 1, 2, 3].map((seat) => {
+                const raw = inputs[seat];
+                const negative = isNegativeScore(raw);
+                return (
+                  <View key={seat} className="mjRoom__modalField">
+                    <Text className="mjRoom__modalName">{seatLabel(snap, seat)}</Text>
+                    <View className="mjRoom__scoreRow">
+                      <View
+                        className={`mjRoom__signBtn ${negative ? "mjRoom__signBtn--neg" : ""}`}
+                        onClick={() => {
+                          setInputs((prev) => {
+                            const next = [...prev] as [string, string, string, string];
+                            next[seat] = toggleScoreSign(prev[seat]);
+                            return next;
+                          });
+                        }}
+                      >
+                        <Text className="mjRoom__signBtnText">{negative ? "−" : "+"}</Text>
+                      </View>
+                      <Input
+                        className="mjRoom__modalInput"
+                        type="digit"
+                        placeholder="分数"
+                        maxlength={5}
+                        value={scoreDigits(raw)}
+                        onInput={(e) => {
+                          const digits = e.detail.value.replace(/\D/g, "");
+                          setInputs((prev) => {
+                            const next = [...prev] as [string, string, string, string];
+                            next[seat] = composeScore(isNegativeScore(prev[seat]), digits);
+                            return next;
+                          });
+                        }}
+                      />
+                    </View>
+                  </View>
+                );
+              })}
             </View>
             {inputSum !== null && inputSum !== 0 ? (
               <Text className="mjRoom__sumWarn">

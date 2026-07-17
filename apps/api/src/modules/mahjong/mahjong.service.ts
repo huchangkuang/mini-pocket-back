@@ -147,9 +147,17 @@ export class MahjongService {
       orderBy: { joinedAt: "desc" },
     });
 
+    let highestScore = 0;
+    let hasScore = false;
+
     const items = participations.map((p) => {
       const s = p.session;
       const totals = sumCommittedTotals(s.rounds);
+      const mine = totals[p.seatIndex] ?? 0;
+      if (!hasScore || mine > highestScore) {
+        highestScore = mine;
+        hasScore = true;
+      }
       return {
         sessionId: s.id,
         code: s.code,
@@ -165,13 +173,6 @@ export class MahjongService {
         })),
       };
     });
-
-    let highestScore = 0;
-    for (const item of items) {
-      for (const t of item.totals) {
-        if (t > highestScore) highestScore = t;
-      }
-    }
 
     return {
       items,

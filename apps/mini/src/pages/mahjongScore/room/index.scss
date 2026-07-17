@@ -254,11 +254,17 @@ page {
 
   &__roundScores {
     display: flex;
-    gap: 16rpx;
+    flex: 1;
+    min-width: 0;
+    justify-content: flex-end;
+    gap: 0;
   }
 
   &__roundScore {
-    text-align: right;
+    flex: 0 0 96rpx;
+    width: 96rpx;
+    text-align: center;
+    overflow: hidden;
   }
 
   &__roundSeat {
@@ -266,6 +272,10 @@ page {
     font-size: 18rpx;
     color: $color-on-surface-variant;
     font-weight: 700;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__endBtn {
@@ -418,7 +428,37 @@ page {
     margin-bottom: 8rpx;
   }
 
+  &__scoreRow {
+    display: flex;
+    align-items: stretch;
+    gap: 12rpx;
+  }
+
+  &__signBtn {
+    flex-shrink: 0;
+    width: 72rpx;
+    border-radius: 12rpx;
+    background: $color-surface-container-low;
+    color: $color-on-surface;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--neg {
+      background: rgba($color-secondary, 0.15);
+      color: $color-secondary;
+    }
+  }
+
+  &__signBtnText {
+    font-size: 36rpx;
+    font-weight: 700;
+    line-height: 1;
+  }
+
   &__modalInput {
+    flex: 1;
+    min-width: 0;
     background: $color-surface-container-low;
     border-radius: 12rpx;
     padding: 20rpx;
