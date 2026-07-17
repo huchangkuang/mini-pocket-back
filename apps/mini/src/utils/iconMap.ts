@@ -12,6 +12,7 @@ import randomIcon from "@/images/classify/random.svg";
 import timeTravelIcon from "@/images/classify/timeTravel.svg";
 import xiahouDunIcon from "@/images/classify/xiahouDun.svg";
 import hawkingIcon from "@/images/classify/hawking.svg";
+import mahjongScoreIcon from "@/images/classify/mahjongScore.svg";
 
 // NutUI icon 名称到 kebab-case 的映射（兼容旧 iconMap 调用）
 const iconNameMap: Record<string, IconName> = {
@@ -61,6 +62,7 @@ const ICON_MAP: Record<string, string> = {
   timeTravel: timeTravelIcon,
   xiahouDun: xiahouDunIcon,
   hawking: hawkingIcon,
+  mahjongScore: mahjongScoreIcon,
 };
 
 const DEFAULT_ICON = randomIcon;

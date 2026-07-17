@@ -109,6 +109,17 @@ const tools: {
     sortOrder: 8,
   },
   {
+    routePath: "/pages/mahjongScore/index",
+    name: "麻将计分",
+    description: "多人共享记账",
+    iconKey: "mahjongScore",
+    accent: "primary",
+    categoryCode: "fun",
+    heatScore: 760,
+    enabled: true,
+    sortOrder: 9,
+  },
+  {
     routePath: "/pages/timeTravel/index",
     name: "时间穿越",
     description: "一键快进未来",
@@ -117,7 +128,7 @@ const tools: {
     categoryCode: "fun",
     heatScore: 400,
     enabled: true,
-    sortOrder: 9,
+    sortOrder: 10,
   },
   {
     routePath: "/pages/xiahouDun/index",
@@ -128,7 +139,7 @@ const tools: {
     categoryCode: "fun",
     heatScore: 380,
     enabled: true,
-    sortOrder: 10,
+    sortOrder: 11,
   },
   {
     routePath: "/pages/hawking/index",
@@ -139,7 +150,7 @@ const tools: {
     categoryCode: "fun",
     heatScore: 360,
     enabled: true,
-    sortOrder: 11,
+    sortOrder: 12,
   },
 ];
 

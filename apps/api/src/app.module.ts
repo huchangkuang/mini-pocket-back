@@ -12,6 +12,7 @@ import { LevelModule } from "./modules/level/level.module";
 import { StatsModule } from "./modules/stats/stats.module";
 import { ToolsModule } from "./modules/tools/tools.module";
 import { GamesModule } from "./modules/games/games.module";
+import { MahjongModule } from "./modules/mahjong/mahjong.module";
 import { PrismaModule } from "./prisma/prisma.module";
 
 @Module({
@@ -32,6 +33,7 @@ import { PrismaModule } from "./prisma/prisma.module";
     StatsModule,
     LevelModule,
     GamesModule,
+    MahjongModule,
   ],
   controllers: [AppController],
 })

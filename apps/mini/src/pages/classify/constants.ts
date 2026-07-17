@@ -10,6 +10,7 @@ import xiahouDunIcon from "@/images/classify/xiahouDun.svg";
 import hawkingIcon from "@/images/classify/hawking.svg";
 // import beadArtIcon from "@/images/classify/beadArt.svg";
 import randomIcon from "@/images/classify/random.svg";
+import mahjongScoreIcon from "@/images/classify/mahjongScore.svg";
 
 export type Accent = "primary" | "secondary" | "tertiary";
 
@@ -128,6 +129,16 @@ export const classifyList: ToolItem[] = [
     category: "fun",
     heat: "780",
     heatRank: 780,
+  },
+  {
+    icon: mahjongScoreIcon,
+    text: "麻将计分",
+    desc: "多人共享记账",
+    path: "/pages/mahjongScore/index",
+    accent: "primary",
+    category: "fun",
+    heat: "760",
+    heatRank: 760,
   },
   {
     icon: timeTravelIcon,

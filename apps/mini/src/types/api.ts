@@ -31,6 +31,18 @@ export type {
   ApiGameInfo,
   ApiGameGuessResult,
 } from "@mini-pocket/shared";
+export type {
+  MahjongSessionStatus,
+  MahjongRoundStatus,
+  ApiMahjongScores,
+  ApiMahjongParticipant,
+  ApiMahjongRound,
+  ApiMahjongSessionSnapshot,
+  ApiMahjongSessionListItem,
+  ApiMahjongSessionList,
+  ApiMahjongSaveDraftResult,
+  ApiMahjongWxacodeResult,
+} from "@mini-pocket/shared";
 
 // 兼容旧名
 export type { Tool as ApiTool } from "@mini-pocket/shared";

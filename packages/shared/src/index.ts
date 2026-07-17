@@ -25,3 +25,15 @@ export type {
   ApiPersistStorageResult,
 } from "./storage";
 export type { ApiCreateGameResult, ApiGuessRecord, ApiGameInfo, ApiGameGuessResult } from "./games";
+export type {
+  MahjongSessionStatus,
+  MahjongRoundStatus,
+  ApiMahjongScores,
+  ApiMahjongParticipant,
+  ApiMahjongRound,
+  ApiMahjongSessionSnapshot,
+  ApiMahjongSessionListItem,
+  ApiMahjongSessionList,
+  ApiMahjongSaveDraftResult,
+  ApiMahjongWxacodeResult,
+} from "./mahjong";

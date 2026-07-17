@@ -58,6 +58,18 @@ export class AuthService {
       },
     });
 
+    // 同步到麻将参与者冗余字段，牌局列表/座位即时可见
+    const participantPatch = {
+      ...(dto.nickname !== undefined ? { nickname: dto.nickname } : {}),
+      ...(dto.avatarUrl !== undefined ? { avatarUrl: dto.avatarUrl } : {}),
+    };
+    if (Object.keys(participantPatch).length > 0) {
+      await this.prisma.mahjongParticipant.updateMany({
+        where: { userId },
+        data: participantPatch,
+      });
+    }
+
     return this.toUserProfile(user);
   }
 

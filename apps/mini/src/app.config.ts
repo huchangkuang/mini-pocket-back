@@ -13,6 +13,8 @@ export default defineAppConfig({
     "pages/lottery/index",
     "pages/returnClock/index",
     "pages/guessNumber/index",
+    "pages/mahjongScore/index",
+    "pages/mahjongScore/room/index",
     "pages/timeTravel/index",
     "pages/xiahouDun/index",
     "pages/hawking/index",

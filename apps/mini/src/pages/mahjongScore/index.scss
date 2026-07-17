@@ -1,0 +1,181 @@
+@import "src/style/tokens.scss";
+
+page {
+  background: $color-surface;
+}
+
+.mjHub {
+  min-height: 100vh;
+  background: $color-surface;
+
+  &__body {
+    padding: 32rpx 32rpx calc(env(safe-area-inset-bottom) + 48rpx);
+    display: flex;
+    flex-direction: column;
+    gap: 32rpx;
+  }
+
+  &__create {
+    width: 100% !important;
+    display: block;
+    box-sizing: border-box;
+    margin: 0 !important;
+    background: $color-primary !important;
+    color: #fff !important;
+    border-radius: 16rpx !important;
+    font-size: 32rpx !important;
+    font-weight: 600;
+    line-height: 1.5 !important;
+    padding: 28rpx 48rpx !important;
+    min-height: 96rpx;
+    border: none !important;
+
+    &::after {
+      border: none;
+    }
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24rpx;
+  }
+
+  &__statCard {
+    background: #fff;
+    border-radius: 16rpx;
+    padding: 24rpx;
+    border: 1rpx solid rgba($color-outline-variant, 0.3);
+  }
+
+  &__statLabel {
+    display: block;
+    font-size: 24rpx;
+    color: $color-on-surface-variant;
+    margin-bottom: 8rpx;
+  }
+
+  &__statValue {
+    font-size: 44rpx;
+    font-weight: 700;
+    color: $color-on-surface;
+
+    &--primary {
+      color: $color-primary;
+    }
+  }
+
+  &__historyTitle {
+    font-size: 36rpx;
+    font-weight: 600;
+    color: $color-on-surface;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24rpx;
+  }
+
+  &__card {
+    background: #fff;
+    border-radius: 16rpx;
+    padding: 24rpx;
+    border: 1rpx solid rgba($color-outline-variant, 0.3);
+  }
+
+  &__cardTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24rpx;
+  }
+
+  &__code {
+    display: block;
+    font-size: 22rpx;
+    font-weight: 700;
+    color: $color-on-surface-variant;
+  }
+
+  &__status {
+    display: block;
+    font-size: 28rpx;
+    font-weight: 600;
+    color: $color-on-surface;
+    margin-top: 4rpx;
+  }
+
+  &__date {
+    font-size: 22rpx;
+    color: $color-on-surface-variant;
+    background: $color-surface-container-low;
+    padding: 6rpx 12rpx;
+    border-radius: 8rpx;
+  }
+
+  &__seats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8rpx;
+    border-top: 1rpx solid rgba($color-outline-variant, 0.15);
+    padding-top: 24rpx;
+  }
+
+  &__seat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rpx;
+  }
+
+  &__avatar {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+    background: $color-surface-variant;
+    color: $color-on-surface-variant;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24rpx;
+    font-weight: 700;
+
+    &--win {
+      background: rgba($color-primary, 0.12);
+      color: $color-primary;
+    }
+  }
+
+  &__seatName {
+    font-size: 20rpx;
+    color: $color-on-surface-variant;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__seatScore {
+    font-size: 22rpx;
+    font-weight: 700;
+
+    &--pos {
+      color: $color-primary;
+    }
+
+    &--neg {
+      color: $color-secondary;
+    }
+  }
+
+  &__empty {
+    padding: 64rpx 0;
+    text-align: center;
+  }
+
+  &__emptyText {
+    color: $color-on-surface-variant;
+    font-size: 28rpx;
+  }
+}

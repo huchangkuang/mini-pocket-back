@@ -45,21 +45,24 @@ model Tool {
 }
 
 model User {
-  id         Int             @id @default(autoincrement())
-  openid     String          @unique
-  unionid    String?         @unique
-  nickname   String?
-  avatarUrl  String?         @db.Text @map("avatar_url")
-  totalXp    Int             @default(0) @map("total_xp")
-  createdAt  DateTime        @default(now()) @map("created_at")
-  updatedAt  DateTime        @updatedAt @map("updated_at")
-  favorites  UserFavorite[]
-  activeDays UserActiveDay[]
-  toolUsages UserToolUsage[]
-  decisions  UserDecision[]
-  feedbacks  Feedback[]
-  games      Game[]
-  guesses    GameGuess[]
+  id                      Int                   @id @default(autoincrement())
+  openid                  String                @unique
+  unionid                 String?               @unique
+  nickname                String?
+  avatarUrl               String?               @db.Text @map("avatar_url")
+  totalXp                 Int                   @default(0) @map("total_xp")
+  createdAt               DateTime              @default(now()) @map("created_at")
+  updatedAt               DateTime              @updatedAt @map("updated_at")
+  favorites               UserFavorite[]
+  activeDays              UserActiveDay[]
+  toolUsages              UserToolUsage[]
+  decisions               UserDecision[]
+  feedbacks               Feedback[]
+  games                   Game[]
+  guesses                 GameGuess[]
+  mahjongSessionsCreated  MahjongSession[]      @relation("MahjongSessionCreator")
+  mahjongParticipations   MahjongParticipant[]
+  mahjongRoundsUpdated    MahjongRound[]        @relation("MahjongRoundUpdater")
 
   @@map("users")
 }
@@ -186,4 +189,78 @@ model GameGuess {
 
   @@unique([gameId, userId, attemptNumber])
   @@map("game_guesses")
+}
+
+enum MahjongSessionStatus {
+  active
+  ended
+}
+
+enum MahjongRoundStatus {
+  draft
+  committed
+}
+
+model MahjongSession {
+  id              String                @id @default(cuid())
+  code            String                @unique @db.VarChar(16)
+  status          MahjongSessionStatus  @default(active)
+  createdByUserId Int                   @map("created_by_user_id")
+  createdBy       User                  @relation("MahjongSessionCreator", fields: [createdByUserId], references: [id])
+  createdAt       DateTime              @default(now()) @map("created_at")
+  updatedAt       DateTime              @updatedAt @map("updated_at")
+  endedAt         DateTime?             @map("ended_at")
+  participants    MahjongParticipant[]
+  rounds          MahjongRound[]
+  inviteCode      MahjongInviteCode?
+
+  @@index([status, updatedAt])
+  @@map("mahjong_sessions")
+}
+
+model MahjongParticipant {
+  id         Int            @id @default(autoincrement())
+  sessionId  String         @map("session_id")
+  session    MahjongSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  userId     Int            @map("user_id")
+  user       User           @relation(fields: [userId], references: [id])
+  seatIndex  Int            @map("seat_index")
+  nickname   String?
+  avatarUrl  String?        @db.Text @map("avatar_url")
+  joinedAt   DateTime       @default(now()) @map("joined_at")
+
+  @@unique([sessionId, userId])
+  @@unique([sessionId, seatIndex])
+  @@map("mahjong_participants")
+}
+
+model MahjongRound {
+  id              Int                 @id @default(autoincrement())
+  sessionId       String              @map("session_id")
+  session         MahjongSession      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  status          MahjongRoundStatus  @default(draft)
+  roundNo         Int?                @map("round_no")
+  score0          Int?                @map("score_0")
+  score1          Int?                @map("score_1")
+  score2          Int?                @map("score_2")
+  score3          Int?                @map("score_3")
+  updatedByUserId Int?                @map("updated_by_user_id")
+  updatedBy       User?               @relation("MahjongRoundUpdater", fields: [updatedByUserId], references: [id])
+  updatedAt       DateTime            @updatedAt @map("updated_at")
+  committedAt     DateTime?           @map("committed_at")
+  createdAt       DateTime            @default(now()) @map("created_at")
+
+  @@index([sessionId, status])
+  @@index([sessionId, roundNo])
+  @@map("mahjong_rounds")
+}
+
+model MahjongInviteCode {
+  id        Int            @id @default(autoincrement())
+  scene     String         @unique @db.VarChar(32)
+  sessionId String         @unique @map("session_id")
+  session   MahjongSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  createdAt DateTime       @default(now()) @map("created_at")
+
+  @@map("mahjong_invite_codes")
 }

@@ -24,6 +24,6 @@ import { WechatService } from "./wechat.service";
   ],
   controllers: [AuthController],
   providers: [AuthService, WechatService, JwtAuthGuard, OptionalJwtAuthGuard],
-  exports: [AuthService, JwtModule, JwtAuthGuard, OptionalJwtAuthGuard],
+  exports: [AuthService, WechatService, JwtModule, JwtAuthGuard, OptionalJwtAuthGuard],
 })
 export class AuthModule {}
